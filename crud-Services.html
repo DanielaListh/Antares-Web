@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="css/style.css">
+  <title>PRUEBA DE SERVICIOS LADO ADMIN</title>
+</head>
+<body>
+
+  <div class="menu-panel">
+    <button class="">Cerrar sesión</button>
+  </div>
+
+    <main class="main">
+        <h1 class="main__title"></h1>
+        <section class="section section-form">
+          <h2 class="section__title">Crear un Servicio</h2>
+          <form class="ServicesForm" id="ServicesForm" >
+            <label class="form__label" for="serviceNameInput">Nombre del Servicio</label>
+            <input class="form__input" id="serviceNameInput" type="text" maxlength="40" required/>
+            <label class="form__label" for="serviceDescriptionInput">Descripcion del servicio</label>
+            <input class="form__input" id="serviceDescriptionInput" type="text" maxlength="100" required/>
+            <button class="form__button" type="submit">Agregar Servicio</button>
+          </form>
+          <div class="error"></div>
+        </section>
+        
+
+        <!-- ver el listado de los servicios -->
+        <section class="section section-list">
+          <h2 class="section__title">Listado Servicios</h2>
+          <ul id="servicesList" class="services"> <!-- llamado en el ul de prueba id="imageList"-->
+            <li class="service__item">
+            </li>
+          </ul>
+        </section>
+      </main>
+        
+
+  <footer class="footer">
+    <small>Copyright 2024</small>
+  </footer>
+
+  <script src="/js/script.js"></script>
+
+</body>
+</html>

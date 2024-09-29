@@ -1,0 +1,357 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+@import url("https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"); 
+/* nos permite traer los iconos de la lista */
+
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+}
+
+/*Admin*/
+
+.bx-check{
+color: #fbefd7;
+cursor: pointer;
+}
+
+.bx-trash{
+ color: #fbefd7;
+ cursor: pointer;
+}
+
+.done{
+  text-decoration:line-through;
+}
+
+.menu-panel{
+  background-color: #fbefd7;
+  position: fixed;
+  width: 120px;
+  height: 100% ;
+}
+
+.section__title{
+  top: 50px;
+  left: 300px;
+}
+
+body{
+  font-family: "Open Sans", sans-serif;
+  background-color: #1e1e1e;
+  color: #fbefd7;
+}
+
+.checkbox {
+ visibility: hidden;
+}
+
+.menu-container {
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 1.8em;
+  
+}
+
+.portada {
+  display: block;
+  padding: 10px;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+
+}
+
+.navbar {
+  margin-top: 50px;
+  text-align: center;
+  bottom: 50px;
+}
+
+.navbar ul{
+  list-style-type: none;
+  display: flex;
+  position: relative;
+  justify-content: flex-end;
+  
+}
+
+.navbar li {
+  display: inline;/*los enlaces de tipo texto los convertimos en bloque para que el margin y padin se a;adan*/
+  margin-right:20px;
+  position: relative;
+  
+}
+
+.navbar a{
+  color: #fbefd7;
+  position: relative;
+
+}
+
+.navbar ul li a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  display: block;
+  margin-top: 5px;
+  right: 0;
+  background: #ffa200;
+  transition: width 0.3s ease;
+}
+
+.navbar ul li a:hover::after {
+  width: 100%;
+  left: 0;
+  background: #ffc96d;
+}
+
+.img-menu-login{
+  width: 30px;
+  height: 26px;
+}
+
+.portada {
+  display: block;
+  text-align: center;
+  position: relative;
+}
+
+.portada-info {
+  
+}
+
+.portada h1 {
+  font-size: 4em;
+  text-transform: uppercase;
+  
+}
+
+.portada h4{
+  font-size: 2em;
+}
+
+.img-principal{
+  position: relative;
+  width: 1144px;
+  height: 640px;
+  left: 376px;
+  top: 40px;
+  
+}
+
+.btn-info {
+  margin-top: 20px;
+}
+
+.btn{
+  margin-top: 20px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  background-color: #1e1e1e;
+  color: #fbefd7;
+  border: 3px solid #fbefd7;
+  cursor: pointer;
+}
+
+/*Historia*/
+.historia {
+  display: flex;
+  border-radius: 10px;
+  padding: 20px;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  margin: 100px;
+  align-items: center;
+}
+
+.historia-content {
+  display: block;
+  padding: 10px;
+  margin: 0 60px 0  0;
+  align-items: center;
+  
+}
+
+.historia-content1{
+  align-items: center;
+}
+
+.historia-content-img {
+  border-radius: 5px;
+  width: 500px;
+}
+
+#h2-tittle{
+  margin-top: 25px;
+  margin-bottom: 30px;
+}
+
+.historia-content h2 {
+  font-size: 5em;
+  margin-bottom: 10px;
+  
+}
+
+.h2-yellow {
+  color: #ffc96d ;
+}
+
+.historia-content p{
+  font-size: 1.5em;
+  margin-bottom: 60px;
+  text-align: justify;
+}
+
+.p1 {
+  font-weight:bolder;
+  text-align: justify;
+}
+
+.historia-content-content{
+  display:inline-block;
+  justify-content: space-around;
+  margin-top: 20px;
+  margin-right: 100px;
+  padding: 20px;
+  
+}
+
+
+#servicios {
+ display: block;
+ align-content: space-between;
+ margin: 0 40px 0 100px;
+ position: relative;
+ align-items: center;
+}
+
+.Servicios-Container{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; /*para que ocupe varias lineas y no una sola*/
+  padding: 40px;
+  justify-content:start;
+  text-align: center;
+}
+
+.content-h2{
+  display: block;
+  justify-content: center;
+}
+
+.h2-servicios1 {
+  font-size: 4em;
+  height: 100px;
+  padding: 0 0 0 110px;
+  margin: 0 0px 0 60px;
+}
+
+.h2-servicios2 { 
+  font-size: 4em;
+  height: 100px;
+  margin-top: 80px;
+  margin-bottom: 50px;
+  margin: 0 0 0 930px;
+}
+
+.color1{
+  color:#fbefd7;
+}
+
+.color2 {
+  color: #ffa200;
+}
+
+/*Logo ws*/
+.logo-ws {
+  position: fixed;/* mantiene el logo pegado a una parte especifica */
+  bottom: 50px;
+  right: 60px;
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+}
+
+.flecha {
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 855px;
+  right: 1500px;
+}
+
+.p-servicios {
+  font-size: 1.8em;
+  text-align: center;
+  margin-top: 100px;
+  
+}
+
+.directorio {
+  background-color: rgba(249,160,27, 0.0);
+  display: block;
+  color: #fbefd7;
+  text-align: center;
+  align-items: center;
+  margin-top: 100px;
+  width: 1000px;
+  padding: 50px 0 50px 0;
+  border-radius: 50px;
+
+  
+}
+
+.directorio:hover {
+  background-color: rgba(255, 157, 11, 0.5);
+}
+
+.directorio a{
+  color: #fbefd7;
+  
+}
+
+.content-services {
+  display: block;
+  width:500px;
+  text-align: center;
+  margin: 150px 10px 80px 10px;
+}
+
+.content-services:hover {
+  background-color: rgba(255, 153, 0, 0.5);
+  border-radius: 20px;
+
+}
+
+.content-services h3 {
+  text-align: center;
+  font-size: 1.5em;
+  cursor: pointer;
+  margin-top: 10px;
+  color:#fbefd7;
+}
+
+.content-services img {
+  align-items: center;
+  cursor: pointer;
+  width: 400px;
+  margin-top: 20px;
+  border-radius: 10px;
+}
+
+.content-services p{
+  font-size: 1.2em;
+  margin-top: 10px;
+  text-align: center;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 500px;
+}
+
