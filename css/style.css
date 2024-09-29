@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
-@import url("https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"); 
+@import url("https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css");
 /* nos permite traer los iconos de la lista */
 
 
@@ -9,6 +9,7 @@
   box-sizing: border-box;
   text-decoration: none;
   list-style: none;
+  list-style-type:none;
 }
 
 /*Admin*/
@@ -30,8 +31,21 @@ cursor: pointer;
 .menu-panel{
   background-color: #fbefd7;
   position: fixed;
-  width: 120px;
-  height: 100% ;
+  width: 300px;
+  height: 100%;
+  margin-top: -50px;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  width: 1500px;
+  height: 900px;
+  margin-left: 400px;
+  background-color: #bdb5a4;
+  border-radius: 25px;
 }
 
 .section__title{
@@ -55,6 +69,8 @@ body{
   font-size: 1.8em;
   
 }
+
+/* Index*/
 
 .portada {
   display: block;
@@ -234,7 +250,7 @@ body{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap; /*para que ocupe varias lineas y no una sola*/
-  padding: 40px;
+  padding: 0 0  0 70px;
   justify-content:start;
   text-align: center;
 }
@@ -272,9 +288,10 @@ body{
   position: fixed;/* mantiene el logo pegado a una parte especifica */
   bottom: 50px;
   right: 60px;
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   cursor: pointer;
+  display: block; /* Asegura que se muestren dentro de la sección */
 }
 
 .flecha {
@@ -317,6 +334,8 @@ body{
   
 }
 
+/*Servicios*/
+
 .content-services {
   display: block;
   width:500px;
@@ -354,4 +373,206 @@ body{
   margin-bottom: 20px;
   width: 500px;
 }
+
+
+/*Contacto*/
+.img-contact img { 
+  max-width: 100%;
+  height: 700px;
+  width: 500px;
+
+}
+
+.container-contacto {
+  background-image: linear-gradient();
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  color: #fbefd7;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.container-contacto p {
+  margin: 10px 0;
+}
+
+
+.contact {
+  width: 50%;
+  margin: 10% 112px;
+}
+
+
+.contact h2 {
+  justify-content: center;
+  font-size: 5em;
+  font-family: Arial, serif;
+  font-weight: bold;
+  margin-top: -90px;
+  color:#ffc96d;
+  
+}
+
+.contact h4 {
+ color: #fbefd7;
+ font-size: 1.7em;
+ margin-top: -10px;
+ margin-bottom: 70px;
+ margin-left: 238px;
+}
+
+.contact p {
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: normal;
+  letter-spacing: 1px;
+  line-height: 150%;
+  color: #fbefd7;
+  margin-bottom: 25px;
+}
+
+input::placeholder, textarea::placeholder {
+  font-size: 20px;
+  color: #bdb5a4;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.contact-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.contact-row input, .contact-row textarea {
+  padding: 10px;
+  width: 500px;
+  background-color: transparent;
+  border: transparent;
+  border-bottom: 1px #fbefd7 solid;
+  color: #fbefd7;
+}
+
+.contact-row i {
+  margin-left: 10px;
+}
+
+.contact label {
+  display: block;
+  text-align: start;
+  font-weight: lighter;
+  opacity: 0.7;
+  margin-left: 160px;
+  margin-bottom: 10px;
+}
+
+.contact button {
+  align-items: center;
+  justify-content: center;
+  margin-top:  30px;
+  margin-bottom: 10px;
+  padding: 15px 50px ;
+  font-weight: bold;
+  font-size: 20px;
+  border-radius: 50px;
+  width: 30%;
+  background-color: #fbefd7;
+}
+.contact button:hover{
+  color: #1e1e1e;
+  transition: all 0.8s;
+  background-color: #ffc96d;
+}
+
+.contact a {
+  display: block;
+  color:#ffdda3;
+  margin: 5px 0;
+}
+
+
+/*footer*/
+
+.footer {
+  background-color:black;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  border-radius: 25px;
+}
+
+.list-footer {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.list-footer div {
+  margin: 10px;
+}
+
+.list-footer h3 {
+  color: #fbefd7;
+  margin-bottom: 10px;
+}
+
+
+.list-footer a {
+  margin: 5px 0;
+  color: #fbefd7;
+}
+
+.list-footer a:hover{
+ color: #ffc96d;
+ transition: all 0.7s;
+}
+
+.redes {
+  margin-bottom: 20px;
+}
+
+.redes h3 {
+  color: #fbefd7;
+  margin-bottom: 10px;
+  margin-left: 125px;
+}
+
+.redes div {
+  display: flex;
+  gap: 10px;
+  
+}
+
+.logos-redes img {
+  margin-top: -5px;
+  width: 30px;
+  height: 30px;
+}
+
+.linea-divisoria {
+  border-top: 1px solid;
+  margin: 20px 110px;
+}
+
+.derechos-reservados {
+  display: flex;
+  color: #ffc96d;
+  font-size: 14px;
+  font-weight: bold;
+  margin: 30px 0;
+  align-items: center;
+  justify-content: center;
+}
+
+
 

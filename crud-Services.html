@@ -8,38 +8,37 @@
 <body>
 
   <div class="menu-panel">
-    <button class="">Cerrar sesión</button>
+    <a href="">Servicios</a><br>
+    <a href="">Pefil Admin</a><br>
+    <a href="index.html">Cerrar sesión</a>
   </div>
 
     <main class="main">
-        <h1 class="main__title"></h1>
-        <section class="section section-form">
-          <h2 class="section__title">Crear un Servicio</h2>
-          <form class="ServicesForm" id="ServicesForm" >
-            <label class="form__label" for="serviceNameInput">Nombre del Servicio</label>
-            <input class="form__input" id="serviceNameInput" type="text" maxlength="40" required/>
-            <label class="form__label" for="serviceDescriptionInput">Descripcion del servicio</label>
-            <input class="form__input" id="serviceDescriptionInput" type="text" maxlength="100" required/>
-            <button class="form__button" type="submit">Agregar Servicio</button>
-          </form>
-          <div class="error"></div>
-        </section>
+      <div class="main-container">
+        <h1 class="h2">Servicios</h2>
+        <div class="main-container-content">
+          <section class="section-form"></section>
+            <form class="ServicesForm" id="ServicesForm" >
+              <label class="form__label" for="serviceNameInput">Nombre del Servicio</label>
+              <input class="form__input" id="serviceNameInput" type="text" maxlength="40" required/>
+              <label class="form__label" for="serviceDescriptionInput">Descripcion del servicio</label>
+              <input class="form__input" id="serviceDescriptionInput" type="text" maxlength="100" required/>
+              <button class="form__button" type="submit">Agregar Servicio</button>
+            </form>
+            <div class="error"></div>
+          </section>
+        </div>
+      </div>
         
-
         <!-- ver el listado de los servicios -->
         <section class="section section-list">
-          <h2 class="section__title">Listado Servicios</h2>
+          <h2 class="section__title">Listado de Servicios</h2>
           <ul id="servicesList" class="services"> <!-- llamado en el ul de prueba id="imageList"-->
             <li class="service__item">
             </li>
           </ul>
         </section>
       </main>
-        
-
-  <footer class="footer">
-    <small>Copyright 2024</small>
-  </footer>
 
   <script src="/js/script.js"></script>
 

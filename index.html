@@ -4,7 +4,7 @@
   <head>
     <meta charset="UTF-8" >
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unidad Diagnostica Antares</title>
+    <title>Unidad Diagnóstica Antares</title>
     <link rel="icon" href="css/ImageAntaresWeb/logoWEB.png" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="css/style.css">
@@ -30,24 +30,27 @@
                 <li><a href="#servicios">Servicios que Ofrecemos</a></li>
                 <li><a href="#Turnos">Consigue turno</a></li>
                 <li><a href="#contacto">Contacto</a></li>
-                <li><a href="Login"><img class="img-menu-login" src="ImageAntaresWeb/png-user.png" alt=""></a></li>
+                <li><a href="/crud-Services.html"><img class="img-menu-login" src="ImageAntaresWeb/png-user.png" alt=""></a></li>
             </ul>
         </nav>
       </div>
 
       <!-- Imagen grande principal -->
-      <div class="portada-info">
-        <img class="img-principal" src="ImageAntaresWeb/LOBY.png" alt="">
+      <div class="content-portada">
         <div>
+          <img class="img-principal" src="ImageAntaresWeb/LOBY.png" alt="">
+        </div>
+        <div class="portada-info">
           <h4>Unidad Diagnostica</h4>
           <h1>Antares</h1>
-        </div>
-        <div class="btn-info">
-          <h3>Tu salud al alcance de</h3>
-          <h2>un click</h2>
-          <button class="btn">Consulta por WhatsApp</button>
+          <div class="btn-info">
+            <h2>Tu salud al alcance de <br>un click</h2>
+            <button class="btn">Consulta por WhatsApp</button>
+          </div>
         </div>
       </div>
+      
+
     </div>
     
     <div id="nuestraHistoria" class="historia">
@@ -180,77 +183,82 @@
               <p> Diagnóstico y tratamiento de las enfermedades del aparato urinario en ambos sexos y del aparato reproductor masculino</p>
             </div>
         </div>
+        <a aria-label="Consulta por nuestro WhatsApp" href="https://wa.me/584245212184"><img src="ImageAntaresWeb/wsLogo.png" alt="" class="logo-ws"/></a>
     </div>
 
-    
-
-    
     <section class="container-contacto" id="contacto">
-        <div class="contact">
-            <h2 class="titulo-contacto">Contáctanos</h2>
+          <div class="img-contact">
+            <img src="ImageAntaresWeb/molde-contact.png" alt="">
+          </div>
+          <div class="contact">
+            <h2 class="titulo-contacto">Realiza tu Consulta</h2>
+            <h4>Tu salud es primordial para nosotros</h4>
             <p>¿Tienes alguna pregunta o comentario?<br>¡Estamos aquí para ayudarte!</p>
             <form class="contact-form" action="https://formspree.io/f/manwwazl" method="post" autocomplete="off">
                 <div class="contact-row">
                     <input type="text" id="nombre" name="nombre" placeholder="Nombre" required>
-                    <i class=" fa-solid fa-user"></i>
                 </div>
                 <div class="contact-row">
                     <input type="email" id="correo" name="correo" placeholder="Correo" required>
-                    <i class=" fa-solid fa-envelope"></i>
                 </div>
                 <div class="contact-row">
-                    <label for="telefono">Teléfono</label>
                     <input type="tel" id="telefono" name="telefono" placeholder="Telefono" required>
-                    <i class=" fa-solid fa-phone"></i>
                 </div>
                 <div class="contact-row">
-                    <label for="asunto">Mensaje:</label>
                     <textarea id="asunto" name="asunto" placeholder="Asunto" rows="3" required></textarea>
                 </div>
                 <button class="btn-ingresar" type="submit" name="enviar">Enviar</button>
                 <a href="#">Términos y Condiciones</a>
             </form>
         </div>
-
-        <h2>Horas de atención</h2>
-        <p class="horas">Lunes - Viernes<br>7am - 6pm<br>Fines de semana<br>Sabados<br>7am - 12pm</p>
-        <h2>Dirección Principal</h2>
-        
-        <h2>Soporte</h2>
-        <p>soporte@udantares.com<br>+54 9 11 5331-5331</p>
       </section>
-
-      <a aria-label="Consulta por nuestro WhatsApp" href="https://wa.me/584245212184"><img src="ImageAntaresWeb/wsLogo.png" alt="" class="logo-ws"/></a>
-      
-    <footer>
-      <div class="informacion">
-        <div>
-          <h3>Ayuda</h3>
-            <p>Contacto</p>
-            <p>Preguntas frecuentes</p>
-            <p>Terminos y condiciones</p>
-        </div>
-        <div>
-          <h3>Cuenta</h3>
-          <p>Tu cuenta</p>
-        </div>
-        <div>
-          <h3>Direccion</h3>
-          <p class="direccion">Av. Olimpica entre calles, Merida y Apure.<br>Sector centro, Barinas<br>Venezuela</p>
-       </div>
-       <div><h3>Suscripcion a noticias en tu email</h3></div>
-
-        <div class="iconos redes">
-          <img src="/css/ImageAntaresWeb/logoWEB.png" alt="">
-          <a href="#"><img src="/styles/imagenes/INSTALOGO.png"   width="20" height="20" alt="Instagram"></a>
-          <a href="#"><img src="/styles/imagenes/PINTLOGO.png"   width="20" height="20" alt="Facebook"></a>
-      </div>
-      <p>Conecta con UDA Antares</p>
-      <p class="derechos">Derechos reservados &copy; 2024</p>
-    </div>
-    </footer>
   
-    <script src="js/scripts.js"></script>
+        <footer class="footer">
+          <div class="list-footer" >
+            <div>
+              <h3>Sobre Nosotros</h3>
+              <ul>
+                <a href="#">Comentarios</a><br>
+                <a href="#">Comunidad</a>
+              </ul>
+            </div>
+            <div>
+              <h3 >Confianza, Seguridad y Protección</h3>
+              <ul >
+                <a href="#">Ayuda y Soporte</a><br>
+                <a href="#">Nuestra Historia</a>
+              </ul>
+            </div>
+            <div>
+              <h3>Términos de Servicio</h3>
+              <ul >
+                <a href="#">Política de Privacidad</a><br>
+                <a href="#">Aviso de Recopilación de CA</a><br>
+                <a href="#">Configuración de Cookies</a>
+              </ul>
+            </div>
+            <div>
+              <h3 >Accesibilidad</h3>
+              <ul>
+                <a href="#">Política de Cookies</a><br>
+                <a href="#">Soluciones Empresariales</a>
+              </ul>
+            </div>
+          </div>
+          <div class="redes">
+            <div>
+              <h3>Síguenos</h3>
+              <div class="logos-redes">
+               <a href="https://www.facebook.com/profile.php?id=100090071004171"><img src="ImageAntaresWeb/faceLogo.png" alt="Facebook"></a>
+               <a href="https://www.instagram.com/antaresbarinas/"><img src="ImageAntaresWeb/instagramLogo.png" alt="Instagram"></a>
+              </div>
+            </div>
+          </div>
+          <div class="linea-divisoria"></div>
+          <div class="derechos-reservados">
+            <p>© 2009 - 2024 Unidad Diagnóstica Antares®.</p>
+          </div>
+        </footer>
 
   </body>
 </html>
