@@ -188,6 +188,7 @@ body{
   text-align: center;
   text-transform: uppercase;
   font-size: 1.8em;
+  margin-top: -50px;
   
 }
 
@@ -198,8 +199,6 @@ body{
   padding: 10px;
   flex-direction: row;
   flex-wrap: nowrap;
-  align-items: center;
-
 }
 
 .navbar {
@@ -252,16 +251,37 @@ body{
   height: 26px;
 }
 
-.portada {
-  display: block;
-  text-align: center;
-  position: relative;
-}
+/*portada se refiere a la imagen y la info con en boton*/
+.content-portada{
+  display: flex;
+  width: auto;
+  height: 700px;
+ }
+ 
+ .img-portada {
+  width: 70%;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  margin-left: 10px;
+ }
 
-.portada-info {
-  
-}
+ .img-portada img{
+  max-height: 100%;
+ }
 
+ .img-portada img:hover{ /*no anda*/
+  background-color: #ffc96d;
+  transition: 0.9s;
+ }
+
+.portada-info{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: end;
+  width: 30%;
+}
 .portada h1 {
   font-size: 4em;
   text-transform: uppercase;
@@ -270,15 +290,6 @@ body{
 
 .portada h4{
   font-size: 2em;
-}
-
-.img-principal{
-  position: relative;
-  width: 1144px;
-  height: 640px;
-  left: 376px;
-  top: 40px;
-  
 }
 
 .btn-info {
@@ -293,6 +304,17 @@ body{
   color: #fbefd7;
   border: 3px solid #fbefd7;
   cursor: pointer;
+}
+
+.btn-info h2{
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-info button:hover{
+  transition: 0.9s;
+  border: 3px solid #ffa200;
+  color: #f9d699;
 }
 
 /*Historia*/
@@ -365,6 +387,7 @@ body{
  margin: 0 40px 0 100px;
  position: relative;
  align-items: center;
+ justify-content: center;
 }
 
 .Servicios-Container{
@@ -433,26 +456,34 @@ body{
 }
 
 .directorio {
-  background-color: rgba(249,160,27, 0.0);
-  display: block;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 2px;/*separacion entre elementos*/
   color: #fbefd7;
   text-align: center;
   align-items: center;
   margin-top: 100px;
-  width: 1000px;
-  padding: 50px 0 50px 0;
+  width: 1400px;
+  padding: 50px 0;
   border-radius: 50px;
-
-  
+  margin-left: 150px;
 }
 
 .directorio:hover {
-  background-color: rgba(255, 157, 11, 0.5);
+  background-color: rgba(255, 153, 0, 0.607);
+  transition: 1s;
 }
 
 .directorio a{
+  display: block;
+  padding: 5px;
   color: #fbefd7;
-  
+  font-weight: 600;
+}
+
+.directorio a:hover{
+ transition: 1s;
+ color: #2b0101;
 }
 
 /*Servicios*/
@@ -467,6 +498,7 @@ body{
 .content-services:hover {
   background-color: rgba(255, 153, 0, 0.5);
   border-radius: 20px;
+  transition: 0.9s;
 
 }
 
@@ -618,6 +650,11 @@ input::placeholder, textarea::placeholder {
   display: block;
   color:#ffdda3;
   margin: 5px 0;
+}
+
+.contact a:hover{
+  color:#ffa200;
+  transition: 0.9s;
 }
 
 
