@@ -13,13 +13,15 @@ const renderServices = () => {
 
    services.forEach((service) => { // Recorrer y renderizar cada servicio
        const html = `
-           <li data-id="${service.id}" class="services__item">
-               <h3 class="${service.completa ? 'done' : ''}">${service.txt_nombre}</h3>
+           <li data-id="${service.id}" class="services_item">
+               <p class="${service.completa ? 'done' : ''}" >${service.id} </p>
+               <p class="${service.completa ? 'done' : ''}" id="nameServices"> ${service.txt_nombre}</p>
                <p class="${service.completa ? 'done' : ''}">${service.txt_descripcion}</p>
-               <div>
+               <div class="container-bx">
                    <i class="bx bx-check" style="cursor:pointer;"></i>
                    <i class="bx bx-trash" style="cursor:pointer;"></i>
                </div>
+               <div class=linea-intermedia></div>
            </li>
        `;
 
@@ -32,10 +34,10 @@ const saveToLocalStorage = () => {
     localStorage.setItem('services', JSON.stringify(services));
 }
 
+let contadorId= 0;
 // Parte de VALIDACIÓN al hacer clic en el evento enviar
 ServicesForm.addEventListener("submit", (event) => {
-   event.preventDefault(); // Prevenir comportamiento por defecto del form
-
+   event.preventDefault(); // Prevenir comportamiento por defecto del for
    const txt_nombre = serviceNameInput.value.trim();
    const txt_descripcion = serviceDescriptionInput.value.trim();
 
@@ -98,10 +100,11 @@ ServicesForm.addEventListener("submit", (event) => {
        return;
    }
 
+   
    // Si no hay errores, crear el objeto service
    if (!erroresValidacion) {
        const service = {
-           id: Date.now(), // Crear un ID único basado en el timestamp actual
+           id: ++contadorId, // Crear un ID único basado en el timestamp actual
            txt_nombre: txt_nombre,
            txt_descripcion: txt_descripcion,
            completa: false

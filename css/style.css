@@ -14,18 +14,25 @@
 
 /*Admin*/
 
-.bx-check{
-color: #fbefd7;
-cursor: pointer;
+.container-bx{
+  margin-top: -30px;
+ margin-left: 1000px;
 }
 
-.bx-trash{
- color: #fbefd7;
- cursor: pointer;
+.bx-check, .bx-trash{
+color: #1e1e1e;
+cursor: pointer;
+margin: 5px 10px;
 }
 
 .done{
   text-decoration:line-through;
+}
+
+.error {
+  margin: 10px 0 10px 20px;
+  color: #f30c0c;
+  font-weight: bold;
 }
 
 .menu-panel{
@@ -34,6 +41,81 @@ cursor: pointer;
   width: 300px;
   height: 100%;
   margin-top: -50px;
+  border: none;
+  outline: none;
+}
+
+
+.menu-panel-content button {
+  background-color: #1e1e1e;
+  border-radius: 20px;
+  width: 270px;
+  height: 50px;
+  margin: 40px 0 10px 50px;
+  border: none;
+}
+
+.menu-panel-content a{
+  color: #fbefd7;
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.menu-panel button:hover{
+  transition: background 1s ease;
+  background:linear-gradient(to right, #ffa200, #1e1e1e 80%);
+}
+
+.button-logOut{
+  margin-top: 100%;
+}
+
+.button-logOut button{
+  margin-left: 50px;
+  margin-bottom: 10px;
+  background-color: #1e1e1e;
+  border-radius: 20px;
+  width: 270px;
+  height: 50px;
+  border: none;
+  border: none;
+  outline: none;
+  
+}
+
+.button-logOut a{
+  color: #fbefd7;
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.button-logOut button:hover{
+  transition: background 1s ease;
+  background:linear-gradient(to right, #ffa200, #1e1e1e 80%);
+}
+
+/*panel services*/
+.services__item { /*clase padre de los h3 y p de list*/
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+#nameServices{
+  font-weight: bolder;
+ }
+
+.services_item p {
+  color: #1e1e1e;
+  padding: 0 10px;
+  font-weight: 600;
+}
+
+
+.linea-intermedia{
+  border-top: 1px solid #1e1e1e;
+  margin: 20px 0;
+  height: 1px;
 }
 
 .main {
@@ -43,14 +125,53 @@ cursor: pointer;
   margin-top: 50px;
   width: 1500px;
   height: 900px;
-  margin-left: 400px;
-  background-color: #bdb5a4;
+  margin-left: 360px; /*me queda centrado en la pantalla*/
   border-radius: 25px;
 }
 
-.section__title{
-  top: 50px;
-  left: 300px;
+.main-container {
+  background-color: #fdf5e6;
+  width: 1300px;
+  height: 900px;
+  margin-top: -40px;
+  border-radius: 25px;
+}
+
+.main-container-content {
+  width: 1300px;
+  height: 150px;
+}
+
+.main-container h2 {
+  color: #1e1e1e;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 20px;
+  font-size: 2.5em;
+}
+
+.main-container label {
+ color: #1e1e1e;
+ margin: 20px 20px;
+ font-size: 1.5em;
+ font-weight: 600;
+}
+
+.main-container input {
+  border-radius: 5px;
+  background-color: #fdf5e6;
+  width: 250px;
+}
+
+.main-container button{
+  border-radius: 25px;
+  width: 150px;
+  background-color: #1e1e1e;
+  color: #fdf5e6;
+}
+
+.section-list {
+  border-radius: 10px;
 }
 
 body{
