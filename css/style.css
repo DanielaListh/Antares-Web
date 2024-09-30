@@ -259,15 +259,19 @@ body{
  }
  
  .img-portada {
+  position: relative;
   width: 70%;
   justify-content: center;
   align-items: center;
-  margin-top: 50px;
-  margin-left: 10px;
+  margin-top: 70px;
+  margin-left: 150px;
  }
 
  .img-portada img{
+  position: relative;
   max-height: 100%;
+  width: 1200px;
+  max-width: 100%;
  }
 
  .img-portada img:hover{ /*no anda*/
@@ -275,17 +279,28 @@ body{
   transition: 0.9s;
  }
 
+ .content-portada {
+  justify-content: center;
+  align-items: center;
+ }
+
 .portada-info{
   display: flex;
+  margin-left: 140px;
   flex-direction: column;
   justify-content: center;
-  align-items: end;
+  align-items: center;
   width: 30%;
 }
 .portada h1 {
-  font-size: 4em;
+  font-size: 5em;
   text-transform: uppercase;
-  
+  color: #fdf5e6;
+}
+
+.portada h1:hover{
+  color: #ffa200;
+  transition: 0.9s;
 }
 
 .portada h4{
@@ -293,10 +308,15 @@ body{
 }
 
 .btn-info {
+  display: flex;
+  flex-direction: column;
   margin-top: 20px;
+  justify-content: center;
+  align-items: center;
 }
 
-.btn{
+
+.btn-info button{
   margin-top: 20px;
   padding: 10px 20px;
   border-radius: 10px;
@@ -306,14 +326,19 @@ body{
   cursor: pointer;
 }
 
-.btn-info h2{
+.btn-info a{
   justify-content: center;
   align-items: center;
+  color: #fbefd7;
 }
 
 .btn-info button:hover{
   transition: 0.9s;
   border: 3px solid #ffa200;
+  color: #f9d699;
+}
+
+.btn-info a:hover{
   color: #f9d699;
 }
 
@@ -357,7 +382,7 @@ body{
 }
 
 .h2-yellow {
-  color: #ffc96d ;
+  color: #ffa200 ;
 }
 
 .historia-content p{
@@ -565,7 +590,7 @@ body{
   font-family: Arial, serif;
   font-weight: bold;
   margin-top: -90px;
-  color:#ffc96d;
+  color:#ffa200;
   
 }
 
