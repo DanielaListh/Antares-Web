@@ -5,7 +5,7 @@ const connection = mysql.createConnection({ // la constante de la conexion que n
     host:"localhost",
     user:"root",
     password:"",
-    database:"antares_bbdd"
+    database:"bbdd_antares"
 });
 
 connection.connect((error) => {

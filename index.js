@@ -14,4 +14,4 @@ app.get('/', (req,res) => { // la ruta raiz del proyecto o pag principal del sit
 
 
 const PORT = 3000;
-app.listen(PORT,()=> console.log(`http://localhost:${PORT}`)); // le pedimos que escuche el puerto
+app.listen(PORT,()=> console.log(`http://localhost:${PORT}`)); // le pedimos que escuche el puerto, mediante el link podemos acceder al index.js o enterPoint

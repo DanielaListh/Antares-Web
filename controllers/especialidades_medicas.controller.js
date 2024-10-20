@@ -2,7 +2,7 @@
 const db = require("../db/db");
 
 //metodos get para todos las especialidades
-const especialidadesMedicas = (req,res) => { // falta el req
+const especialidadesMedicas = (req,res) => {
     const sql = "SELECT * FROM especialidades_medicas";
     db.query(sql,(error,rows) => {
         if(error){ // si hay un error que retorne cual es el error
@@ -32,7 +32,7 @@ const especialidad = (req,res) => { //aqui le falto al profe el req y res
 //post
 const crearEspecialidad = (req,res) => {
     const {nombreEspecialidadMedica,descripcion} = req.body;// le mandamos body
-    const sql = "INSERT INTO especialidades_medicas (nombre_especialidad_medica, descripcion_especialidad_medica) VALUES(?,?)";
+    const sql = "INSERT INTO especialidades_medicas (nombre_especialidad_med, descripcion_especialidad_med) VALUES(?,?)";
     db.query(sql,[nombreEspecialidadMedica,descripcion],(error,result) => {
         console.log(result);
         if(error){ // si hay un error que retorne cual es el error
@@ -52,7 +52,7 @@ const crearEspecialidad = (req,res) => {
 const actualizarEspecialidad= (req,res) => {
     const {id_especialidad} = req.params; // me pide que requiera el id como parametro
     const {nombreEspecialidadMedica,descripcion} = req.body;// le mandamos body de los datos a modificar
-    const sql="UPDATE especialidades_medicas SET nombre_especialidad_medica = ?, descripcion_especialidad_medica = ?  WHERE id_especialidad_medica = ?";
+    const sql="UPDATE especialidades_medicas SET nombre_especialidad_med = ?, descripcion_especialidad_med = ?  WHERE id_especialidad_medica = ?";
     db.query(sql,[nombreEspecialidadMedica,descripcion, id_especialidad],(error,result) => {
         console.log(result);
         if(error){ // si hay un error que retorne cual es el error

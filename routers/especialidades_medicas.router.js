@@ -9,16 +9,16 @@ const controller = require("../controllers/especialidades_medicas.controller");
 router.get('/', controller.especialidadesMedicas);
 
 //para una sola especialidad
-router.get('/:id_especialidad', controller.especialidad);
+router.get('/:id_especialidades', controller.especialidad);
 
 //metodo post, para crear o actualizar
 router.post('/', controller.crearEspecialidad);
 
 //metodo put, busca por id y actualizar
-router.put('/:id_especialidad', controller.actualizarEspecialidad);
+router.put('/:id_especialidades', controller.actualizarEspecialidad);
 
 //metodo delete
-router.delete('/:id_especialidad', controller.borrarEspecialidad);
+router.delete('/:id_especialidades', controller.borrarEspecialidad);
 
 //exportar las rutas(routers)
 module.exports = router;
