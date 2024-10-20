@@ -31,20 +31,22 @@ const especialidad = (req,res) => { //aqui le falto al profe el req y res
 
 //post
 const crearEspecialidad = (req,res) => {
-    const {nombreEspecialidadMedica,descripcion} = req.body;// le mandamos body
-    const sql = "INSERT INTO especialidades_medicas (nombre_especialidad_medica, descripcion_especialidad_medica) VALUES(?,?)";
-    db.query(sql,[nombreEspecialidadMedica,descripcion],(error,result) => {
+    console.log(req.file);
+    //let imageName = "";
+    if(req.file){
+        return res.status(400).send('no se subio ningun archivo');
+    };
+    const imagenUrl = `/uploads/${req.file.filename}`;
+    const {nombreEspecialidadMedica,descripcionMed} = req.body;// le mandamos body
+    const sql = "INSERT INTO especialidades_medicas (nombre_especialidad_med, descripcion_especialidad_med, imagen_especialidad_med) VALUES(?,?,?)";
+    db.query(sql,[nombreEspecialidadMedica,descripcionMed, imagenUrl],(error,result) => {
         console.log(result);
         if(error){ // si hay un error que retorne cual es el error
             return res.status(500).json({error : "Error: intente mas tarde"});
         }
-        const especialidadM = {...req.body, id: result.insertId}; // reconstruir el objeto body
+        const especialidadM = {...req.body, id: result.insertId, imagenUrl}; // reconstruir el objeto body
         res.status(201).json(especialidadM); // muestra el creado con exito
     });
-    //campos de la tabla especialidades_medicas
-    //nombreEspecialidadMedica
-    //descripcion
-    //fechaAltaEspecialidad // la he quitado porque quiero que por default la fecha sea automatica
 };
 
 
