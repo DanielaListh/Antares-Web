@@ -17,20 +17,20 @@ router.get("/protected", usuariosMiddleware, (req, res) => {
 });
 
 //ruta para encontrar los usuarios registrados
-router.get('/', usuariosMiddleware, controller.obtenerUsuarios);
+router.get('/', controller.obtenerUsuarios);
 
 // ruta para ver info de un solo usuario
-router.get('/:id_usuario', usuariosMiddleware, controller.obtenerUsuario);
+router.get('/:id_usuario', controller.obtenerUsuario);
 
 //para obtener el perfil del usuario actual (apto para los egolatras)
-router.get('/me', usuariosMiddleware, controller.obtenerPerfilUsuario);
+router.get('/me', controller.obtenerPerfilUsuario);
 
 
 //metodo put, busca por id y actualizar
-router.put('/:id_usuario', usuariosMiddleware, controller.actualizarUsuario);
+router.put('/:id_usuario', controller.actualizarUsuario);
 
 //metodo delete
-router.delete('/:id_usuario', usuariosMiddleware, controller.eliminarUsuario);
+router.delete('/:id_usuario', controller.eliminarUsuario);
 
 
 //exportar las rutas(routers)
