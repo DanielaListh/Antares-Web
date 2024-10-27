@@ -23,7 +23,7 @@ router.get('/', controller.obtenerUsuarios);
 router.get('/:id_usuario', controller.obtenerUsuario);
 
 //para obtener el perfil del usuario actual (apto para los egolatras)
-router.get('/me', controller.obtenerPerfilUsuario);
+router.get('/perfil', controller.obtenerPerfilUsuario);
 
 
 //metodo put, busca por id y actualizar

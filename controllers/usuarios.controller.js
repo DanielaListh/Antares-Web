@@ -4,17 +4,17 @@ const bcrypt = require("bcryptjs");
 //controladores del modulo, accede a la base de datos
 const db = require("../db/db");
 
-
+//, genero_usuario, imagen_perfil_usuario
 //post crear un usuario REGISTRAR
 const crearUsuario = (req, res) => {
-    const { nombreUsuario, correoElectronico, password, fechaNacimiento, idRol } = req.body;
+    const { nombreUsuario, correoElectronico, password, fechaNacimiento, idRol, generoUsuario, imagenPerfilUsuario } = req.body;
 
     // Hashear la contraseña antes de guardarla
     const hash = bcrypt.hashSync(password, 8); // hash sincronico, que hace calculos mat del password
     console.log(hash); //ver el hash por la console
 
-    const sql = "INSERT INTO usuarios (nombre_usuario, correo_electronico, password, fecha_nacimiento, id_rol) VALUES (?, ?, ?, ?, ?)";
-    db.query(sql, [nombreUsuario, correoElectronico, hash, fechaNacimiento, idRol], (error, result) => {
+    const sql = "INSERT INTO usuarios (nombre_usuario, correo_electronico, password, fecha_nacimiento, id_rol, genero_usuario, imagen_perfil_usuario) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    db.query(sql, [nombreUsuario, correoElectronico, hash, fechaNacimiento, idRol, generoUsuario, imagenPerfilUsuario], (error, result) => {
         if (error) {
             console.log('Error al insertar en la base de datos:', error);
             return res.status(500).json({ error: "Error: intente más tarde" });
@@ -116,8 +116,8 @@ const obtenerPerfilUsuario = (req, res) => {
 const actualizarUsuario= (req,res) => {
     const {idUsuario} = req.params; // me pide que requiera el id como parametro
     const {nombreUsuario, correoElectronico, password, fechaNacimiento} = req.body;// le mandamos body de los datos a modificar
-    const sql="UPDATE usuarios SET nombre_usuario = ?, correo_electronico = ?, password = ?, fecha_nacimiento = ?  WHERE id_usuario = ?";
-    db.query(sql,[nombreUsuario, correoElectronico, password, fechaNacimiento, idUsuario],(error,result) => {
+    const sql="UPDATE usuarios SET nombre_usuario = ?, correo_electronico = ?, password = ?, fecha_nacimiento = ?, genero_usuario = ?, imagen_perfil_usuario = ?  WHERE id_usuario = ?";
+    db.query(sql,[nombreUsuario, correoElectronico, password, fechaNacimiento, generoUsuario, imagenPerfilUsuario, idUsuario],(error,result) => {
         console.log(result);
         if(error){ // si hay un error que retorne cual es el error
             return res.status(500).json({error : "Error: intente mas tarde"});
