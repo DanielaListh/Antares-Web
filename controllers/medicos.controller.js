@@ -16,7 +16,7 @@ const obtenerMedicos = (req,res) => { // falta el req
 //controlador para un rol
 const obtenerMedico = (req,res) => { //aqui le falto al profe el req y res
     const {id_usuario} = req.params; // aqui el profe coloco id_peliculas, pero a mi no me hizo falta
-    const sql = "SELECT * FROM roles WHERE id_usuario = ?"; // se deja el ? para evitar inyeccciones externas
+    const sql = "SELECT * FROM medicos WHERE id_usuario = ?"; // se deja el ? para evitar inyeccciones externas
     db.query(sql,[id_usuario],(error,rows) => {
         console.log(rows);
         if(error){ // si hay un error que retorne cual es el error
@@ -31,18 +31,19 @@ const obtenerMedico = (req,res) => { //aqui le falto al profe el req y res
 
 //post solo se puede crear un medico a traves del registro eligiendo el rol de medico. Aqui no se da el alta del user medico
 // sino que se da de alta los datos que son propios del rol medico
-const crearDatosMedico = (req,res) => {
-    const {codigoMedico,biografiaMedico} = req.body;// le mandamos a crear el body
-    const sql = "INSERT INTO roles (codigo_medico, biografia_medico) VALUES(?,?)";
-    db.query(sql,[codigoMedico,biografiaMedico],(error,result) => {
-        console.log(result);
-        if(error){ // si hay un error que retorne cual es el error
-            return res.status(500).json({error : "Error: intente mas tarde"});
-        }
-        const DatosMedicoCreado = {...req.body, id: result.insertId}; // reconstruir el objeto body
-        res.status(201).json(DatosMedicoCreado); // muestra el creado con exito
-    });
-};
+//const crearDatosMedico = (req,res) => {
+    //const {codigoMedico,biografiaMedico} = req.body;// le mandamos a crear el body
+    //const sql = "INSERT INTO medicos (codigo_medico, biografia_medico) VALUES(?,?)";
+    //db.query(sql,[codigoMedico,biografiaMedico],(error,result) => {
+        //if(error){ // si hay un error que retorne cual es el error
+           // return res.status(500).json({error : "Error: intente mas tarde"});
+        //}
+       // console.log(result); //resultado despues de verificar si hay errores
+
+       // const DatosMedicoCreado = {...req.body, id: result.insertId}; // reconstruir el objeto body
+       // res.status(201).json(DatosMedicoCreado); // muestra el creado con exito
+   // });
+//};
 
 
 //PUT, actualiza los datos del rol medico
@@ -84,7 +85,7 @@ const borrarDatosMedico = (req,res) => {
 module.exports = {
     obtenerMedicos,
     obtenerMedico,
-    crearDatosMedico,
+    //crearDatosMedico,
     actualizarDatosMedico,
     borrarDatosMedico,
 };

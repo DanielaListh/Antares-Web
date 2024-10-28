@@ -11,8 +11,9 @@ router.get('/', controller.obtenerMedicos);
 //para un solo medico
 router.get('/:id_usuario', controller.obtenerMedico);
 
+// he decidido que no tiene sentido crear los datos del medico ya que estos se crean con valor default al registarse un usuario con el rol 2
 //metodo post, para crear o actualizar
-router.post('/', controller.crearDatosMedico);
+//router.post('/', controller.crearDatosMedico);
 
 //metodo put, busca por id y actualizar
 router.put('/:id_usuario', controller.actualizarDatosMedico);

@@ -19,6 +19,16 @@ const crearUsuario = (req, res) => {
             console.log('Error al insertar en la base de datos:', error);
             return res.status(500).json({ error: "Error: intente más tarde" });
         }
+        if(idRol===2){
+            const idUsuario = result.insertId;
+            const sqlMedico = "INSERT INTO medicos (id_usuario, codigo_medico, biografia_medico) VALUES (?, 'none', 'none')";
+
+            db.query(sqlMedico,[idUsuario], (errorMedico) => {
+                if(errorMedico){
+                    return res.status(500).json({error:"Error al crear datos del medico"});
+                }
+            });
+        }
         //si no hay error se procede a general el token JWT
         const token = jwt.sign(
             { id: result.insertId },
