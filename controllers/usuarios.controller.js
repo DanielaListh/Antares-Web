@@ -1,25 +1,63 @@
 const jwt = require ("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const multer = require('multer');
+const fs = require('fs');
+const path = require('path');
 
 //controladores del modulo, accede a la base de datos
 const db = require("../db/db");
 
-//, genero_usuario, imagen_perfil_usuario
+//guardar la img en ruta
+function saveImage(file) {
+    const newPath = `./uploads/${file.originalname}`;
+    fs.renameSync(file.path, newPath);
+    return newPath;
+}
+
+// validación de multer para solo recibir img
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'uploads/');
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+    }
+});
+
+//el tipo de archivos que va a permitir
+const fileFilter = (req, file, cb) => {
+    const filetypes = /jpeg|jpg|png/;
+    const mimetype = filetypes.test(file.mimetype); //ayuda a identificar el tipo de archivo
+    const extname = filetypes.test(path.extname(file.originalname).toLowerCase()); // ayuda a identificar el archivo basado en su .png o .jpg
+    if (mimetype && extname) { // si lo identifica con ambos identificadores
+        return cb(null, true); //cn null no hay error y es verdadero el segundo param
+    } else {
+        cb('Error: solo se permiten archivos de imagen');
+    }
+};
+
+
 //post crear un usuario REGISTRAR
 const crearUsuario = (req, res) => {
-    const { nombreUsuario, correoElectronico, password, fechaNacimiento, idRol, generoUsuario, imagenPerfilUsuario } = req.body;
+    console.log(req.file);
+    if (!req.file) {
+        return res.status(400).send('No se subió ningún archivo');
+    }
+    const imagenUrl = saveImage(req.file);
+    const { nombreUsuario, correoElectronico, password, fechaNacimiento, idRol, generoUsuario } = req.body;
 
     // Hashear la contraseña antes de guardarla
     const hash = bcrypt.hashSync(password, 8); // hash sincronico, que hace calculos mat del password
     console.log(hash); //ver el hash por la console
 
     const sql = "INSERT INTO usuarios (nombre_usuario, correo_electronico, password, fecha_nacimiento, id_rol, genero_usuario, imagen_perfil_usuario) VALUES (?, ?, ?, ?, ?, ?, ?)";
-    db.query(sql, [nombreUsuario, correoElectronico, hash, fechaNacimiento, idRol, generoUsuario, imagenPerfilUsuario], (error, result) => {
+    db.query(sql, [nombreUsuario, correoElectronico, hash, fechaNacimiento, idRol, generoUsuario, imagenUrl], (error, result) => {
         if (error) {
             console.log('Error al insertar en la base de datos:', error);
             return res.status(500).json({ error: "Error: intente más tarde" });
         }
-        if(idRol===2){
+        // al crear un usuario con el rol 2 creamos automaticamente en la tabla medicos y dejamos por default los demas valores
+        if(idRol===2){ // es para que se vea el rol de los medicos
             const idUsuario = result.insertId;
             const sqlMedico = "INSERT INTO medicos (id_usuario, codigo_medico, biografia_medico) VALUES (?, 'none', 'none')";
 
@@ -76,7 +114,7 @@ const loginUsuario = (req, res) => {
 
 
 
-//metodos get para obtener todos los usuarios
+//metodos get para obtener todos los usuarios GET
 const obtenerUsuarios = (req,res) => { // falta el req
     const sql = "SELECT * FROM usuarios";
     db.query(sql,(error,rows) => {
@@ -88,11 +126,11 @@ const obtenerUsuarios = (req,res) => { // falta el req
 };
 
 
-//controlador para obtener un usuario
+//controlador para obtener un usuario GET
 const obtenerUsuario = (req,res) => { //aqui le falto al profe el req y res
-    const {id_usuario} = req.params; // aqui el profe coloco id_peliculas, pero a mi no me hizo falta
+    const {idUsuario} = req.params; // aqui el profe coloco id_peliculas, pero a mi no me hizo falta
     const sql = "SELECT * FROM usuarios WHERE id_usuario = ?"; // se deja el ? para evitar inyeccciones externas
-    db.query(sql,[id_usuario],(error,rows) => {
+    db.query(sql,[idUsuario],(error,rows) => {
         console.log(rows);
         if(error){ // si hay un error que retorne cual es el error
             return res.status(500).json({error : "Error: intente mas tarde"});
@@ -105,11 +143,11 @@ const obtenerUsuario = (req,res) => { //aqui le falto al profe el req y res
 };
 
 
-// Obtener el perfil del usuario autenticado
+// Obtener el perfil del usuario autenticado GET
 const obtenerPerfilUsuario = (req, res) => {
-    const { id } = req.user; // Suponiendo que el ID del usuario autenticado está en req.user
-    const sql = "SELECT * FROM usuarios WHERE id = ?";
-    db.query(sql, [id], (error, result) => {
+    const {idUsuario} = req.user; // Suponiendo que el ID del usuario autenticado está en req.user
+    const sql = "SELECT * FROM usuarios WHERE id_usuario = ?";
+    db.query(sql, [idUsuario], (error, result) => {
         if (error) {
             console.error('Error al consultar la base de datos:', error);
             return res.status(500).json({ error: "Error: intente más tarde" });
@@ -123,11 +161,16 @@ const obtenerPerfilUsuario = (req, res) => {
 
 
 //metodo o controlador PUT, actualiza con put un usuario por medio del id
-const actualizarUsuario= (req,res) => {
+const actualizarUsuario = (req,res) => {
+    console.log(req.file);
+    if (!req.file) {
+        return res.status(400).send('No se subió ningún archivo');
+    }
+    const imagenUrl = saveImage(req.file);
     const {idUsuario} = req.params; // me pide que requiera el id como parametro
-    const {nombreUsuario, correoElectronico, password, fechaNacimiento} = req.body;// le mandamos body de los datos a modificar
-    const sql="UPDATE usuarios SET nombre_usuario = ?, correo_electronico = ?, password = ?, fecha_nacimiento = ?, genero_usuario = ?, imagen_perfil_usuario = ?  WHERE id_usuario = ?";
-    db.query(sql,[nombreUsuario, correoElectronico, password, fechaNacimiento, generoUsuario, imagenPerfilUsuario, idUsuario],(error,result) => {
+    const { correoElectronico, password, generoUsuario} = req.body;// le mandamos body de los datos a modificar
+    const sql = "UPDATE usuarios SET correo_electronico = ?, password = ?, genero_usuario = ?, imagen_perfil_usuario = ?  WHERE id_usuario = ?";
+    db.query(sql,[correoElectronico, password, generoUsuario, imagenUrl, idUsuario],(error,result) => {
         console.log(result);
         if(error){ // si hay un error que retorne cual es el error
             return res.status(500).json({error : "Error: intente mas tarde"});

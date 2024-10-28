@@ -1,93 +1,115 @@
-//controladores del modulo
-const db = require("../db/db");
+// controladores del modulo
+const multer = require('multer');
+const db = require('../db/db');
+const fs = require('fs');
+const path = require('path');
 
-//metodos get para todos las especialidades
-const especialidadesMedicas = (req,res) => { // falta el req
+// métodos get para todas las especialidades
+const especialidadesMedicas = (req, res) => {
     const sql = "SELECT * FROM especialidades_medicas";
-    db.query(sql,(error,rows) => {
-        if(error){ // si hay un error que retorne cual es el error
-            return res.status(500).json({error : "Error: intente mas tarde"});
+    db.query(sql, (error, rows) => {
+        if (error) {
+            return res.status(500).json({ error: "Error: intente más tarde" });
         }
-        res.json(rows);// si no hay error que devuelva las filas
+        res.json(rows);
     });
 };
 
-
-//controlador para un servicio o especialidad
-const especialidad = (req,res) => { //aqui le falto al profe el req y res
-    const {id_especialidad} = req.params; // aqui el profe coloco id_peliculas, pero a mi no me hizo falta
-    const sql = "SELECT * FROM especialidades_medicas WHERE id_especialidad_medica = ?"; // se deja el ? para evitar inyeccciones externas
-    db.query(sql,[id_especialidad],(error,rows) => {
-        console.log(rows);
-        if(error){ // si hay un error que retorne cual es el error
-            return res.status(500).json({error : "Error: intente mas tarde"});
+// controlador para una especialidad
+const especialidad = (req, res) => {
+    const { id_especialidad } = req.params;
+    const sql = "SELECT * FROM especialidades_medicas WHERE id_especialidad_medica = ?";
+    db.query(sql, [id_especialidad], (error, rows) => {
+        if (error) {
+            return res.status(500).json({ error: "Error: intente más tarde" });
         }
-        if(rows.length == 0){ // si las filas modificadas son cero significa que no encontro nada
-            return res.status(404).send({error : "error: No existe la especialidad buscada"});
-        };
-        res.json(rows[0]);// si no hay error que devuelva las filas, []muestra el elemento en esa posicion
+        if (rows.length == 0) {
+            return res.status(404).send({ error: "Error: No existe la especialidad buscada" });
+        }
+        res.json(rows[0]);
     });
 };
 
-//post
-const crearEspecialidad = (req,res) => {
+//guardar la img en ruta
+function saveImage(file) {
+    const newPath = `./uploads/${file.originalname}`;
+    fs.renameSync(file.path, newPath);
+    return newPath;
+}
+
+// validación de multer para solo recibir img
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'uploads/');
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+    }
+});
+
+//el tipo de archivos que va a permitir
+const fileFilter = (req, file, cb) => {
+    const filetypes = /jpeg|jpg|png/;
+    const mimetype = filetypes.test(file.mimetype); //ayuda a identificar el tipo de archivo
+    const extname = filetypes.test(path.extname(file.originalname).toLowerCase()); // ayuda a identificar el archivo basado en su .png o .jpg
+    if (mimetype && extname) { // si lo identifica con ambos identificadores
+        return cb(null, true); //cn null no hay error y es verdadero el segundo param
+    } else {
+        cb('Error: solo se permiten archivos de imagen');
+    }
+};
+
+// post
+const crearEspecialidad = (req, res) => {
     console.log(req.file);
-    //let imageName = "";
-    if(req.file){
-        return res.status(400).send('no se subio ningun archivo');
-    };
-    const imagenUrl = `/uploads/${req.file.filename}`;
-    const {nombreEspecialidadMedica,descripcionMed} = req.body;// le mandamos body
-    const sql = "INSERT INTO especialidades_medicas (nombre_especialidad_med, descripcion_especialidad_med, imagen_especialidad_med) VALUES(?,?,?)";
-    db.query(sql,[nombreEspecialidadMedica,descripcionMed, imagenUrl],(error,result) => {
-        console.log(result);
-        if(error){ // si hay un error que retorne cual es el error
-            return res.status(500).json({error : "Error: intente mas tarde"});
+    if (!req.file) {
+        return res.status(400).send('No se subió ningún archivo');
+    }
+    const imagenUrl = saveImage(req.file);
+    const { nombreEspecialidadMedica, descripcionMed } = req.body;
+    const sql = "INSERT INTO especialidades_medicas (nombre_especialidad_med, descripcion_especialidad_med, imagen_especialidad_med) VALUES (?, ?, ?)";
+    db.query(sql, [nombreEspecialidadMedica, descripcionMed, imagenUrl], (error, result) => {
+        if (error) {
+            return res.status(500).json({ error: "Error: intente más tarde" });
         }
-        const especialidadM = {...req.body, id: result.insertId, imagenUrl}; // reconstruir el objeto body
-        res.status(201).json(especialidadM); // muestra el creado con exito
+        const especialidadM = { ...req.body, id: result.insertId, imagenUrl };
+        res.status(201).json(especialidadM);
     });
 };
 
-
-//metodo o controlador put
-const actualizarEspecialidad= (req,res) => {
-    const {id_especialidad} = req.params; // me pide que requiera el id como parametro
-    const {nombreEspecialidadMedica,descripcion} = req.body;// le mandamos body de los datos a modificar
-    const sql="UPDATE especialidades_medicas SET nombre_especialidad_medica = ?, descripcion_especialidad_medica = ?  WHERE id_especialidad_medica = ?";
-    db.query(sql,[nombreEspecialidadMedica,descripcion, id_especialidad],(error,result) => {
-        console.log(result);
-        if(error){ // si hay un error que retorne cual es el error
-            return res.status(500).json({error : "Error: intente mas tarde"});
+// método o controlador put
+const actualizarEspecialidad = (req, res) => {
+    const { id_especialidad } = req.params;
+    const { nombreEspecialidadMedica, descripcion } = req.body;
+    const sql = "UPDATE especialidades_medicas SET nombre_especialidad_medica = ?, descripcion_especialidad_medica = ? WHERE id_especialidad_medica = ?";
+    db.query(sql, [nombreEspecialidadMedica, descripcion, id_especialidad], (error, result) => {
+        if (error) {
+            return res.status(500).json({ error: "Error: intente más tarde" });
         }
-        if(result.affectedRows == 0){
-            return res.status(404).send({error : "Error: la especialidad medica a modificar no existe"})
+        if (result.affectedRows == 0) {
+            return res.status(404).send({ error: "Error: la especialidad medica a modificar no existe" });
         }
-        const especialidadM = {...req.body, ...req.params}; // reconstruir el objeto body y los perametros que trae
-        res.json(especialidadM);// se muestra el elemento que existe
-       
-    });
-
-};
-
-
-//modulo borrar
-const borrarEspecialidad = (req,res) => {
-    const{id_especialidad} = req.params;
-    const sql ="DELETE FROM especialidades_medicas WHERE id_especialidad_medica = ?";
-    db.query(sql,[id_especialidad], (error,result) => {
-        console.log(result);
-        if(error){
-            return res.status(500).json({error : "Error: intente mas tarde"});
-        }
-        if(result.affectedRows == 0){ // si no hay ninguna fila afectada es un error
-            return res.status(404).send({error : "Error: la especialidad medica a eliminar no existe "});
-        };
-        res.json({mensaje : "Especialidad medica eliminada correctamente"});
+        const especialidadM = { ...req.body, ...req.params };
+        res.json(especialidadM);
     });
 };
 
-//exportar las funciones del modulo
+// módulo borrar
+const borrarEspecialidad = (req, res) => {
+    const { id_especialidad } = req.params;
+    const sql = "DELETE FROM especialidades_medicas WHERE id_especialidad_medica = ?";
+    db.query(sql, [id_especialidad], (error, result) => {
+        if (error) {
+            return res.status(500).json({ error: "Error: intente más tarde" });
+        }
+        if (result.affectedRows == 0) {
+            return res.status(404).send({ error: "Error: la especialidad medica a eliminar no existe" });
+        }
+        res.json({ mensaje: "Especialidad medica eliminada correctamente" });
+    });
+};
+
+// exportar las funciones del modulo
 module.exports = {
     especialidadesMedicas,
     especialidad,

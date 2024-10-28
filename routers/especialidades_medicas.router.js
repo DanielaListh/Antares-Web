@@ -1,41 +1,56 @@
-//rutas del modulo
-const express = require('express'); // traiga el modulo de expres
-const router = express.Router(); // que use la funcion de rutas
+// rutas del modulo
+const express = require('express'); // trae el módulo de express
+const router = express.Router(); // usa la función de rutas
+const multer = require('multer'); // requiere multer para manejar la subida de archivos
+const path = require('path');
 
-// MULTER
-const multer = require("multer");
-const path = require("path");
 
+// Configura multer para aceptar solo archivos de imagen
 const storage = multer.diskStorage({
-    destination:(req,file, cb) => { //cb=callback se especifica la carpeta de destino // destination como y donde voy a subir esos archivos
-        cb(null, 'uploads'); //esta carpeta debe existir en el proyecto (raiz)
+    destination: (req, file, cb) => {
+        cb(null, 'uploads/');
     },
-    filename : (req,file,cb) => {
-        console.log(file);//ver que trae el archivo
-        cb(null, Date.now() + path.extname(file.originalname)); // segundos desde 1970 para que el valor de la imagen sea unico
-    },
+    filename: (req, file, cb) => {
+        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+    }
 });
 
-//const uploads = multer({storage:"storage"}); // si son iguales se puede escribir como solo 1 storage
-const upload = multer({storage});
+const fileFilter = (req, file, cb) => {
+    const filetypes = /jpeg|jpg|png|gif/;
+    const mimetype = filetypes.test(file.mimetype);
+    const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
 
-//controlador
+    if (mimetype && extname) {
+        return cb(null, true);
+    } else {
+        cb('Error: Solo se permiten archivos de imagen');
+    }
+};
+
+
+const upload = multer({
+    storage: storage,
+    fileFilter: fileFilter
+}).single('imagenUrl');
+
+// Controlador
 const controller = require("../controllers/especialidades_medicas.controller");
 
-//metodo get para todas las especialidades
+// Método GET para todas las especialidades
 router.get('/', controller.especialidadesMedicas);
 
-//para una sola especialidad
+// Método GET para una sola especialidad
 router.get('/:id_especialidad', controller.especialidad);
 
-//metodo post, para crear o actualizar
-router.post('/', upload.single('imagenUrl'), controller.crearEspecialidad); //video multer hora 1:21:00
+// Método POST para crear
+router.post('/', upload, controller.crearEspecialidad);
 
-//metodo put, busca por id y actualizar
+// Método PUT para buscar por ID y actualizar
 router.put('/:id_especialidad', controller.actualizarEspecialidad);
 
-//metodo delete
+// Método DELETE para borrar una especialidad
 router.delete('/:id_especialidad', controller.borrarEspecialidad);
 
-//exportar las rutas(routers)
+// Exportar las rutas (routers)
 module.exports = router;
+
