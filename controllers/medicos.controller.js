@@ -50,7 +50,7 @@ const obtenerMedico = (req,res) => { //aqui le falto al profe el req y res
 const actualizarDatosMedico = (req,res) => {
     const {id_usuario} = req.params; // me pide que requiera el id como parametro
     const {codigoMedico,biografiaMedico} = req.body;// le mandamos body de los datos a modificar
-    const sql="UPDATE medicos SET codigo_medico = ?, biografia_medico = ?  WHERE id_usuario = ?";
+    const sql=" UPDATE medicos SET codigo_medico = ?, biografia_medico = ?  WHERE id_usuario = ?";
     db.query(sql,[codigoMedico,biografiaMedico, id_usuario],(error,result) => {
         console.log(result);
         if(error){ // si hay un error que retorne cual es el error

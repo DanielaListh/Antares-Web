@@ -1,6 +1,8 @@
 //controladores del modulo
 const db = require("../db/db");
 
+//Esto es un formulario que llenan los doctores en su perfil, luego se podra recopilar esos datos en la misma tabla
+
 //metodos get para todos los medicos_especialidades (tabla intermedia entre medicos y especialidades donde se ve las especialidades de cada medico)
 const obtenerMedicosEspecialidades = (req,res) => { // falta el req
     const sql = "SELECT * FROM medicos_especialidades";
@@ -30,19 +32,27 @@ const obtenerMedicosEspecialidad = (req,res) => {
     //SELECT especialidades_medicas.nombre_especialidad FROM medicos_especialidades medicos JOIN especialidades e ON medicos.id_especialidad = e.id_especialidad WHERE me.id_usuario = ?
 };
 
-//post se crea la especialida que posee un medico y su experiencia en esa misma 
-const crearMedicoEspecialidad = (req,res) => {
-    const {idUsuario, idEspecialidadMedica, fechaExperiencia} = req.body;// le mandamos a crear el body
+//POST se crea la especialida que posee un medico y su experiencia en esa misma 
+const crearMedicoEspecialidad = (req, res) => {
+    const { idUsuario, idEspecialidadMedica, fechaExperiencia } = req.body;
+    
+    if (!idUsuario || !idEspecialidadMedica || !fechaExperiencia) {
+        return res.status(400).json({ error: "Todos los campos son obligatorios" });
+    }
     const sql = "INSERT INTO medicos_especialidades (id_usuario, id_especialidad_medica, fecha_experiencia) VALUES(?,?,?)";
-    db.query(sql,[idUsuario, idEspecialidadMedica, fechaExperiencia],(error,result) => {
+    db.query(sql, [idUsuario, idEspecialidadMedica, fechaExperiencia], (error, result) => {
         console.log(result);
-        if(error){ // si hay un error que retorne cual es el error
-            return res.status(500).json({error : "Error: intente mas tarde"});
-        }
-        const MedicoEspecialidadCreada = {...req.body, id: result.insertId}; // reconstruir el objeto body
-        res.status(201).json(MedicoEspecialidadCreada); // muestra el creado con exito
+        if (error) { 
+            console.log(error);
+            // Si hay un error que retorne cual es el error
+            return res.status(500).json({ error: "Error: intente más tarde" });
+        } 
+        // Si la inserción es exitosa
+        const medicoEspecialidad = { id: result.insertId, idUsuario, idEspecialidadMedica, fechaExperiencia };
+        res.status(201).json(medicoEspecialidad); // Muestra el creado con éxito
     });
 };
+
 
 
 //PUT, actualiza los datos 

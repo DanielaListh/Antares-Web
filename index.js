@@ -18,7 +18,7 @@ const medicosRouter = require('./routers/medicos.router');
 app.use('/medicos', medicosRouter); // que la app expres utilice el /medicos como ruta
 
 const medicosEspecialidadesRouter =  require('./routers/medicosEspecialidades.router');
-app.use('/MedicosEspecialidades', medicosEspecialidadesRouter);
+app.use('/medicosEspecialidades', medicosEspecialidadesRouter);
 
 app.get('/', (req,res) => { // la ruta raiz del proyecto o pag principal del sitio
     res.send("Hola Antares");
