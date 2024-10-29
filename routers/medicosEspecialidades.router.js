@@ -5,6 +5,9 @@ const router = express.Router(); // que use la funcion de rutas
 //controlador
 const controller = require("../controllers/medicosEspecialidades.controller");
 
+// ruta para mostrar el formulario de especialidades a los medicos, este formulario es de htlm
+router.get('/formulario-especialidades', controller.renderizarFormularioEspecialidades);
+
 //metodo get para todas los medicos
 router.get('/', controller.obtenerMedicosEspecialidades);
 
@@ -12,7 +15,7 @@ router.get('/', controller.obtenerMedicosEspecialidades);
 router.get('/:idMedicoEspecialidad', controller.obtenerMedicosEspecialidad);
 
 //metodo post, para crear o actualizar
-router.post('/', controller.crearMedicoEspecialidad);
+router.post('/', controller.agregarMedicoEspecialidad);
 
 //metodo put, busca por id y actualizar
 router.put('/:idMedicoEspecialidad', controller.actualizarMedicoEspecialidad);

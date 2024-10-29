@@ -1,7 +1,12 @@
 //controladores del modulo
 const db = require("../db/db");
 
-//Esto es un formulario que llenan los doctores en su perfil, luego se podra recopilar esos datos en la misma tabla
+//Esto es un formulario que llenan los doctores en su perfil, son dirigidos a el luego de realizar el registro, se usa para recopilar esos datos en una misma tabla
+
+//vista para el formulario
+const renderizarFormularioEspecialidades = (req, res) => {
+    res.render('formulario_especialidades'); // renderiza la vista del formulario
+};
 
 //metodos get para todos los medicos_especialidades (tabla intermedia entre medicos y especialidades donde se ve las especialidades de cada medico)
 const obtenerMedicosEspecialidades = (req,res) => { // falta el req
@@ -24,7 +29,7 @@ const obtenerMedicosEspecialidad = (req,res) => {
         if(error){ // si hay un error que retorne cual es el error
             return res.status(500).json({error : "Error: intente mas tarde"});
         }
-        if(rows.length == 0){ // si las filas modificadas son cero significa que no encontro nada
+        if(rows.length === 0){ // si las filas modificadas son cero significa que no encontro nada
             return res.status(404).send({error : "error: No existe el la especialidad del medico buscado"});
         };
         res.json(rows[0]);// si no hay error que devuelva las filas, []muestra el elemento en esa posicion
@@ -33,12 +38,9 @@ const obtenerMedicosEspecialidad = (req,res) => {
 };
 
 //POST se crea la especialida que posee un medico y su experiencia en esa misma 
-const crearMedicoEspecialidad = (req, res) => {
-    const { idUsuario, idEspecialidadMedica, fechaExperiencia } = req.body;
-    
-    if (!idUsuario || !idEspecialidadMedica || !fechaExperiencia) {
-        return res.status(400).json({ error: "Todos los campos son obligatorios" });
-    }
+const agregarMedicoEspecialidad = (req, res) => { // el IdUsuario debe autocompletarse al crearse en el registro
+    const {idEspecialidadMedica, fechaExperiencia} = req.body;
+    const idUsuario = req.user.id; //asumiendo que tiene el token autenticado
     const sql = "INSERT INTO medicos_especialidades (id_usuario, id_especialidad_medica, fecha_experiencia) VALUES(?,?,?)";
     db.query(sql, [idUsuario, idEspecialidadMedica, fechaExperiencia], (error, result) => {
         console.log(result);
@@ -92,9 +94,10 @@ const borrarMedicoEspecialidad = (req,res) => {
 
 //exportar las funciones del modulo
 module.exports = {
+    renderizarFormularioEspecialidades,
     obtenerMedicosEspecialidades,
     obtenerMedicosEspecialidad,
-    crearMedicoEspecialidad,
+    agregarMedicoEspecialidad,
     actualizarMedicoEspecialidad,
-    borrarMedicoEspecialidad,
+    borrarMedicoEspecialidad
 };

@@ -15,17 +15,17 @@ function saveImage(file) {
 }
 
 // validación de multer para solo recibir img
-const storage = multer.diskStorage({
+/*const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, 'uploads/');
     },
     filename: (req, file, cb) => {
         cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
     }
-});
+});*/
 
 //el tipo de archivos que va a permitir
-const fileFilter = (req, file, cb) => {
+/*const fileFilter = (req, file, cb) => {
     const filetypes = /jpeg|jpg|png/;
     const mimetype = filetypes.test(file.mimetype); //ayuda a identificar el tipo de archivo
     const extname = filetypes.test(path.extname(file.originalname).toLowerCase()); // ayuda a identificar el archivo basado en su .png o .jpg
@@ -34,7 +34,7 @@ const fileFilter = (req, file, cb) => {
     } else {
         cb('Error: solo se permiten archivos de imagen');
     }
-};
+};*/
 
 
 //post crear un usuario REGISTRAR
@@ -56,25 +56,31 @@ const crearUsuario = (req, res) => {
             console.log('Error al insertar en la base de datos:', error);
             return res.status(500).json({ error: "Error: intente más tarde" });
         }
+
+        const idUsuario = result.insertId;
+
         // al crear un usuario con el rol 2 creamos automaticamente en la tabla medicos y dejamos por default los demas valores
         if(idRol===2){ // es para que se vea el rol de los medicos
-            const idUsuario = result.insertId;
+            //const idUsuario = result.insertId;
             const sqlMedico = "INSERT INTO medicos (id_usuario, codigo_medico, biografia_medico) VALUES (?, 'none', 'none')";
-
             db.query(sqlMedico,[idUsuario], (errorMedico) => {
                 if(errorMedico){
+                    console.log('Error al insertar en la tabla medicos:', errorMedico);
                     return res.status(500).json({error:"Error al crear datos del medico"});
                 }
             });
         }
-        //si no hay error se procede a general el token JWT
+        //si no hay error se procede a general el token JWT y definimos si necesita completar el form de medico
         const token = jwt.sign(
-            { id: result.insertId },
+            { id: idUsuario },
             process.env.SECRET_KEY,  // esta en mis variables de entorno .env
             { expiresIn: "1h" } //expira en una hora el token
         );
+
         const userCreado = { ...req.body, id: result.insertId };
-        res.status(201).json({ userCreado, token }); // Devuelve el usuario creado y el token
+        const necesitaEspecialidad = (idRol === 2); // Si es médico, necesita especialidad
+        // Si no es médico, responde sin necesidad de especialidad
+        res.status(201).json({ userCreado, token, necesitaEspecialidad});
     });
 };
 
