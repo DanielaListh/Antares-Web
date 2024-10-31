@@ -1,11 +1,12 @@
 const jwt = require ("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-const multer = require('multer');
+//const multer = require('multer');
 const fs = require('fs');
-const path = require('path');
+//const path = require('path');
 
 //controladores del modulo, accede a la base de datos
 const db = require("../db/db");
+const { error } = require("console");
 
 //guardar la img en ruta
 function saveImage(file) {
@@ -14,29 +15,6 @@ function saveImage(file) {
     return newPath;
 }
 
-// validación de multer para solo recibir img
-/*const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, 'uploads/');
-    },
-    filename: (req, file, cb) => {
-        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
-    }
-});*/
-
-//el tipo de archivos que va a permitir
-/*const fileFilter = (req, file, cb) => {
-    const filetypes = /jpeg|jpg|png/;
-    const mimetype = filetypes.test(file.mimetype); //ayuda a identificar el tipo de archivo
-    const extname = filetypes.test(path.extname(file.originalname).toLowerCase()); // ayuda a identificar el archivo basado en su .png o .jpg
-    if (mimetype && extname) { // si lo identifica con ambos identificadores
-        return cb(null, true); //cn null no hay error y es verdadero el segundo param
-    } else {
-        cb('Error: solo se permiten archivos de imagen');
-    }
-};*/
-
-
 //post crear un usuario REGISTRAR
 const crearUsuario = (req, res) => {
     console.log(req.file);
@@ -44,14 +22,14 @@ const crearUsuario = (req, res) => {
         return res.status(400).send('No se subió ningún archivo');
     }
     const imagenUrl = saveImage(req.file);
-    const { nombreUsuario, correoElectronico, password, fechaNacimiento, idRol, generoUsuario } = req.body;
+    const { nombreUsuario, correoElectronico, password, fechaNacimiento, idRol, idGenero } = req.body;
 
     // Hashear la contraseña antes de guardarla
     const hash = bcrypt.hashSync(password, 8); // hash sincronico, que hace calculos mat del password
     console.log(hash); //ver el hash por la console
 
-    const sql = "INSERT INTO usuarios (nombre_usuario, correo_electronico, password, fecha_nacimiento, id_rol, genero_usuario, imagen_perfil_usuario) VALUES (?, ?, ?, ?, ?, ?, ?)";
-    db.query(sql, [nombreUsuario, correoElectronico, hash, fechaNacimiento, idRol, generoUsuario, imagenUrl], (error, result) => {
+    const sql = "INSERT INTO usuarios (nombre_usuario, correo_electronico, password, fecha_nacimiento, id_rol, imagen_perfil_usuario, id_genero, es_borrado) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    db.query(sql, [nombreUsuario, correoElectronico, hash, fechaNacimiento, idRol, imagenUrl, idGenero, false], (error, result) => {
         if (error) {
             console.log('Error al insertar en la base de datos:', error);
             return res.status(500).json({ error: "Error: intente más tarde" });
@@ -60,7 +38,7 @@ const crearUsuario = (req, res) => {
         const idUsuario = result.insertId;
 
         // al crear un usuario con el rol 2 creamos automaticamente en la tabla medicos y dejamos por default los demas valores
-        if(idRol===2){ // es para que se vea el rol de los medicos
+        if(idRol==2){ // es para que se vea el rol de los medicos
             //const idUsuario = result.insertId;
             const sqlMedico = "INSERT INTO medicos (id_usuario, codigo_medico, biografia_medico) VALUES (?, 'none', 'none')";
             db.query(sqlMedico,[idUsuario], (errorMedico) => {
@@ -70,6 +48,7 @@ const crearUsuario = (req, res) => {
                 }
             });
         }
+
         //si no hay error se procede a general el token JWT y definimos si necesita completar el form de medico
         const token = jwt.sign(
             { id: idUsuario },
@@ -78,8 +57,8 @@ const crearUsuario = (req, res) => {
         );
 
         const userCreado = { ...req.body, id: result.insertId };
-        const necesitaEspecialidad = (idRol === 2); // Si es médico, necesita especialidad
-        // Si no es médico, responde sin necesidad de especialidad
+        const necesitaEspecialidad = (idRol == 2); // Si es médico, necesita especialidad
+        // Si no es médico, pasa de largo
         res.status(201).json({ userCreado, token, necesitaEspecialidad});
     });
 };
@@ -203,16 +182,65 @@ const actualizarUsuario = (req,res) => {
 
 //modulo borrar usuario
 const eliminarUsuario = (req, res) => {
-    const { idUsuario } = req.params;
-    const sql = "DELETE FROM usuarios WHERE id_usuario = ?";
-    db.query(sql, [idUsuario], (error, result) => {
+    const { idUsuario } = req.params; // captura el valor de la ruta y se almacena en idUsuario
+
+    //buscamos al usuario para obtener el idRol
+    const sqlBuscarUsuario = "SELECT id_rol FROM usuarios WHERE id_usuario = ?";
+    db.query(sqlBuscarUsuario, [idUsuario], (error, result) => {
         if (error) {
-            console.error('Error al eliminar el usuario:', error);
-            return res.status(500).json({ error: "Error: intente más tarde" });
+            console.error('Error al buscar el usuario:', error);
+            return res.status(500).json({ error: "Error: intente más tarde" }); // imprime en result del postman 
         }
-        res.status(200).json({ message: "Usuario eliminado correctamente" });
+
+        if (result.length === 0) { // si el largo del resultado es 0 (no encontro nada)
+            return res.status(404).json({ error: "Usuario no encontrado" }); // entonces no encontro el user
+        }
+
+        const idRol = result[0].id_rol; //el result encuentra en la bbdd el objeto 1 de fila id_rol(bbdd) y toma su valor, y es ahora la const idRol
+        
+        //si el rol es 2, eliminamos de medicos primero
+        if (idRol == 2) {
+            const sqlEliminarMedicoEspecialidades = "DELETE FROM medicos_especialidades WHERE id_usuario = ?";
+            db.query(sqlEliminarMedicoEspecialidades, [idUsuario], (errorMedicoEsp) => {
+                if (errorMedicoEsp) {
+                    console.error('Error al eliminar el médico de especialidades:', errorMedicoEsp);
+                    return res.status(500).json({ error: "Error: intente más tarde" });
+                }
+
+            const sqlEliminarMedico = "DELETE FROM medicos WHERE id_usuario = ?";
+            db.query(sqlEliminarMedico, [idUsuario], (errorMedico) => {
+                if (errorMedico) {
+                    console.error('Error al eliminar el médico:', errorMedico);
+                    return res.status(500).json({ error: "Error: intente más tarde" });
+                }
+
+                //luego eliminamos el usuario
+                const sqlEliminarUsuario = "DELETE FROM usuarios WHERE id_usuario = ?";
+                db.query(sqlEliminarUsuario, [idUsuario], (errorUsuario, resultUsuario) => {
+                    if (errorUsuario) {
+                        console.error('Error al eliminar el usuario:', errorUsuario);
+                        return res.status(500).json({ error: "Error: intente más tarde" });
+                    }
+                    res.status(200).json({ message: "Usuario, médico y su/s especialidad/es eliminados correctamente" });
+                });
+            });
+
+        });
+
+        } else {
+            //si el rol no es 2, solo eliminamos el usuario
+            const sqlEliminarUsuario = "DELETE FROM usuarios WHERE id_usuario = ?";
+            db.query(sqlEliminarUsuario, [idUsuario], (errorUsuario, resultUsuario) => {
+                if (errorUsuario) {
+                    console.error('Error al eliminar el usuario:', errorUsuario);
+                    return res.status(500).json({ error: "Error: intente más tarde" });
+                }
+                res.status(200).json({ message: "Usuario eliminado correctamente" });
+            });
+        }
     });
 };
+
 
 //exportar las funciones del modulo
 module.exports = {

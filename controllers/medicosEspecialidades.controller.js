@@ -3,7 +3,7 @@ const db = require("../db/db");
 
 //Esto es un formulario que llenan los doctores en su perfil, son dirigidos a el luego de realizar el registro, se usa para recopilar esos datos en una misma tabla
 
-//vista para el formulario
+//vista para el formulario, funcionara en el front no en el postman
 const renderizarFormularioEspecialidades = (req, res) => {
     res.render('formulario_especialidades'); // renderiza la vista del formulario
 };
@@ -18,7 +18,6 @@ const obtenerMedicosEspecialidades = (req,res) => { // falta el req
         res.json(rows);// si no hay error que devuelva las filas
     });
 };
-
 
 //controlador para un medico con especialidad
 const obtenerMedicosEspecialidad = (req,res) => {
@@ -37,10 +36,9 @@ const obtenerMedicosEspecialidad = (req,res) => {
     //SELECT especialidades_medicas.nombre_especialidad FROM medicos_especialidades medicos JOIN especialidades e ON medicos.id_especialidad = e.id_especialidad WHERE me.id_usuario = ?
 };
 
-//POST se crea la especialida que posee un medico y su experiencia en esa misma 
-const agregarMedicoEspecialidad = (req, res) => { // el IdUsuario debe autocompletarse al crearse en el registro
-    const {idEspecialidadMedica, fechaExperiencia} = req.body;
-    const idUsuario = req.user.id; //asumiendo que tiene el token autenticado
+//POST se crea la especialida que posee un medico y su experiencia en esa misma en el perfil del usuario se va a colocar el id:(numero id) para que al hacer el form tipee su id
+const agregarMedicoEspecialidad = (req, res) => { 
+    const {idUsuario, idEspecialidadMedica, fechaExperiencia} = req.body;
     const sql = "INSERT INTO medicos_especialidades (id_usuario, id_especialidad_medica, fecha_experiencia) VALUES(?,?,?)";
     db.query(sql, [idUsuario, idEspecialidadMedica, fechaExperiencia], (error, result) => {
         console.log(result);
