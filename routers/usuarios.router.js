@@ -28,7 +28,7 @@ const fileFilter = (req, file, cb) => {
     }
 };
 
-const upload = multer({
+const upload = multer({ // definimos que siempre subiremos una sola imagen traida de imagenUrl y guardada en upload
     storage: storage,
     fileFilter: fileFilter
 }).single('imagenUrl');// tener cuidado de siempre colocar las comillas ''

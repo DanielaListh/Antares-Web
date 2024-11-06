@@ -27,8 +27,7 @@ const fileFilter = (req, file, cb) => {
     }
 };
 
-
-const upload = multer({
+const upload = multer({ // definimos que siempre subiremos una sola imagen traida de imagenUrl y guardada en upload
     storage: storage,
     fileFilter: fileFilter
 }).single('imagenUrl');
@@ -40,16 +39,16 @@ const controller = require("../controllers/especialidades_medicas.controller");
 router.get('/', controller.especialidadesMedicas);
 
 // Método GET para una sola especialidad
-router.get('/:id_especialidad', controller.especialidad);
+router.get('/:idEspecialidad', controller.especialidad);
 
 // Método POST para crear
 router.post('/', upload, controller.crearEspecialidad);
 
 // Método PUT para buscar por ID y actualizar
-router.put('/:id_especialidad', controller.actualizarEspecialidad);
+router.put('/:idEspecialidad', upload, controller.actualizarEspecialidad);
 
 // Método DELETE para borrar una especialidad
-router.delete('/:id_especialidad', controller.borrarEspecialidad);
+router.delete('/:idEspecialidad', controller.borrarEspecialidad);
 
 // Exportar las rutas (routers)
 module.exports = router;

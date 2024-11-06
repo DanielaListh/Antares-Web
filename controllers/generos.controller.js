@@ -1,85 +1,83 @@
-//controladores del modulo
+//
 const db = require("../db/db");
 
-//metodos get para todos los roles
-const obtenerGeneros = (req,res) => { // falta el req
+// Método GET para obtener todos los géneros
+const obtenerGeneros = (req, res) => {
     const sql = "SELECT * FROM generos";
-    db.query(sql,(error,rows) => {
-        if(error){ // si hay un error que retorne cual es el error
-            return res.status(500).json({error : "Error: intente mas tarde"});
+    db.query(sql, (error, rows) => {
+        if (error) {
+            console.error("Error al obtener los géneros:", error);
+            return res.status(500).json({ error: "Error: intente más tarde" });
         }
-        res.json(rows);// si no hay error que devuelva las filas
+        res.json(rows);
     });
 };
 
-
-//controlador para un rol
-const obtenerGenero = (req,res) => { //aqui le falto al profe el req y res
-    const {id_genero} = req.params; // aqui el profe coloco id_peliculas, pero a mi no me hizo falta
-    const sql = "SELECT * FROM generos WHERE id_rol = ?"; // se deja el ? para evitar inyeccciones externas
-    db.query(sql,[id_genero],(error,rows) => {
-        console.log(rows);
-        if(error){ // si hay un error que retorne cual es el error
-            return res.status(500).json({error : "Error: intente mas tarde"});
+// Controlador para obtener un género específico
+const obtenerGenero = (req, res) => {
+    const { idGenero } = req.params;
+    const sql = "SELECT * FROM generos WHERE id_genero = ?";
+    db.query(sql, [idGenero], (error, rows) => {
+        if (error) {
+            console.error("Error al obtener el género:", error);
+            return res.status(500).json({ error: "Error: intente más tarde" });
         }
-        if(rows.length == 0){ // si las filas modificadas son cero significa que no encontro nada
-            return res.status(404).send({error : "error: No existe el genero buscado"});
-        };
-        res.json(rows[0]);// si no hay error que devuelva las filas, []muestra el elemento en esa posicion
+        if (rows.length === 0) {
+            return res.status(404).send({ error: "Error: No existe el género buscado" });
+        }
+        res.json(rows[0]);
     });
 };
 
-//post
-const crearGenero = (req,res) => {
-    const {nombreGenero} = req.body;// le mandamos a crear el body
+// Método POST para crear un nuevo género
+const crearGenero = (req, res) => {
+    const { nombreGenero } = req.body;
     const sql = "INSERT INTO generos (nombre_genero) VALUES(?)";
-    db.query(sql,[nombreGenero],(error,result) => {
-        console.log(result);
-        if(error){ // si hay un error que retorne cual es el error
-            return res.status(500).json({error : "Error: intente mas tarde"});
+    db.query(sql, [nombreGenero], (error, result) => {
+        if (error) {
+            console.error("Error al crear el género:", error);
+            return res.status(500).json({ error: "Error: intente más tarde" });
         }
-        const generoCreado = {...req.body, id: result.insertId}; // reconstruir el objeto body
-        res.status(201).json(generoCreado); // muestra el creado con exito
+        const generoCreado = { ...req.body, id: result.insertId };
+        res.status(201).json(generoCreado);
     });
 };
 
-
-//metodo o controlador put
-const actualizarGenero= (req,res) => {
-    const {idGenero} = req.params; // me pide que requiera el id como parametro
-    const {nombreGenero} = req.body;// le mandamos body de los datos a modificar
-    const sql="UPDATE generos SET nombre_genero = ?  WHERE id_genero = ?";
-    db.query(sql,[nombreGenero, idGenero],(error,result) => {
-        console.log(result);
-        if(error){ // si hay un error que retorne cual es el error
-            return res.status(500).json({error : "Error: intente mas tarde"});
+// Método PUT para actualizar un género existente
+const actualizarGenero = (req, res) => {
+    const { idGenero } = req.params;
+    const { nombreGenero } = req.body;
+    const sql = "UPDATE generos SET nombre_genero = ? WHERE id_genero = ?";
+    db.query(sql, [nombreGenero, idGenero], (error, result) => {
+        if (error) {
+            console.error("Error al actualizar el género:", error);
+            return res.status(500).json({ error: "Error: intente más tarde" });
         }
-        if(result.affectedRows == 0){
-            return res.status(404).send({error : "Error: el genero a modificar no existe"})
+        if (result.affectedRows === 0) {
+            return res.status(404).send({ error: "Error: El género a modificar no existe" });
         }
-        const generoActualizado = {...req.body, ...req.params}; // reconstruir el objeto body y los perametros que trae
-        res.json(generoActualizado);// se muestra el elemento que existe
+        const generoActualizado = { ...req.body, ...req.params };
+        res.json(generoActualizado);
     });
 };
 
-
-//modulo borrar
-const borrarGenero = (req,res) => {
-    const{idGenero} = req.params;
-    const sql ="DELETE FROM generos WHERE id_genero = ?";
-    db.query(sql,[idGenero], (error,result) => {
-        console.log(result);
-        if(error){
-            return res.status(500).json({error : "Error: intente mas tarde"});
+// Método DELETE para eliminar un género
+const borrarGenero = (req, res) => {
+    const { idGenero } = req.params;
+    const sql = "DELETE FROM generos WHERE id_genero = ?";
+    db.query(sql, [idGenero], (error, result) => {
+        if (error) {
+            console.error("Error al eliminar el género:", error);
+            return res.status(500).json({ error: "Error: intente más tarde" });
         }
-        if(result.affectedRows == 0){ // si no hay ninguna fila afectada es un error
-            return res.status(404).send({error : "Error: el genero a eliminar no existe "});
-        };
-        res.json({mensaje : "Genero eliminado correctamente"});
+        if (result.affectedRows === 0) {
+            return res.status(404).send({ error: "Error: El género a eliminar no existe" });
+        }
+        res.json({ mensaje: "Género eliminado correctamente" });
     });
 };
 
-//exportar las funciones del modulo
+// Exportar las funciones del módulo
 module.exports = {
     obtenerGeneros,
     obtenerGenero,

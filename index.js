@@ -21,7 +21,7 @@ const medicosEspecialidadesRouter =  require('./routers/medicosEspecialidades.ro
 app.use('/medicosEspecialidades', medicosEspecialidadesRouter);
 
 const generoRouter = require('./routers/generos.router');
-app.use('generos', generoRouter);
+app.use('/generos', generoRouter);
 
 app.get('/', (req,res) => { // la ruta raiz del proyecto o pag principal del sitio
     res.send("Hola Antares");

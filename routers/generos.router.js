@@ -9,16 +9,16 @@ const controller = require("../controllers/generos.controller");
 router.get('/', controller.obtenerGeneros);
 
 //para un solo rol
-router.get('/:id_genero', controller.obtenerGenero);
+router.get('/:idGenero', controller.obtenerGenero);
 
 //metodo post, para crear o actualizar
 router.post('/', controller.crearGenero);
 
 //metodo put, busca por id y actualizar
-router.put('/:id_genero', controller.actualizarGenero);
+router.put('/:idGenero', controller.actualizarGenero);
 
 //metodo delete
-router.delete('/:id_genero', controller.borrarGenero);
+router.delete('/:idGenero', controller.borrarGenero);
 
 //exportar las rutas(routers)
 module.exports = router;
