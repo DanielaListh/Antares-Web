@@ -31,7 +31,7 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({
     storage: storage,
     fileFilter: fileFilter
-}).single('imagenUrl');
+}).single('imagenUrl');// tener cuidado de siempre colocar las comillas ''
 
 
 //ruta para crear un nuevo usuaerio
@@ -50,10 +50,6 @@ router.get('/', controller.obtenerUsuarios);
 
 // ruta para ver info de un solo usuario
 router.get('/:idUsuario', controller.obtenerUsuario);
-
-//para obtener el perfil del usuario actual (apto para los egolatras)
-router.get('/perfil', controller.obtenerPerfilUsuario);
-
 
 //metodo put, busca por id y actualizar
 router.put('/:idUsuario', upload, controller.actualizarUsuario);
