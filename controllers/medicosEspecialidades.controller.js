@@ -1,3 +1,4 @@
+// DISCLAIMER NO ESTA ANDANDO POR UN TEMA EN USUARIOS CON ROLES
 //controladores del modulo
 const db = require("../db/db");
 

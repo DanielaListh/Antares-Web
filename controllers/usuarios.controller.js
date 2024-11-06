@@ -179,7 +179,9 @@ const actualizarUsuario = (req, res) => {
             db.query(sqlActualizarRol, [nombreUsuario, correoElectronico, hash, fechaNacimiento, nuevoRol, imagenUrl, idGenero, idUsuario], (error, result) => {
                 if (error) {
                     console.log("Error al intentar actualizar el usuario en la tabla Usuarios:", error);
-                    return res.status(500).json({ error: "Error al actualizar el usuario A" });
+                    //return res.status(500).json({ error: "Error al actualizar el usuario ${idUsuario}" });
+                    return res.status(500).json({ error: `Error al actualizar el usuario ${idUsuario}` });
+
                 }
                 res.status(200).json({ message: "El usuario se ha actualizado correctamente" });
             });

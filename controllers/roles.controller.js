@@ -79,7 +79,7 @@ const borrarRol = (req,res) => {
             return res.status(500).json({error : "Error: intente mas tarde"});
         }
         if(result.affectedRows == 0){ // si no hay ninguna fila afectada es un error
-            return res.status(404).send({error : "Error: la especialidad medica a eliminar no existe "});
+            return res.status(404).send({error : "Error: el rol a eliminar no existe "});
         };
         res.json({mensaje : "Rol eliminado correctamente"});
     });

@@ -14,8 +14,8 @@ const obtenerMedicos = (req,res) => { // falta el req
 
 
 //controlador para un rol
-const obtenerMedico = (req,res) => { //aqui le falto al profe el req y res
-    const {id_usuario} = req.params; // aqui el profe coloco id_peliculas, pero a mi no me hizo falta
+const obtenerMedico = (req,res) => {
+    const {id_usuario} = req.params; 
     const sql = "SELECT * FROM medicos WHERE id_usuario = ?"; // se deja el ? para evitar inyeccciones externas
     db.query(sql,[id_usuario],(error,rows) => {
         console.log(rows);

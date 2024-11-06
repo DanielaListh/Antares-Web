@@ -1,7 +1,8 @@
 # ignoramos archivos de la base de datos
-*.sql
-/SqlDDBB
+#*.sql
+#/SqlDDBB
 
+// se ignora .env porque si lo subimos al githhub nuestro proyecto queda expuesto
 .env
 
 #ignorar carpeta de node modules

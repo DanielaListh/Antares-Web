@@ -2,7 +2,7 @@ const express = require('express');
 require('dotenv').config(); //luego lo veremos pero son las variables de entorno, \se requiere las variables de entorno ejemplo PORT
 const app = express();// incicio la applicacion  express
 
-app.use(express.json()); // en el cuerpo de la peticion vendra un json y se transforma en un objeso js y asi poder usarlo
+app.use(express.json()); // en el cuerpo de la peticion vendra un json y se transforma en un objeto js y asi poder usarlo
 //Middleware para transformar el cuerpo de la peticion a Json
 
 const especialidadesMedicasRouter = require('./routers/especialidades_medicas.router'); // que coloque en esta constante lo que hay en ese modulo
@@ -22,6 +22,9 @@ app.use('/medicosEspecialidades', medicosEspecialidadesRouter);
 
 const generoRouter = require('./routers/generos.router');
 app.use('/generos', generoRouter);
+
+const estadosRouter = require('./routers/estados.router');
+app.use('/estados', estadosRouter);
 
 app.get('/', (req,res) => { // la ruta raiz del proyecto o pag principal del sitio
     res.send("Hola Antares");

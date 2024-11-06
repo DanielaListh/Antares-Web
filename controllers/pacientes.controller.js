@@ -1,1 +1,0 @@
-// en ves de insert hacemos push en el video de 5 horas
