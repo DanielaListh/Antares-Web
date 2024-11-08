@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+@import url("https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css");
+/* nos permite traer los iconos de la lista */
+
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  list-style-type:none;
+}
+
+/* Archivo styles.css */
+
+/* Fondo de la página */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url('/css/ImageAntaresWeb/redesN.jpg'); /* Asegúrate de poner la ruta correcta a tu imagen */
+    background-size: cover;
+    background-position: center;
+    font-family: Arial, sans-serif;
+    color: #fff;
+}
+
+/* Contenedor principal */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Barra de navegación */
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+}
+
+/* Caja de inicio de sesión */
+.login-box {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    border-radius: 30px;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.8);
+    width: 550px;
+    position: relative;
+}
+
+/* Títulos */
+.login-box h2 {
+    margin: 0 0 30px;
+    padding: 0;
+    font-size: 24px;
+}
+
+/* Campos de texto */
+.login-box div {
+    display: inline-block;
+    /*position: relative;*/
+    margin-bottom: 20px;
+}
+
+.login-box input, .login-box select {
+    display: inline-block;
+    width: auto;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #fff;
+    margin-bottom: 30px;
+    border: none;
+    border-bottom: 1px solid #fff;
+    outline: none;
+    background: transparent;
+}
+
+.login-box label {
+    /*display: inline-block;*/
+    position: absolute;
+    width: 100px;
+    top: 10;
+    left: 0;
+    padding: 10px 0;
+    font-size: 18px;
+    color: #fff;
+    pointer-events: none;
+    transition: 0.5s;
+    text-align: right;
+}
+
+/* Efecto en los campos de texto */
+.login-box input:focus ~ label,
+.login-box input:valid ~ label,
+.login-box select:focus ~ label,
+.login-box select:valid ~ label {
+    display: inline-block;
+    top:0px;
+    left: 0;
+    color: #da7810;
+    font-size: 12px;
+}
+
+/* Checkbox */
+.checkbox {
+    margin-bottom: 20px;
+}
+
+.checkbox input {
+    margin-right: 10px;
+}
+
+/* Botón de registro */
+button {
+    background: #cd5a08;
+    border: none;
+    padding: 10px 20px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 5px;
+}
+
+button:hover {
+    background: #973804;
+}
+
+/* Enlace a términos y condiciones */
+.login-box a {
+    color: #9e0ab9;
+    text-decoration: none;
+}
+
+.login-box a:hover {
+    text-decoration: underline;
+}

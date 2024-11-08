@@ -1,5 +1,8 @@
+const expres = require('express');
+const router = expres.Router();
 const jwt = require ("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const multer = require('multer');
 const fs = require('fs'); // proporciona una API que interactua con archivos, puede renombrar archivos, leerlos, darles nombre, eliminarlos, etc.
 
 //controladores del modulo, accede a la base de datos
@@ -124,7 +127,7 @@ const obtenerUsuario = (req,res) => { //aqui le falto al profe el req y res
 };
 
 
-// Obtener el perfil del usuario autenticado GET
+// Obtener el perfil del usuario autenticado GET, mas adelante
 //const obtenerPerfilUsuario = (req, res) => {
    // const {idUsuario} = req.user; // Suponiendo que el ID del usuario autenticado está en req.user
    // const sql = "SELECT * FROM usuarios WHERE id_usuario = ?";
@@ -150,65 +153,31 @@ const actualizarUsuario = (req, res) => {
 
     const imagenUrl = saveImage(req.file); // Guardar la imagen subida y almacenar la URL en imagenUrl
     const { idUsuario } = req.params; // Obtener el id del usuario como parámetro para buscar el registro a actualizar
-    const { nombreUsuario, correoElectronico, password, fechaNacimiento, nuevoRol, idGenero } = req.body; // Obtener los datos del cuerpo de la solicitud
-
+    const { nombreUsuario, correoElectronico, password, fechaNacimiento, idRol, idGenero } = req.body; // Obtener los datos del cuerpo de la solicitud
+     //antes nuevoRol
     // Hashear la contraseña antes de guardarla
     const hash = bcrypt.hashSync(password, 8); // hash sincronico, que hace calculos mat del password
     console.log(hash); //ver el hash por la console
 
-    // Obtener el rol actual del idUsuario
-    const sqlBuscarUsuario = "SELECT id_rol FROM usuarios WHERE id_usuario = ?";
-    db.query(sqlBuscarUsuario, [idUsuario], (error, result) => {
+
+    const sql = "UPDATE usuarios SET nombre_usuario = ?, correo_electronico = ?, password = ?, fecha_nacimiento = ?, id_rol = ?, imagen_perfil_usuario = ?, id_genero = ? WHERE id_usuario = ?";
+    db.query(sql, [nombreUsuario, correoElectronico, hash, fechaNacimiento, idRol, imagenUrl, idGenero, idUsuario], (error, result) => {
         if (error) {
-            console.log("Error al buscar el usuario:", error);
-            return res.status(500).json({ error: "Error de sintaxis, intente más tarde" });
+            console.log("Error al intentar actualizar el usuario en la tabla Usuarios:", error);
+            return res.status(500).json({ error: `Error al actualizar el usuario ${idUsuario}` });
         }
-        if (result.length === 0) {
-            return res.status(404).json({ error: "Usuario no encontrado" });
-        }
-        // si encuentra el rol lo guarda en idRolActual
-        const idRolActual = result[0].id_rol;
-        console.log(idRolActual); // lo imprime en consola
+        // como estaba dando dos respuestas al metodo me crasheaba el server, tenia dos res.status para la misma funcion
+        //res.status(200).json({ message: "El usuario se ha actualizado correctamente" });
 
-        // Si el rol actual es 2 y el nuevo rol es diferente, eliminamos los registros en las tablas medicos y medicos_especialidades
-        // comparacion entre el valor del rol actual y el valor del rol que se busca actualizar
-        if (idRolActual == 2 && nuevoRol != 2) {// aqui los registros relacionados seran eliminados automaticamente debido a on delete cascade
-            // si el rol es dos procedemos a eliminar los registros en medicos y medicos_especialidades, pero esto se hace automatico
-            // Actualizamos el rol y los demás campos del usuario
-            const sqlActualizarRol = "UPDATE usuarios SET nombre_usuario = ?, correo_electronico = ?, password = ?, fecha_nacimiento = ?, id_rol = ?, imagen_perfil_usuario = ?, id_genero = ? WHERE id_usuario = ?";
-            db.query(sqlActualizarRol, [nombreUsuario, correoElectronico, hash, fechaNacimiento, nuevoRol, imagenUrl, idGenero, idUsuario], (error, result) => {
-                if (error) {
-                    console.log("Error al intentar actualizar el usuario en la tabla Usuarios:", error);
-                    //return res.status(500).json({ error: "Error al actualizar el usuario ${idUsuario}" });
-                    return res.status(500).json({ error: `Error al actualizar el usuario ${idUsuario}` });
-
-                }
-                res.status(200).json({ message: "El usuario se ha actualizado correctamente" });
-            });
-        } else {
-            // Si el rol es 1 o 3, se actualiza el rol y los demás campos del usuario (por los momentos es asi ya que no tengo hecho la parte del admin ni la del paciente, luego sera mas esopecifico)
-            const sqlActualizarUsuario = "UPDATE usuarios SET nombre_usuario = ?, correo_electronico = ?, password = ?, fecha_nacimiento = ?, id_rol = ?, imagen_perfil_usuario = ?, id_genero = ?  WHERE id_usuario = ?";
-            db.query(sqlActualizarUsuario, [nombreUsuario, correoElectronico, hash, fechaNacimiento, nuevoRol, imagenUrl, idGenero, idUsuario], (error, result) => {
-                if (error) {
-                    console.log("Error al actualizar el usuario (el id no es 2):", error);
-                    return res.status(500).json({ error: "Error: intente más tarde" });
-                }
-                if (result.affectedRows === 0) {
-                    return res.status(404).send({ error: "Error: el usuario a modificar no existe" });
-                }
-                res.status(200).json({ message: "Rol del usuario ha sido actualizado correctamente" });
-
-                // Obtener el usuario actualizado, pero mostrando el rol
-                const sqlSelect = "SELECT * FROM usuarios WHERE id_usuario = ?";
-                db.query(sqlSelect, [idUsuario], (error, result) => {
-                    if (error) {
-                        return res.status(500).json({ error: "Error: intente más tarde" });
-                    }
-                    const userActualizado = result[0]; // Mostrar el id_rol en la respuesta
-                    res.json(userActualizado); // Mostrar el elemento que existe
-                });
-            });
-        }
+        // Obtener el usuario actualizado, pero mostrando el rol
+        const sqlSelect = "SELECT * FROM usuarios WHERE id_usuario = ?";
+        db.query(sqlSelect, [idUsuario], (error, result) => {
+            if (error) {
+                return res.status(500).json({ error: "Error: intente más tarde" });
+            }
+            const userActualizado = result[0]; // Mostrar el id_rol en la respuesta
+            res.status(200).json({ message: "El usuario se ha actualizado correctamente", user: userActualizado });
+        });
     });
 };
 
