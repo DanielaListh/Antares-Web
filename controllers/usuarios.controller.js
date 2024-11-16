@@ -1,8 +1,8 @@
 const expres = require('express');
-const router = expres.Router();
+////const router = expres.Router();
 const jwt = require ("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-const multer = require('multer');
+//const multer = require('multer');
 const fs = require('fs'); // proporciona una API que interactua con archivos, puede renombrar archivos, leerlos, darles nombre, eliminarlos, etc.
 
 //controladores del modulo, accede a la base de datos

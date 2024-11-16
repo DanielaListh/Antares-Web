@@ -12,187 +12,19 @@
   list-style-type:none;
 }
 
-/*Admin*/
-
-.container-bx{
-  margin-top: -30px;
- margin-left: 1000px;
-}
-
-.bx-check, .bx-trash{
-color: #1e1e1e;
-cursor: pointer;
-margin: 5px 10px;
-}
-
-.done{
-  text-decoration:line-through;
-}
-
-.error {
-  margin: 10px 0 10px 20px;
-  color: #f30c0c;
-  font-weight: bold;
-}
-
-.menu-panel{
-  background-color: #fbefd7;
-  position: fixed;
-  width: 300px;
-  height: 100%;
-  margin-top: -50px;
-  border: none;
-  outline: none;
-}
-
-
-.menu-panel-content button {
-  background-color: #1e1e1e;
-  border-radius: 20px;
-  width: 270px;
-  height: 50px;
-  margin: 40px 0 10px 50px;
-  border: none;
-}
-
-.menu-panel-content a{
-  color: #fbefd7;
-  font-size: 2em;
-  font-weight: bold;
-}
-
-.menu-panel button:hover{
-  transition: background 1s ease;
-  background:linear-gradient(to right, #ffa200, #1e1e1e 80%);
-}
-
-.button-logOut{
-  margin-top: 100%;
-}
-
-.button-logOut button{
-  margin-left: 50px;
-  margin-bottom: 10px;
-  background-color: #1e1e1e;
-  border-radius: 20px;
-  width: 270px;
-  height: 50px;
-  border: none;
-  border: none;
-  outline: none;
-  
-}
-
-.button-logOut a{
-  color: #fbefd7;
-  font-size: 2em;
-  font-weight: bold;
-}
-
-.button-logOut button:hover{
-  transition: background 1s ease;
-  background:linear-gradient(to right, #ffa200, #1e1e1e 80%);
-}
-
-/*panel services*/
-.services__item { /*clase padre de los h3 y p de list*/
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-}
-
-#nameServices{
-  font-weight: bolder;
- }
-
-.services_item p {
-  color: #1e1e1e;
-  padding: 0 10px;
-  font-weight: 600;
-}
-
-
-.linea-intermedia{
-  border-top: 1px solid #1e1e1e;
-  margin: 20px 0;
-  height: 1px;
-}
-
-.main {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 50px;
-  width: 1500px;
-  height: 900px;
-  margin-left: 360px; /*me queda centrado en la pantalla*/
-  border-radius: 25px;
-}
-
-.main-container {
-  background-color: #fdf5e6;
-  width: 1300px;
-  height: 900px;
-  margin-top: -40px;
-  border-radius: 25px;
-}
-
-.main-container-content {
-  width: 1300px;
-  height: 150px;
-}
-
-.main-container h2 {
-  color: #1e1e1e;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  margin-left: 20px;
-  font-size: 2.5em;
-}
-
-.main-container label {
- color: #1e1e1e;
- margin: 20px 20px;
- font-size: 1.5em;
- font-weight: 600;
-}
-
-.main-container input {
-  border-radius: 5px;
-  background-color: #fdf5e6;
-  width: 250px;
-}
-
-.main-container button{
-  border-radius: 25px;
-  width: 150px;
-  background-color: #1e1e1e;
-  color: #fdf5e6;
-}
-
-.section-list {
-  border-radius: 10px;
-}
-
 body{
   font-family: "Open Sans", sans-serif;
-  background-color: #1e1e1e;
-  color: #fbefd7;
-}
-
-.checkbox {
- visibility: hidden;
-}
-
-.menu-container {
-  text-align: center;
-  text-transform: uppercase;
-  font-size: 1.8em;
-  margin-top: -50px;
-  
+  /*background-image: url(/css/ImageAntaresWeb/fondo.jpg);*/
+  background-size: cover; /* la imagen cubra toda el área */ 
+  background-position: center; /* Centra la imagen en la pantalla */ 
+  background-repeat: no-repeat;
 }
 
 /* Index*/
+
+.menu-container{
+  background-color: #285fc5;
+}
 
 .portada {
   display: block;
@@ -202,30 +34,31 @@ body{
 }
 
 .navbar {
-  margin-top: 50px;
-  text-align: center;
-  bottom: 50px;
+  margin-top: 30px;
+  padding-bottom: 20px;
 }
 
 .navbar ul{
   list-style-type: none;
   display: flex;
-  position: relative;
+  position:relative;
   justify-content: flex-end;
-  
+  list-style-position: inside; 
+  text-align: center;
 }
 
 .navbar li {
   display: inline;/*los enlaces de tipo texto los convertimos en bloque para que el margin y padin se a;adan*/
   margin-right:20px;
   position: relative;
+  text-align: center;
   
 }
 
 .navbar a{
-  color: #fbefd7;
-  position: relative;
-
+  color: #ffffff;
+  text-align: center;
+  font-size: 2em;
 }
 
 .navbar ul li a::after {
@@ -236,14 +69,14 @@ body{
   display: block;
   margin-top: 5px;
   right: 0;
-  background: #ffa200;
+  background: #ffffff;
   transition: width 0.3s ease;
 }
 
 .navbar ul li a:hover::after {
   width: 100%;
   left: 0;
-  background: #ffc96d;
+  background: #2e79f2;
 }
 
 .img-menu-login{
@@ -251,11 +84,103 @@ body{
   height: 26px;
 }
 
+/* Estilos personalizados para la barra de desplazamiento */ 
+
+::-webkit-scrollbar { 
+  width: 10px; 
+} 
+
+::-webkit-scrollbar-track { 
+  background: #f0f0f0; 
+} 
+
+::-webkit-scrollbar-thumb { 
+  background-color: rgba(40, 95, 197, 0.0); 
+  border-radius: 10px; border: 
+  2px solid #f0f0f0; 
+} 
+
+::-webkit-scrollbar-thumb:hover { 
+  background-color: #3c72ca; 
+}
+
+
+/*registro*/
+
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+.form-container {
+  display: flex;
+  width: 90%;
+  background-color: #ffffff;
+  border-radius: 10px;
+}
+.form-container img {
+  width: 50%;
+  background-color: #285fc5;
+  border-radius: 50px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 50px;
+}
+
+.imageSingup{
+  width: 50%;
+  object-fit: cover;
+}
+
+.form {
+  padding: 10px;
+  width: 50%;
+  background-color: #ffdada;
+  border-radius: 50px;
+}
+.form h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+.form input, .form select, .form button {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.form button {
+  background-color: #2e79f2;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+.form button:hover {
+  background-color: #285fc5;
+}
+.form .login-link {
+  display: block;
+  text-align: center;
+  margin-top: 10px;
+}
+
+
+
+
 /*portada se refiere a la imagen y la info con en boton*/
 .content-portada{
   display: flex;
   width: auto;
   height: 700px;
+  
  }
  
  .img-portada {
@@ -686,7 +611,7 @@ input::placeholder, textarea::placeholder {
 /*footer*/
 
 .footer {
-  background-color:black;
+  background-color: rgba(40, 95, 197, 0.5);
   padding: 20px;
   font-family: Arial, sans-serif;
   border-radius: 25px;
@@ -716,7 +641,7 @@ input::placeholder, textarea::placeholder {
 }
 
 .list-footer a:hover{
- color: #ffc96d;
+ color: #ffffff;
  transition: all 0.7s;
 }
 
@@ -749,7 +674,7 @@ input::placeholder, textarea::placeholder {
 
 .derechos-reservados {
   display: flex;
-  color: #ffc96d;
+  color: #ffffff;
   font-size: 14px;
   font-weight: bold;
   margin: 30px 0;

@@ -32,7 +32,8 @@ const obtenerGenero = (req, res) => {
 // Método POST para crear un nuevo género
 const crearGenero = (req, res) => {
     const { nombreGenero } = req.body;
-    const sql = "INSERT INTO generos (nombre_genero) VALUES(?)";
+
+    const sql = 'INSERT INTO generos (nombre_genero) VALUES (?)';
     db.query(sql, [nombreGenero], (error, result) => {
         if (error) {
             console.error("Error al crear el género:", error);

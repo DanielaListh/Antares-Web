@@ -3,128 +3,144 @@
 /* nos permite traer los iconos de la lista */
 
 
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  text-decoration: none;
-  list-style: none;
-  list-style-type:none;
-}
-
 /* Archivo styles.css */
 
-/* Fondo de la página */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+    list-style-type:none;
+}
+
 body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    background-image: url('/css/ImageAntaresWeb/redesN.jpg'); /* Asegúrate de poner la ruta correcta a tu imagen */
+    min-height: 100vh;
+    background-image: url('/css/ImageAntaresWeb/redesN.jpg');
     background-size: cover;
     background-position: center;
     font-family: Arial, sans-serif;
     color: #fff;
+    margin-top: -50px;
 }
 
-/* Contenedor principal */
 .container {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
+    width: 100%;
+    max-width: 700px;
 }
 
-/* Barra de navegación */
-nav ul {
-    list-style: none;
-    padding: 0;
-}
+.navbar {
+    margin-top: 50px;
+    text-align: center;
+    bottom: 50px;
+    font-size: 1.8em;
+  }
+  
+  .navbar ul{
+    list-style-type: none;
+    display: flex;
+    position: relative;
+    justify-content: flex-end;
+    
+  }
+  
+  .navbar li {
+    display: inline;/*los enlaces de tipo texto los convertimos en bloque para que el margin y padin se a;adan*/
+    margin-right:20px;
+    position: relative;
+    
+  }
+  
+  .navbar a{
+    color: #ffffff;
+    position: relative;
+  }
+  
+  .navbar ul li a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    display: block;
+    margin-top: 5px;
+    right: 0;
+    background: #ffa200;
+    transition: width 0.3s ease;
+  }
+  
+  .navbar ul li a:hover::after {
+    width: 100%;
+    left: 0;
+    background: #ffc96d;
+  }
 
-nav ul li {
-    display: inline;
-    margin: 0 15px;
-}
-
-nav ul li a {
-    text-decoration: none;
-    color: #fff;
-    font-weight: bold;
-}
-
-/* Caja de inicio de sesión */
 .login-box {
     background: rgba(0, 0, 0, 0.6);
     padding: 20px;
-    border-radius: 30px;
-    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.8);
-    width: 550px;
-    position: relative;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    max-width: 500px;
+    text-align: left;
 }
 
-/* Títulos */
 .login-box h2 {
-    margin: 0 0 30px;
-    padding: 0;
+    margin-bottom: 20px;
     font-size: 24px;
 }
 
-/* Campos de texto */
 .login-box div {
-    display: inline-block;
-    /*position: relative;*/
     margin-bottom: 20px;
+    position: relative;
 }
 
-.login-box input, .login-box select {
-    display: inline-block;
-    width: auto;
-    padding: 10px 0;
+.login-box input,
+.login-box select {
+    width: 100%;
+    padding: 10px;
     font-size: 16px;
     color: #fff;
-    margin-bottom: 30px;
+    background: transparent;
     border: none;
     border-bottom: 1px solid #fff;
     outline: none;
-    background: transparent;
 }
+
+.campoRol
 
 .login-box label {
-    /*display: inline-block;*/
     position: absolute;
-    width: 100px;
-    top: 10;
+    top: 10px;
     left: 0;
-    padding: 10px 0;
-    font-size: 18px;
+    font-size: 16px;
     color: #fff;
-    pointer-events: none;
-    transition: 0.5s;
-    text-align: right;
+    transition: 0.3s;
 }
 
-/* Efecto en los campos de texto */
 .login-box input:focus ~ label,
 .login-box input:valid ~ label,
 .login-box select:focus ~ label,
 .login-box select:valid ~ label {
-    display: inline-block;
-    top:0px;
+    top: -15px;
     left: 0;
     color: #da7810;
     font-size: 12px;
 }
 
-/* Checkbox */
 .checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     margin-bottom: 20px;
 }
 
-.checkbox input {
-    margin-right: 10px;
-}
-
-/* Botón de registro */
 button {
     background: #cd5a08;
     border: none;
@@ -134,13 +150,13 @@ button {
     cursor: pointer;
     transition: 0.3s;
     border-radius: 5px;
+    width: 100%;
 }
 
 button:hover {
     background: #973804;
 }
 
-/* Enlace a términos y condiciones */
 .login-box a {
     color: #9e0ab9;
     text-decoration: none;
