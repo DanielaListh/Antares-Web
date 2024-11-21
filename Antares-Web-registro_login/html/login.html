@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In</title>
+    <link rel="icon" href="/css/ImageAntaresWeb/logoWEB.png" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+
+    <div class="menu-container">
+        <input class="checkbox" type="checkbox" id="menu"/>
+        <label for="menu">
+            <img src="css/ImageAntaresWeb/menu.png" class="menu-icono" alt="">
+        </label>
+        <nav class="navbar">
+            <ul>
+                <li><a href="/html/index.html"><img class="img-menu-login" src="/css/ImageAntaresWeb/logoAuuu.png" alt=""></a></li>
+                <li><a href="/html/index.html">Home</a></li>
+                <li><a href="#nuestraHistoria">Nuestra Historia</a></li>
+                <li><a href="#servicios">Servicios que Ofrecemos</a></li>
+                <li><a href="#Turnos">Consigue turno</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+                <li><a href="/html/login.html" src="/css/ImageAntaresWeb/png-user.png" alt="">Login</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="eclipse">
+      <img src="/css/ImageAntaresWeb/eclipse1.png" alt="">
+    </div>
+
+    <div class="container">
+        <div class="form-container">
+            <form  class="form1" id="loginForm" action="http://localhost:3000/usuarios/login" method="POST" enctype="multipart/form-data">
+              <h2>Inicia Sesion</h2>
+              <div>
+                  <label for="correoElectronico">Correo Electrónico:</label><br>
+                  <input type="email" id="correoElectronico" name="correoElectronico" required>
+              </div>
+              <div>
+                  <label for="password">Contraseña:</label><br>
+                  <input type="password" id="password" name="password" required>
+                  <i class="far fa-eye" id="togglePassword" style="cursor: pointer;"></i>
+              </div>
+              <div>
+                  <button type="submit">acceder</button>
+                  <P class="login-link">Si no tienes cuenta,<a href="/html/registroUsuarios.html" class="login-link"> Regístrate.</a></P>
+              </div>
+          </form>
+          <div class="imageSingup">
+            <img src="/css/ImageAntaresWeb/dentistalogin.jpg" alt="Persona en silla de ruedas">
+        </div>
+
+        </div>
+    </div>
+
+    
+    <footer class="footer">
+        <div class="list-footer" >
+          <div>
+            <h3>Sobre Nosotros</h3>
+            <ul>
+              <a href="#">Comentarios</a><br>
+              <a href="#">Comunidad</a>
+            </ul>
+          </div>
+          <div>
+            <h3 >Confianza, Seguridad y Protección</h3>
+            <ul >
+              <a href="#">Ayuda y Soporte</a><br>
+              <a href="#">Nuestra Historia</a>
+            </ul>
+          </div>
+          <div>
+            <h3>Términos de Servicio</h3>
+            <ul >
+              <a href="#">Política de Privacidad</a><br>
+              <a href="#">Aviso de Recopilación de CA</a><br>
+              <a href="#">Configuración de Cookies</a>
+            </ul>
+          </div>
+          <div>
+            <h3 >Accesibilidad</h3>
+            <ul>
+              <a href="#">Política de Cookies</a><br>
+              <a href="#">Soluciones Empresariales</a>
+            </ul>
+          </div>
+        </div>
+        <div class="redes">
+          <div>
+            <h3>Síguenos</h3>
+            <div class="logos-redes">
+              <a href="https://www.facebook.com/profile.php?id=100090071004171"><img src="/css/ImageAntaresWeb/faceLogo.png" alt="Facebook"></a>
+              <a href="https://www.instagram.com/antaresbarinas/"><img src="/css/ImageAntaresWeb/instagramLogo.png" alt="Instagram"></a>
+            </div>
+          </div>
+        </div>
+        <div class="linea-divisoria"></div>
+        <div class="derechos-reservados">
+          <p>© 2009 - 2024 Unidad Diagnóstica Antares®.</p>
+        </div>
+    </footer>
+
+    <script> 
+
+      document.getElementById('togglePassword').addEventListener('click', function() {
+            const passwordField = document.getElementById('password');
+            const toggleIcon = document.getElementById('togglePassword');
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                toggleIcon.classList.remove('fa-eye');
+                toggleIcon.classList.add('fa-eye-slash');
+            } else {
+                passwordField.type = 'password';
+                toggleIcon.classList.remove('fa-eye-slash');
+                toggleIcon.classList.add('fa-eye');
+            }
+        });
+
+      document.getElementById('loginForm').addEventListener('submit', function(event) { 
+        event.preventDefault(); 
+        const formData = new FormData(this); 
+        const data = Object.fromEntries(formData.entries()); 
+
+        fetch('http://localhost:3000/usuarios/login', { 
+            method: 'POST', 
+            body: JSON.stringify(data), 
+            headers: { 
+                'Content-Type': 'application/json' 
+            } 
+        }) 
+        .then(response => {
+          if(!response.ok){
+            throw new Error("la respuesta de el netkwork no anda");
+          }
+          return response.json();
+        }) 
+        .then(data => { 
+            if (data.auth) { 
+                // Guardar el token en el almacenamiento local (localStorage) 
+                localStorage.setItem('token', data.token); 
+                // Redirigir a otra página 
+                window.location.href = 'http://localhost:3000/dashboard'; 
+            } else { 
+                alert('Login fallido. Por favor, verifique sus credenciales.');
+            } 
+        }) 
+        .catch(error => {
+          console.error('Error:', error);
+          alert("ocurrio un error al iniciar sesion auuuu");
+        });
+      }); 
+    </script>
+
+</body>
+</html>

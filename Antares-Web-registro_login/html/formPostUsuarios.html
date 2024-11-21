@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/singIn.css">
+    <title>Sing in</title>
+</head>
+<body class="body">
+    <div class="container">
+        <nav class="navbar"> 
+            <ul> 
+                <li><a href="/html/index.html">Home</a></li> 
+                <li><a href="">Nuestra Historia</a></li> 
+                <li><a href="#">Servicios que Ofrecemos</a></li>
+                <li><a href="#">Consigue turno</a></li> 
+                <li><a href="#">Contacto</a></li> 
+                <li><a href="#">Log in</a></li> 
+            </ul> 
+        </nav>
+        <div class="login-box">
+        <h2>Sing in</h2>
+        
+            <div>
+                <label for="nombreUsuario">Nombre de Usuario:</label><br>
+                <input type="text" id="nombreUsuario" name="nombreUsuario" required>
+            </div>
+            <div>
+                <label for="correoElectronico">Correo Electrónico:</label><br>
+                <input type="email" id="correoElectronico" name="correoElectronico" required>
+            </div>
+            <div>
+                <label for="password">Contraseña:</label><br>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div>
+            <label for="fechaNacimiento">Fecha de Nacimiento:</label><br>
+                <input type="date" id="fechaNacimiento" name="fechaNacimiento" required>
+            </div>
+            <div>
+                <label for="idRol">Usted es:</label>
+                <select class="campoRol" id="idRol" name="idRol" required>
+                    <option value="1">Paciente</option>
+                    <option value="2">Médico</option>
+                    <option value="3">Administrador</option>
+             </select>
+         </div>
+            <div>
+             <label for="idGenero">Género:</label>
+                <select id="idGenero" name="idGenero" required>
+                    <option value="1">Masculino</option>
+                    <option value="2">Femenino</option>
+                    <option value="3">Binario</option>
+             </select>
+            </div>
+            <div> 
+                <label for="imagenPerfil">Subir Imagen de Perfil:</label>
+                <input type="file" id="imagenPerfil" name="imagenUrl" accept=".png, .jpg, .jpeg, image/*" required>
+            </div>
+            <div class="terminos">
+                <input type="checkbox" name="terminos" id="terminos" required>
+                <label for="terminos">Acepto los <a href="/terminos-y-condiciones" target="_blank">términos y condiciones</a></label>
+            </div>
+            <div>
+                <button type="submit">Registrar</button>
+            </div>
+        </form>
+        </div>
+    </div>
+        <script>
+            document.querySelector('form').addEventListener('submit', function(event) {
+                const fileInput = document.getElementById('imagenPerfil');
+             const file = fileInput.files[0];
+             if (file) {
+                  const validTypes = ['image/png', 'image/jpeg', 'image/jpg'];
+                  if (!validTypes.includes(file.type)) {
+                      alert('Solo se permiten archivos de tipo PNG o JPG.');
+                     event.preventDefault();
+                 }
+             }
+            });
+        </script>
+    
+</body>
+</html>
