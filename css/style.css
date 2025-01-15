@@ -18,19 +18,32 @@ body{
   background-size: cover; /* la imagen cubra toda el área */ 
   background-position: center; /* Centra la imagen en la pantalla */ 
   background-repeat: no-repeat;
+  background-color: #ffffff;
 }
 
 /* Index*/
-
-.menu-container{
-  background-color: #285fc5;
-}
 
 .portada {
   display: block;
   padding: 10px;
   flex-direction: row;
   flex-wrap: nowrap;
+  justify-content: center;
+}
+
+.menu-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 80px;
+  padding: 0 40px;
+  background-color: #003064;
+  height: 200px;
+  border-radius: 25px;
+}
+
+.checkbox {
+  display: none;
 }
 
 .navbar {
@@ -38,11 +51,10 @@ body{
   padding-bottom: 20px;
 }
 
-.navbar ul{
+.navbar ul {
   list-style-type: none;
   display: flex;
-  position:relative;
-  justify-content: flex-end;
+  justify-content: center;
   list-style-position: inside; 
   text-align: center;
 }
@@ -54,6 +66,8 @@ body{
   text-align: center;
   
 }
+
+/*fijarse la letra con respecto a la resolucion de la pantalla*/
 
 .navbar a{
   color: #ffffff;
@@ -76,12 +90,15 @@ body{
 .navbar ul li a:hover::after {
   width: 100%;
   left: 0;
-  background: #2e79f2;
+  background: #ff9900;
 }
 
+
+
+/*esta es la imagen del logo de la empresa en la barra de navegacion*/
 .img-menu-login{
-  width: 30px;
-  height: 26px;
+  width: 180px;
+  height: 100px;
 }
 
 /* Estilos personalizados para la barra de desplazamiento */ 
@@ -107,64 +124,75 @@ body{
 
 /*registro*/
 
-
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
-  margin: 0;
-  padding: 0;
-}
 .container {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-}
-.form-container {
-  display: flex;
-  width: 90%;
-  background-color: #ffffff;
-  border-radius: 10px;
-}
-.form-container img {
-  width: 50%;
-  background-color: #285fc5;
-  border-radius: 50px;
-  border-radius: 10px;
-  overflow: hidden;
-  margin-bottom: 50px;
+  margin: 50px 100px;
 }
 
-.imageSingup{
-  width: 50%;
+.form-container {
+  display: flex;
+  background-color:rgba(255, 255, 255, 0.836);
+  align-items: center;
+}
+
+/*width = ancho, height = alto*/
+
+.form-container img {
+  width: 800px;
+  border-radius: 50px;
+  overflow: hidden;
   object-fit: cover;
 }
 
+/*div del formulario de registro*/
 .form {
+  width: 40%;
   padding: 10px;
-  width: 50%;
-  background-color: #ffdada;
+  background-color: rgba(255, 255, 255, 0.5);
   border-radius: 50px;
+  margin-left:20px ;
+  justify-content: center;
+  text-align: center;
 }
+
 .form h2 {
-  margin-bottom: 20px;
+  text-align: center;
+  margin:20px;
   color: #333;
+  font-size: 7vh;
 }
+
+.form label, .form a {
+  color: #000000;
+  font-size: 2vh;
+}
+
 .form input, .form select, .form button {
-  width: 100%;
+  margin: 15px;
+  justify-content: center;
+  width: 80%;
   padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
+  border: 1px solid #fff;
   border-radius: 5px;
+  font-size: 25px;
 }
 .form button {
-  background-color: #2e79f2;
-  color: white;
-  border: none;
+  width: 250px;
+  height: 100px;
+  color: #285fc5;
+  border:3px solid #285fc5;
   cursor: pointer;
+  border-radius: 50px;
+  font-size: 3vh;
+  font-weight: 600;
+
 }
 .form button:hover {
-  background-color: #285fc5;
+  background-color: #f6f9ff;
+  border:3px solid #ffc353;
+  color: #fabc5e;
 }
 .form .login-link {
   display: block;
@@ -611,7 +639,8 @@ input::placeholder, textarea::placeholder {
 /*footer*/
 
 .footer {
-  background-color: rgba(40, 95, 197, 0.5);
+  background-color: #003064;
+  margin: 0 80px;
   padding: 20px;
   font-family: Arial, sans-serif;
   border-radius: 25px;
@@ -630,18 +659,18 @@ input::placeholder, textarea::placeholder {
 }
 
 .list-footer h3 {
-  color: #fbefd7;
+  color: #ffffff;
   margin-bottom: 10px;
 }
 
 
 .list-footer a {
   margin: 5px 0;
-  color: #fbefd7;
+  color: #ffffff;
 }
 
 .list-footer a:hover{
- color: #ffffff;
+ color: #fabc5e;
  transition: all 0.7s;
 }
 
@@ -650,7 +679,7 @@ input::placeholder, textarea::placeholder {
 }
 
 .redes h3 {
-  color: #fbefd7;
+  color: #ffffff;
   margin-bottom: 10px;
   margin-left: 125px;
 }
@@ -658,18 +687,25 @@ input::placeholder, textarea::placeholder {
 .redes div {
   display: flex;
   gap: 10px;
-  
 }
 
-.logos-redes img {
-  margin-top: -5px;
-  width: 30px;
-  height: 30px;
+.icon-facebook {
+  color: #ffffff; /* Color de Facebook */
+  font-size: 25px; /* Tamaño del icono */
+  margin-right: 5px; /* Espacio entre iconos */
 }
+
+.icon-instagram {
+  color: #ffffff; /* Color de Instagram */
+  font-size: 29px; /* Tamaño del icono */
+  margin-right: 10px; /* Espacio entre iconos */
+}
+
 
 .linea-divisoria {
   border-top: 1px solid;
   margin: 20px 110px;
+  color: #ffffff;
 }
 
 .derechos-reservados {
