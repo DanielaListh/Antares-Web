@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 </head>
-<body>
+<body class="body-image">
 
     <div class="menu-container">
         <a href="/html/index.html"><img class="img-menu-login" src="/css/ImageAntaresWeb/logoAuuu.png" alt=""></a>
@@ -36,28 +36,50 @@
             <div class="imageSingup">
                 <img src="/css/ImageAntaresWeb/abrazo.jpg" alt="Persona en silla de ruedas">
             </div>
-            <div class="form">
-                <h2>Regístrate</h2>
-                <input type="text" placeholder="Nombre">
-                <input type="email" placeholder="Email">
-                <input type="password" placeholder="Contraseña">
-                <input type="date" placeholder="Fecha de Nacimiento">
-                <select>
-                    <option value="">Usted es</option>
-                    <!-- Opciones adicionales -->
-                </select>
-                <select>
-                    <option value="">Género</option>
-                    <!-- Opciones adicionales -->
-                </select>
-                <input type="file">
-                <button>Regístrate</button>
-                <a href="#" class="login-link">Si ya tienes cuenta, Inicia Sesión</a>
-            </div>
+            <form class="form" action="http://localhost:3000/usuarios/register" method="POST" enctype="multipart/form-data">
+              <h2>Regístrate</h2>
+                <input type="text" id="nombreUsuario" name="nombreUsuario" placeholder="Elije un nombre de usuario" required>
+                <input type="email" id="correoElectronico" name="correoElectronico" placeholder="Elije un email" required>
+                <input type="password" id="password" name="password" placeholder="Crea tu contraseña" required>
+                <input type="date" id="fechaNacimiento" name="fechaNacimiento" required>
+              <div>
+                  <label for="idRol"></label>
+                  <select class="campoRol" id="idRol" name="idRol" required>
+                      <option value="1">Paciente</option>
+                      <option value="2">Médico</option>
+                      <option value="3">Administrador</option>
+               </select>
+              </div>
+              <div>
+               <label for="idGenero"></label>
+                  <select id="idGenero" name="idGenero" required>
+                      <option value="1">Masculino</option>
+                      <option value="2">Femenino</option>
+                      <option value="3">Binario</option>
+                  </select>
+              </div>
+              <div> 
+                <label for="imagenPerfil" class="custom-imagenPerfil">Selecciona una imagen para tu perfil</label>
+                <input type="file" id="imagenPerfil" name="imagenUrl" accept=".png, .jpg, .jpeg, image/*" required>
+              </div>
+              <div class="terminos-condiciones">
+                <input type="checkbox" onclick="agreesubmit(this)" name="condiciones"/> Estoy de acuerdo con los <a href="#" target="_blank" class="enlace-terminos">términos y condiciones</a> <br/>
+              </div>
+              <div>
+                  <button type="submit">Regístrate</button>
+              </div>
+              <div class="or">
+                <div class="linea-div"></div>
+                <div class="O"> O </div>
+                <div class="linea-div"></div>
+              </div>
+              <a href="#" class="login-link"><span class="color3">si ya tienes cuenta, </span><span class="color4">Inicia Sesión</span></a>
+          </form>
+
+          <div id="notificacion" class="notificacion"> ¡Registro creado exitosamente! </div>
+
         </div>
     </div>
-
-    <img src="/css/ImageAntaresWeb/eclipse1.png" alt="">
 
     <footer class="footer">
         <div class="list-footer" >
@@ -109,6 +131,35 @@
           <p>© 2009 - 2024 Unidad Diagnóstica Antares®.</p>
         </div>
     </footer>
+
+    <script>
+      document.querySelector('form').addEventListener('submit', function(event) {
+          const fileInput = document.getElementById('imagenPerfil');
+       const file = fileInput.files[0];
+       if (file) {
+            const validTypes = ['image/png', 'image/jpeg', 'image/jpg'];
+            if (!validTypes.includes(file.type)) {
+                alert('Solo se permiten archivos de tipo PNG o JPG.');
+               event.preventDefault();
+           }
+       }
+      });
+
+      function mostrarNotificacion() { 
+        var notificacion = document.getElementById("notificacion"); 
+        notificacion.style.display = "block"; 
+        setTimeout(function() { 
+          notificacion.style.display = "none"; 
+        }, 5000); 
+      } 
+      
+      function registrarUsuario(event) { 
+        event.preventDefault(); // Evitar el envío del formulario por defecto 
+        mostrarNotificacion();
+        // Aquí iría el código para registrar en la base de datos 
+        }
+
+  </script>
 
 </body>
 </html>

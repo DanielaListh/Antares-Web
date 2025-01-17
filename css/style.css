@@ -35,16 +35,18 @@ body{
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 0 80px;
+  margin: 0 40px;
   padding: 0 40px;
   background-color: #003064;
-  height: 200px;
-  border-radius: 25px;
+  height: 60px;
+  border-radius: 10px;
 }
 
 .checkbox {
   display: none;
 }
+
+/*barra de navegacion*/
 
 .navbar {
   margin-top: 30px;
@@ -72,8 +74,10 @@ body{
 .navbar a{
   color: #ffffff;
   text-align: center;
-  font-size: 2em;
+  font-size: 1.3em;
 }
+
+/*after: selecciona el elemento navbar y agrega un copntenido despues, le añade dinamismo */
 
 .navbar ul li a::after {
   content: '';
@@ -81,7 +85,7 @@ body{
   width: 0;
   height: 2px;
   display: block;
-  margin-top: 5px;
+  margin-top: -2px;
   right: 0;
   background: #ffffff;
   transition: width 0.3s ease;
@@ -97,8 +101,9 @@ body{
 
 /*esta es la imagen del logo de la empresa en la barra de navegacion*/
 .img-menu-login{
-  width: 180px;
-  height: 100px;
+  width: 120px;
+  height: 70px;
+  margin-top: 15px;
 }
 
 /* Estilos personalizados para la barra de desplazamiento */ 
@@ -124,31 +129,52 @@ body{
 
 /*registro*/
 
+.body-image {
+  background-image: url(/css/ImageAntaresWeb/eclipse1.png);
+  background-size: cover;
+}
+
 .container {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 50px 100px;
+  margin: 30px 50px;
 }
 
 .form-container {
   display: flex;
-  background-color:rgba(255, 255, 255, 0.836);
   align-items: center;
 }
 
 /*width = ancho, height = alto*/
 
 .form-container img {
-  width: 800px;
+  width: 700px;
+  height: 800px;
   border-radius: 50px;
   overflow: hidden;
   object-fit: cover;
 }
 
-/*div del formulario de registro*/
+
+/*notificacion de envio de formulario*/
+.notificacion {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #0059ff;
+  color: #f0f0f0;
+  padding: 10px 20px;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0, 48, 100, 1);
+  display: none;
+}
+
+/*formulario de registro*/
+
 .form {
-  width: 40%;
+  width: 45%;
+  height: 800px;
   padding: 10px;
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 50px;
@@ -156,6 +182,7 @@ body{
   justify-content: center;
   text-align: center;
 }
+
 
 .form h2 {
   text-align: center;
@@ -165,41 +192,154 @@ body{
 }
 
 .form label, .form a {
-  color: #000000;
+  color: #333;
   font-size: 2vh;
 }
 
-.form input, .form select, .form button {
-  margin: 15px;
+.terminos-condiciones input, 
+.terminos-condiciones label {
+  display: flex;
+  align-items: flex-start; /* alinea verticalmente los elementos */
+  margin-bottom: 10px;
+}
+
+.form a:hover{
+  color: #0059ff;
+}
+
+.form input {
+  margin-top: 7px;
+  margin-bottom: 5px;
   justify-content: center;
   width: 80%;
   padding: 10px;
-  border: 1px solid #fff;
+  border: none;
+  border-bottom: 1.5px solid #003064;
   border-radius: 5px;
   font-size: 25px;
+  background-color: rgba(215, 9, 9, 0.005);
+  color: #333;
 }
+
+input:hover {
+  border-color: #df9d01;
+  outline: none;
+}
+
+.form select {
+  margin: 7px;
+  justify-content: center;
+  width: 80%;
+  padding: 5px;
+  border: none;
+  border-bottom: 1.5px solid #003064;
+  border-radius: 5px;
+  font-size: 25px;
+  color: #333;
+  appearance: none; /* Para ocultar el icono por defecto */ 
+  -webkit-appearance: none; 
+  -moz-appearance:none;
+}
+
+select {
+  background-color: rgba(255, 255, 255, 0.005);
+  color: #333; 
+  width: 200px; 
+  appearance: none; /* Para ocultar el icono por defecto */ -webkit-appearance: none; -moz-appearance: none;
+}
+
+/* aplicar estilos a los options, se busca que se vea minimalista*/
+
+select option {
+  background-color: rgba(252, 201, 135, 0.621);
+  color: #333;
+  padding: 8px 12px;
+  font-size: 18px;
+}
+
+select:hover {
+  border-color: #df9d01;
+  outline: none;
+}
+
+/*mejorar la estetica del input file (imagenes)*/
+/*ocultamos el imput file, y mediante clases e id hacemos llamada al imput desde el label*/
+input[type="file"]{
+  display: none;
+}
+
+.custom-imagenPerfil {
+  display: inline-block;
+  padding: 15px 0;
+  cursor: pointer;
+  border-bottom: 1.5px solid #333 ;
+  border-radius: 10px;
+  background-color: rgba(215, 9, 9, 0.005);
+  color: #1e1e1e;
+  transition: background-color 0.3, color 0.3;
+  width: 500px;
+}
+
+.custom-imagenPerfil:hover {
+  background-color: rgba(215, 9, 9, 0.005);
+  color: #df9d01;
+}
+
+
 .form button {
   width: 250px;
-  height: 100px;
+  height: 50px;
   color: #285fc5;
   border:3px solid #285fc5;
   cursor: pointer;
   border-radius: 50px;
   font-size: 3vh;
   font-weight: 600;
+  background-color: rgba(255, 255, 255, 0.1);
 
 }
 .form button:hover {
-  background-color: #f6f9ff;
   border:3px solid #ffc353;
   color: #fabc5e;
 }
 .form .login-link {
   display: block;
   text-align: center;
-  margin-top: 10px;
 }
 
+.or {
+  display: flex;
+  align-items: center;
+  pad: 10px 30px;
+  justify-content: center;
+  align-items: center;
+}
+
+.O {
+  margin: 0 10px;
+  color: #333;
+}
+
+.linea-div {
+  
+  max-width: 200px;
+  flex-grow: 1;
+  height: 1px;
+  background-color: #333;
+}
+
+.color3 {
+  color: #333;
+}
+
+/*inicia secion link spam*/
+.color4 {
+  color: #285fc5;
+}
+
+.color4:hover{
+  color: #8b5402;
+}
 
 
 
@@ -437,7 +577,7 @@ body{
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 2px;/*separacion entre elementos*/
-  color: #fbefd7;
+  color: #003064;
   text-align: center;
   align-items: center;
   margin-top: 100px;
@@ -448,7 +588,7 @@ body{
 }
 
 .directorio:hover {
-  background-color: rgba(255, 153, 0, 0.607);
+  background-color: rgba(0, 48, 100, 1);
   transition: 1s;
 }
 
@@ -474,7 +614,7 @@ body{
 }
 
 .content-services:hover {
-  background-color: rgba(255, 153, 0, 0.5);
+  background-color: rgba(0, 48, 100, 1);
   border-radius: 20px;
   transition: 0.9s;
 
@@ -543,7 +683,7 @@ body{
   font-family: Arial, serif;
   font-weight: bold;
   margin-top: -90px;
-  color:#ffa200;
+  color:#003064;
   
 }
 
@@ -640,10 +780,12 @@ input::placeholder, textarea::placeholder {
 
 .footer {
   background-color: #003064;
-  margin: 0 80px;
-  padding: 20px;
+  margin: 0 40px;
+  padding: 10px;
   font-family: Arial, sans-serif;
   border-radius: 25px;
+  height: 260px;
+  width: 1450px;
 }
 
 .list-footer {
@@ -680,17 +822,26 @@ input::placeholder, textarea::placeholder {
 
 .redes h3 {
   color: #ffffff;
-  margin-bottom: 10px;
-  margin-left: 125px;
+  margin-left: 75px;
 }
 
+/*gap: margen entre filas y columnas en un grid o flexbox*/
 .redes div {
   display: flex;
   gap: 10px;
 }
 
+
+/*iconos de redes en el footer*/
+
 .icon-facebook {
   color: #ffffff; /* Color de Facebook */
+  font-size: 25px; /* Tamaño del icono */
+  margin-right: 5px; /* Espacio entre iconos */
+}
+
+.icon-facebook:hover {
+  color: #fabc5e; /* Color de Facebook */
   font-size: 25px; /* Tamaño del icono */
   margin-right: 5px; /* Espacio entre iconos */
 }
@@ -701,10 +852,16 @@ input::placeholder, textarea::placeholder {
   margin-right: 10px; /* Espacio entre iconos */
 }
 
+.icon-instagram:hover {
+  color: #fabc5e; /* Color de Instagram */
+  font-size: 29px; /* Tamaño del icono */
+  margin-right: 10px; /* Espacio entre iconos */
+}
+
 
 .linea-divisoria {
   border-top: 1px solid;
-  margin: 20px 110px;
+  margin: 10px 110px;
   color: #ffffff;
 }
 
@@ -713,7 +870,7 @@ input::placeholder, textarea::placeholder {
   color: #ffffff;
   font-size: 14px;
   font-weight: bold;
-  margin: 30px 0;
+  margin: 10px 0;
   align-items: center;
   justify-content: center;
 }
