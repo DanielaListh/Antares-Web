@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario de Registro</title>
+    <title>Login Admin</title>
     <link rel="icon" href="css/ImageAntaresWeb/logoWEB.png" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="/css/style.css">
@@ -33,50 +33,26 @@
 
     <div class="container">
         <div class="form-container">
-            <div class="imageSingup">
-                <img src="/css/ImageAntaresWeb/abrazo.jpg" alt="Persona en silla de ruedas">
-            </div>
-            <form class="form" action="http://localhost:3000/usuarios/register" method="POST" enctype="multipart/form-data">
-              <h2>Regístrate</h2>
-                <input type="text" id="nombreUsuario" name="nombreUsuario" placeholder="Elije un nombre de usuario" required>
-                <input type="email" id="correoElectronico" name="correoElectronico" placeholder="Elije un email" required>
-                <input type="password" id="password" name="password" placeholder="Crea tu contraseña" required>
-                <input type="date" id="fechaNacimiento" name="fechaNacimiento" required>
+            <form class="form-login" action="http://localhost:3000/usuarios/login" method="POST" enctype="multipart/form-data">
+              <h2>Log In</h2>
+                <input type="email" id="correoElectronico" name="correoElectronico" placeholder="escribe tu email" required>
+                <input type="password" id="password" name="password" placeholder="coloca tu contraseña" required>
               <div>
-                  <label for="idRol"></label>
-                  <select class="campoRol" id="idRol" name="idRol" required>
-                      <option value="1">Paciente</option>
-                      <option value="2">Médico</option>
-                      <option value="3">Administrador</option>
-               </select>
+                  <button type="submit">Login</button>
               </div>
-              <div>
-               <label for="idGenero"></label>
-                  <select id="idGenero" name="idGenero" required>
-                      <option value="1">Masculino</option>
-                      <option value="2">Femenino</option>
-                      <option value="3">Binario</option>
-                  </select>
-              </div>
-              <div> 
-                <label for="imagenPerfil" class="custom-imagenPerfil">Selecciona una imagen para tu perfil</label>
-                <input type="file" id="imagenPerfil" name="imagenUrl" accept=".png, .jpg, .jpeg, image/*" required>
-              </div>
-              <div class="terminos-condiciones">
-                <input type="checkbox" onclick="agreesubmit(this)" name="condiciones"/> Estoy de acuerdo con los <a href="#" target="_blank" class="enlace-terminos">términos y condiciones</a> <br/>
-              </div>
-              <div>
-                  <button type="submit">Regístrate</button>
-              </div>
-              <div class="or">
+              <div class="or-login">
                 <div class="linea-div"></div>
                 <div class="O"> O </div>
                 <div class="linea-div"></div>
               </div>
-              <a href="/html/LoginAdmin.html" class="login-link"><span class="color3">si ya tienes cuenta, </span><span class="color4">Inicia Sesión</span></a>
+              <a href="/html/registroUsuarios.html" class="login-link"><span class="color3">si no tienes cuenta, </span><span class="color4">Regístrate</span></a>
           </form>
 
-          <div id="notificacion" class="notificacion"> ¡Registro creado exitosamente! </div>
+          <div class="imageSingup">
+            <img src="/css/ImageAntaresWeb/Screenshot (1).png" alt="personal medico atendiendo a paciente">
+        </div>
+
+          <div id="notificacion" class="notificacion"> ¡Inicio de sesion exitoso! </div>
 
         </div>
     </div>
@@ -133,34 +109,20 @@
     </footer>
 
     <script>
-
-      import Toastify from 'toastify-js';
-      import "toastify-js/src/toastify.css";
-
-      function mostrarNotificacion(token) {
-      Toastify({
-          text: `Token JWT: ${token}`,
-          duration: 40000, // 30 segundos
-          close: true,
-          gravity: "top", // `top` o `bottom`
-          position: "right", // `left`, `center` o `right`
-          backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
-        }).showToast();
-      }
-
-
-      document.querySelector('form').addEventListener('submit', function(event) {
-          const fileInput = document.getElementById('imagenPerfil');
-       const file = fileInput.files[0];
-       if (file) {
-            const validTypes = ['image/png', 'image/jpeg', 'image/jpg'];
-            if (!validTypes.includes(file.type)) {
-                alert('Solo se permiten archivos de tipo PNG o JPG.');
-               event.preventDefault();
-           }
-       }
-      });
-
+      
+      function mostrarNotificacion() { 
+        var notificacion = document.getElementById("notificacion"); 
+        notificacion.style.display = "block"; 
+        setTimeout(function() { 
+          notificacion.style.display = "none"; 
+        }, 5000); 
+      } 
+      
+      function LoginUsuario(event) { 
+        event.preventDefault(); // Evitar el envío del formulario por defecto 
+        mostrarNotificacion();
+        // Aquí iría el código para registrar en la base de datos 
+        }
 
   </script>
 

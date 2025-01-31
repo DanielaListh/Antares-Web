@@ -4,6 +4,7 @@ const jwt = require ("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 //const multer = require('multer');
 const fs = require('fs'); // proporciona una API que interactua con archivos, puede renombrar archivos, leerlos, darles nombre, eliminarlos, etc.
+const nodemailer = require('nodemailer');
 
 //controladores del modulo, accede a la base de datos
 const db = require("../db/db");
@@ -16,6 +17,15 @@ function saveImage(file) {
     fs.renameSync(file.path, newPath);// con fs lo renombro
     return newPath; // retorna la nueva ruta
 }
+
+//configuracion de transporte de correo electronico, se utiliza variables de entorno para seguridad
+const transporter = nodemailer.createTransport({
+    service: 'Gmail',
+    auth: {
+        user: process.env.EMAIL_USER,
+        pass:process.env.EMAIL_PASS
+    }
+});
 
 //POST crear un usuario REGISTRAR
 const crearUsuario = (req, res) => {
@@ -55,10 +65,23 @@ const crearUsuario = (req, res) => {
             { expiresIn: "1h" } //expira en una hora el token
         );
 
+        console.log(token);  //se muestra el JWT en la consola, pero para fines laborales no es bueno mostrar por consola esto, es inseguro
+
         const userCreado = { ...req.body, id: result.insertId };
         const necesitaEspecialidad = (idRol == 2); // Si es médico, necesita especialidad
-        // Si no es médico, pasa de largo
-        res.status(201).json({ userCreado, token, necesitaEspecialidad});
+        
+
+        //enviar el correo
+        transporter.sendMail(mailOptions, (error, info) => {
+            if(error){
+                console.log('Error al enviar el correo:', error);
+                return res.status(500).json({error: "Error al enviar el correo"});
+            }
+
+            console.log('Correo enviado: ' + info.response);
+            // Si no es médico, pasa de largo
+            res.status(201).json({ userCreado, token, necesitaEspecialidad});
+        });  
     });
 };
 

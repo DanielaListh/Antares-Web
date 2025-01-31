@@ -127,7 +127,7 @@ body{
 }
 
 
-/*registro*/
+/*registro y login*/
 
 .body-image {
   background-image: url(/css/ImageAntaresWeb/eclipse1.png);
@@ -144,13 +144,14 @@ body{
 .form-container {
   display: flex;
   align-items: center;
+  height: 674px;
 }
 
 /*width = ancho, height = alto*/
 
 .form-container img {
   width: 700px;
-  height: 800px;
+  height: 674px;
   border-radius: 50px;
   overflow: hidden;
   object-fit: cover;
@@ -173,16 +174,26 @@ body{
 /*formulario de registro*/
 
 .form {
-  width: 45%;
-  height: 800px;
+  width: 50%;
+  height: auto;
   padding: 10px;
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 50px;
-  margin-left:20px ;
+  margin-left:20px; /*marginleft 20px para registro y margin rigth 20px para login*/
   justify-content: center;
   text-align: center;
 }
 
+.form-login {
+  width: 50%;
+  height: 674px;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50px;
+  margin-right: 20px; /*marginleft 20px para registro y margin rigth 20px para login*/
+  justify-content: center;
+  text-align: center;
+}
 
 .form h2 {
   text-align: center;
@@ -191,7 +202,19 @@ body{
   font-size: 7vh;
 }
 
+.form-login h2 {
+  text-align: center;
+  margin:50px 20px;
+  color: #333;
+  font-size: 7vh;
+}
+
 .form label, .form a {
+  color: #333;
+  font-size: 2vh;
+}
+
+.form-login label, .form-login a {
   color: #333;
   font-size: 2vh;
 }
@@ -207,9 +230,27 @@ body{
   color: #0059ff;
 }
 
+.form-login a:hover{
+  color: #0059ff;
+}
+
 .form input {
   margin-top: 7px;
   margin-bottom: 5px;
+  justify-content: center;
+  width: 80%;
+  padding: 10px;
+  border: none;
+  border-bottom: 1.5px solid #003064;
+  border-radius: 5px;
+  font-size: 25px;
+  background-color: rgba(215, 9, 9, 0.005);
+  color: #333;
+}
+
+.form-login input {
+  margin-top: 20px;
+  margin-bottom: 20px;
   justify-content: center;
   width: 80%;
   padding: 10px;
@@ -296,13 +337,37 @@ input[type="file"]{
   font-size: 3vh;
   font-weight: 600;
   background-color: rgba(255, 255, 255, 0.1);
-
 }
+
+.form-login button {
+  width: 250px;
+  height: 50px;
+  color: #285fc5;
+  border:3px solid #285fc5;
+  cursor: pointer;
+  border-radius: 50px;
+  font-size: 3vh;
+  font-weight: 600;
+  background-color: rgba(255, 255, 255, 0.1);
+  margin: 20px;
+}
+
 .form button:hover {
   border:3px solid #ffc353;
   color: #fabc5e;
 }
+
+.form-login button:hover {
+  border:3px solid #ffc353;
+  color: #fabc5e;
+}
+
 .form .login-link {
+  display: block;
+  text-align: center;
+}
+
+.form-login .login-link {
   display: block;
   text-align: center;
 }
@@ -315,13 +380,20 @@ input[type="file"]{
   align-items: center;
 }
 
+.or-login {
+  display: flex;
+  align-items: center;
+  padding: 20px 0px;
+  justify-content: center;
+  align-items: center;
+}
+
 .O {
   margin: 0 10px;
   color: #333;
 }
 
 .linea-div {
-  
   max-width: 200px;
   flex-grow: 1;
   height: 1px;
