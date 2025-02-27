@@ -1,9 +1,18 @@
+// esto es un middleware?
+
 const express = require('express');
+const cors= require('cors');
 require('dotenv').config(); //luego lo veremos pero son las variables de entorno, \se requiere las variables de entorno ejemplo PORT
 const app = express();// incicio la applicacion  express
+const path =require('path');
 
 app.use(express.json()); // en el cuerpo de la peticion vendra un json y se transforma en un objeto js y asi poder usarlo
 //Middleware para transformar el cuerpo de la peticion a Json
+
+app.use(cors());
+
+//servir archivos estaticos desde la carpeta 'uploads'
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 const especialidadesMedicasRouter = require('./routers/especialidades_medicas.router'); // que coloque en esta constante lo que hay en ese modulo
 app.use('/especialidades', especialidadesMedicasRouter); // prefijo de la ruta especialidades
@@ -27,7 +36,7 @@ const estadosRouter = require('./routers/estados.router');
 app.use('/estados', estadosRouter);
 
 app.get('/', (req,res) => { // la ruta raiz del proyecto o pag principal del sitio
-    res.send("Hola Antares");
+    res.send("Hola Agape");
 });
 
 

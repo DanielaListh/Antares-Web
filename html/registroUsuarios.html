@@ -11,30 +11,43 @@
 
 </head>
 <body class="body-image">
-
-    <div class="menu-container">
-        <a href="/html/index.html"><img class="img-menu-login" src="/css/ImageAntaresWeb/logoAuuu.png" alt=""></a>
-          <input class="checkbox" type="checkbox" id="menu"/>
-          <label for="menu">
-              <img src="/ImageAntaresWeb/menu.png" class="menu-icono" alt="">
-          </label>
-          <nav class="navbar">
-              <ul>
-                  <li><a href="/html/index.html">Home</a></li>
-                  <li><a href="#nuestraHistoria">Nuestra Historia</a></li>
-                  <li><a href="#servicios">Servicios que Ofrecemos</a></li>
-                  <li><a href="#Turnos">Consigue turno</a></li>
-                  <li><a href="#contacto">Contacto</a></li>
-                  <li><a href="/html/LoginAdmin.html">Ingrese</a></li>
-                  <li><a href="/html/registroUsuarios.html" src="/css/ImageAntaresWeb/png-user.png" alt="">Registro</a></li>
-              </ul>
-          </nav>
+  <!-- Navbar -->
+  <div class="menu-container">
+    <div class="mini-content-portada">
+      <div class="isotipo">
+        <a href="/html/index.html"><img src="/css/Imagenes/LogoAgape.png" alt=""></a>
+      </div>
+      <div class="direccion-spot">
+        <img src="/css/Imagenes/spot blue.png" alt="">
+        <a href="https://maps.app.goo.gl/yqhJ7Sezm5qkZNsz6">Ágape Clínica Familiar Recoleta</a>
+      </div>
+      <div class="contain-button-indice">
+        <button class="button-indice"><a href="tel:+584245212184">CONTÁCTANOS</a></button>
+        <button class="button-indice"><a href="#resultadosDeExamenes">RESULTADOS DE EXÁMENES</a></button>
+      </div>
     </div>
+    <div class="content-navbar">
+      <input class="checkbox" type="checkbox" id="menu" />
+      <label for="menu">
+        <img src="/Imagenes/menu.png" class="menu-icono" alt="">
+      </label>
+      <nav class="navbar">
+        <ul>
+          <li><a href="/html/index.html">Home</a></li>
+          <li><a href="#nuestraHistoria">Nuestra Clínica</a></li>
+          <li><a href="#servicios">Servicios que Ofrecemos</a></li>
+          <li><a href="#Turnos">Consigue turno</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+
 
     <div class="container">
         <div class="form-container">
             <div class="imageSingup">
-                <img src="/css/ImageAntaresWeb/abrazo.jpg" alt="Persona en silla de ruedas">
+                <img src="/css/Imagenes/abrazo.jpg" alt="Persona en silla de ruedas">
             </div>
             <form class="form" action="http://localhost:3000/usuarios/register" method="POST" enctype="multipart/form-data">
               <h2>Regístrate</h2>
@@ -63,7 +76,7 @@
                 <input type="file" id="imagenPerfil" name="imagenUrl" accept=".png, .jpg, .jpeg, image/*" required>
               </div>
               <div class="terminos-condiciones">
-                <input type="checkbox" onclick="agreesubmit(this)" name="condiciones"/> Estoy de acuerdo con los <a href="#" target="_blank" class="enlace-terminos">términos y condiciones</a> <br/>
+                <input type="checkbox" onclick="agreesubmit(this)" name="condiciones"/> Estoy de acuerdo con los <a href="#" target="_blank" class="enlace-terminos">términos y condiciones</a><br/>
               </div>
               <div>
                   <button type="submit">Regístrate</button>
@@ -109,7 +122,9 @@
             <h3 >Accesibilidad</h3>
             <ul>
               <a href="#">Política de Cookies</a><br>
-              <a href="#">Soluciones Empresariales</a>
+              <a href="#">Soluciones Empresariales</a><br>
+              <a href="/html/registroUsuarios.html">Registro Administrativo</a><br>
+              <a href="/html/LoginAdmin.html">Login Administrativo</a>
             </ul>
           </div>
         </div>
@@ -128,7 +143,7 @@
         </div>
         <div class="linea-divisoria"></div>
         <div class="derechos-reservados">
-          <p>© 2009 - 2024 Unidad Diagnóstica Antares®.</p>
+          <p>© 2002 - 2025 Ágape Clínica Familiar. ®</p>
         </div>
     </footer>
 

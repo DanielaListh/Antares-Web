@@ -1,0 +1,40 @@
+
+.barra-sup-horizontal-tabla{
+    background-color: rgb(250, 215, 247);
+}
+
+.board-content {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #fff0f000;
+    padding: 8px;
+    text-align: left;
+    border-radius: 5px;
+}
+
+th {
+    background-color: #fff0f0;
+}
+
+td {
+    background-color: #fbf2f299;
+    font-size: 0.9em;
+}
+
+.btn {
+    background-color: #fbf2f200;
+    cursor: pointer;
+}
+
+td button {
+    background-color: #fff0f000;
+    border: 1px solid #fff0f000;
+}
+
+button img {
+    width: 25px;
+    cursor: pointer;
+}

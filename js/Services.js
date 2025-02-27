@@ -1,4 +1,6 @@
-// Crear la lista de servicios
+// Crear la lista de servicios sin bases de datos
+// tiene que servir de ejemplo para hjacer la integracion del back con el front
+// fue un ejercicio para la clase usando localStorage
 
 let services = []; // crear un lista o array vacio
 

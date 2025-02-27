@@ -32,21 +32,101 @@ body{
 }
 
 .menu-container {
-  display: flex;
+  position: sticky;
+  position: -webkit-sticky;
   align-items: center;
-  justify-content: space-between;
-  margin: 0 40px;
-  padding: 0 40px;
-  background-color: #003064;
-  height: 60px;
-  border-radius: 10px;
+  justify-content: center;
+  height: auto;
+  background-color: white;
+  width: 100%;
+  top:0;
+  z-index: 10; 
+  /*el z-index determina el nivel de apilamiento 
+  de los elementos posicionados, controla que 
+  elemento se superpone a otro por su valor */
 }
 
 .checkbox {
   display: none;
 }
 
+/*pre barra de navegacion*/
+
+.mini-content-portada {
+  display: flex;
+  padding-bottom: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.isotipo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.isotipo img {
+  height: 60px;
+}
+
+.direccion-spot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100px;
+  min-width: 400px;
+}
+
+.direccion-spot img{
+  height: 40px;
+}
+
+.direccion-spot a{
+  color: #003064;
+  font-weight: 500;
+}
+
+.direccion-spot a:hover{
+  color: #38b6ff;
+}
+
+.contain-button-indice {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+
+.contain-button-indice a{
+  color: white;
+  font-weight: 500;
+  font-size: 1.0em;
+}
+
+.button-indice {
+  border-radius: 25px;
+  margin-right: 20px;
+  padding: 10px;
+  background-color: #003064;
+  border:3px solid #003064;
+}
+
+.button-indice:hover{
+  background-color: #38b6ff;
+  border:3px solid #38b6ff;
+}
+
+
 /*barra de navegacion*/
+
+.content-navbar {
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  background-color: #f6f6f4;
+  height: 60px;
+  border-radius: 10px;
+}
 
 .navbar {
   margin-top: 30px;
@@ -59,6 +139,7 @@ body{
   justify-content: center;
   list-style-position: inside; 
   text-align: center;
+  align-items: center;
 }
 
 .navbar li {
@@ -66,15 +147,15 @@ body{
   margin-right:20px;
   position: relative;
   text-align: center;
-  
 }
 
 /*fijarse la letra con respecto a la resolucion de la pantalla*/
 
 .navbar a{
-  color: #ffffff;
+  color: #003064;
   text-align: center;
   font-size: 1.3em;
+  font-weight: 700;
 }
 
 /*after: selecciona el elemento navbar y agrega un copntenido despues, le añade dinamismo */
@@ -94,7 +175,7 @@ body{
 .navbar ul li a:hover::after {
   width: 100%;
   left: 0;
-  background: #ff9900;
+  background: #006eff;
 }
 
 
@@ -109,28 +190,28 @@ body{
 /* Estilos personalizados para la barra de desplazamiento */ 
 
 ::-webkit-scrollbar { 
-  width: 10px; 
+  width: 20px;
+  
 } 
 
 ::-webkit-scrollbar-track { 
-  background: #f0f0f0; 
+  background: #f3f9ff; 
 } 
 
 ::-webkit-scrollbar-thumb { 
-  background-color: rgba(40, 95, 197, 0.0); 
   border-radius: 10px; border: 
-  2px solid #f0f0f0; 
+  3px solid  #85acd7 ; 
 } 
 
 ::-webkit-scrollbar-thumb:hover { 
-  background-color: #3c72ca; 
+  background-color: #85acd7; 
 }
 
 
 /*registro y login*/
 
 .body-image {
-  background-image: url(/css/ImageAntaresWeb/eclipse1.png);
+  background-image: url(/css/Imagenes/eclipse1.png);
   background-size: cover;
 }
 
@@ -418,14 +499,31 @@ input[type="file"]{
 /*portada se refiere a la imagen y la info con en boton*/
 /*carusel*/
 
-.carousel {
-  width: 94%;
-  margin: auto;
-  overflow: hidden;
-  margin-top: 20px;
-  background-color: #0059ff;
+.Content-Carousel {
+  height: auto;
   justify-content: center;
   align-items: center;
+  margin-top: 10px;
+  border-radius: 30px;
+  background-image: url(/css/Imagenes/eclipse-2.png);
+  background-size:cover;
+}
+
+.transparency {
+  background-color: rgba(255, 250, 250, 0.3);
+  height: 450PX;
+}
+
+.carousel {
+  width: 95%;
+  height: 390px;
+  margin: auto;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+
+}
 
 .carousel-images img {
   width: 100%;
@@ -436,90 +534,171 @@ input[type="file"]{
   display: block;
 }
 
-.portada-info{
+.portada-info {
   display: flex;
   margin-left: 140px;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 30%;
-}
-.portada h1 {
-  font-size: 5em;
-  text-transform: uppercase;
-  color: #fdf5e6;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0px 90px 0px 0px;
+  margin-top: -600px;
 }
 
-.portada h1:hover{
+
+.portada-info h1 {
+  font-size: 5em;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+.portada-info h1:hover{
   color: #ffa200;
   transition: 0.9s;
 }
 
-.portada h4{
+.portada-info h4{
   font-size: 2em;
+  color: #ffffff;
+}
+
+.portada-info h2{
+  color: white;
 }
 
 .btn-info {
   display: flex;
-  flex-direction: column;
-  margin-top: 20px;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  padding: 10px 0px;
+  width: 250px;
+
 }
 
-
-.btn-info button{
-  margin-top: 20px;
+.btn-info button {
+  margin-top: 10px;
   padding: 10px 20px;
-  border-radius: 10px;
-  background-color: #1e1e1e;
-  color: #fbefd7;
-  border: 3px solid #fbefd7;
+  border-radius: 25px;
+  background-color: rgba(255, 255, 255, 0.02);
+  border: 3px solid #b9d5f1;
   cursor: pointer;
 }
 
-.btn-info a{
+.infoAlcance {
+  font-size: 1.5em;
+  font-weight: 200;
   justify-content: center;
   align-items: center;
-  color: #fbefd7;
+}
+
+.unclick {
+  font-size: 2em;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-info a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1.3em;
+
 }
 
 .btn-info button:hover{
   transition: 0.9s;
   border: 3px solid #ffa200;
-  color: #f9d699;
 }
 
 .btn-info a:hover{
-  color: #f9d699;
+  color: #f8ad2b;
+  transition: 0.9s;
 }
+
+
+/*sobre nosotros va dentro de Content-Carousel*/
+
+.sobre-nosotros {
+  text-align: center;
+  margin-top: 150px;
+}
+
+.sobre-nosotros h2{
+  margin: 10px 0px;
+  color: #003064;
+  font-size: 2.5em;
+}
+
+.sobre-nosotros h3 {
+  margin: 20px 0px;
+  color: #003064;
+  font-size: 1.2em;
+}
+
+.content-notes{
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+.notes {
+  text-align:start;
+  width: 340px;
+  height: auto;
+  background-color: #ffffff;
+  border-radius: 20px;
+  color: #003064;
+  box-shadow: 1px 1px 7px #888888;
+  padding: 30px;
+}
+
+.notes:hover{
+  box-shadow: 1px 1px 7px #0091ff;
+  transition: 2s;
+}
+
+.notes h4 {
+  font-size: 1.2em;
+  margin: 10px 0px;
+}
+
+.notes img {
+  width: 80px;
+  height: 80px;
+}
+
+
 
 /*Historia*/
 .historia {
+  background-image: url(/css/Imagenes/eclipse3.png);
+  background-size: cover;
+  min-height: 1000px;
+}
+
+.historia-transparency {
   display: flex;
-  border-radius: 10px;
-  padding: 20px;
+  margin: 90px 70px;
   flex-direction: row;
   flex-wrap: nowrap;
-  margin: 100px;
   align-items: center;
+  background-color: rgba(185, 213, 241, 0.5);
+  align-content: space-between;
+  border-radius: 50px;
 }
 
 .historia-content {
   display: block;
-  padding: 10px;
   margin: 0 60px 0  0;
-  align-items: center;
-  
-}
-
-.historia-content1{
   align-items: center;
 }
 
 .historia-content-img {
-  border-radius: 5px;
+  border-radius: 50px;
   width: 500px;
+  margin-left: 20px;
 }
 
 #h2-tittle{
@@ -528,8 +707,8 @@ input[type="file"]{
 }
 
 .historia-content h2 {
-  font-size: 5em;
-  margin-bottom: 10px;
+  font-size: 3.5 em;
+  margin-bottom: 5px;
   
 }
 
@@ -538,9 +717,10 @@ input[type="file"]{
 }
 
 .historia-content p{
-  font-size: 1.5em;
-  margin-bottom: 60px;
+  font-size: 1.1em;
+  margin-bottom: 30px;
   text-align: justify;
+  margin-right: 30px;
 }
 
 .p1 {
@@ -551,69 +731,23 @@ input[type="file"]{
 .historia-content-content{
   display:inline-block;
   justify-content: space-around;
-  margin-top: 20px;
-  margin-right: 100px;
+  margin-top: 10px;
   padding: 20px;
   
-}
-
-
-#servicios {
- display: block;
- align-content: space-between;
- margin: 0 40px 0 100px;
- position: relative;
- align-items: center;
- justify-content: center;
-}
-
-.Servicios-Container{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap; /*para que ocupe varias lineas y no una sola*/
-  padding: 0 0  0 70px;
-  justify-content:start;
-  text-align: center;
-}
-
-.content-h2{
-  display: block;
-  justify-content: center;
-}
-
-.h2-servicios1 {
-  font-size: 4em;
-  height: 100px;
-  padding: 0 0 0 110px;
-  margin: 0 0px 0 60px;
-}
-
-.h2-servicios2 { 
-  font-size: 4em;
-  height: 100px;
-  margin-top: 80px;
-  margin-bottom: 50px;
-  margin: 0 0 0 930px;
-}
-
-.color1{
-  color:#fbefd7;
-}
-
-.color2 {
-  color: #ffa200;
 }
 
 /*Logo ws*/
 .logo-ws {
   position: fixed;/* mantiene el logo pegado a una parte especifica */
   bottom: 50px;
-  right: 60px;
+  right: 75px;
   width: 50px;
   height: 50px;
   cursor: pointer;
   display: block; /* Asegura que se muestren dentro de la sección */
 }
+
+/*flecha */
 
 .flecha {
   width: 50px;
@@ -625,6 +759,59 @@ input[type="file"]{
   right: 1500px;
 }
 
+/*Servicios*/
+
+#servicios {
+ display: block;
+ align-content: space-between;
+ align-items: center;
+ justify-content: center;
+ 
+}
+
+.Servicios-Container{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; /*para que ocupe varias lineas y no una sola*/
+  padding: 0 0  0 40px;
+  justify-content:start;
+  text-align: center;
+}
+
+.content-h2{
+  display: block;
+  justify-content: center;
+  align-items: center;
+  background-image: url(/css/Imagenes/eclipse1.png);
+  background-size: auto;
+  background-repeat: no-repeat;
+  background-position:right;
+  background-size: 40%;
+  height: 700px;
+}
+
+.h2-servicios1 {
+  font-size: 3.5em;
+  height: 100px;
+  text-align: center;
+}
+
+.h2-servicios2 { 
+  font-size: 3.0em;
+  height: 200px;
+  width: auto;
+  text-align:center;
+  color: #003064;
+}
+
+.color1{
+  color:#003064;
+}
+
+.color2 {
+  color: #0091ff;
+}
+
 .p-servicios {
   font-size: 1.8em;
   text-align: center;
@@ -632,44 +819,60 @@ input[type="file"]{
   
 }
 
-.directorio {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 2px;/*separacion entre elementos*/
-  color: #003064;
-  text-align: center;
+.buscador-container {
+  background-color: rgba(255, 223, 236, 0.3);
+  justify-content: center;
   align-items: center;
-  margin-top: 100px;
-  width: 1400px;
-  padding: 50px 0;
-  border-radius: 50px;
-  margin-left: 150px;
+  text-align: center;
+  padding: 10px;
+  margin: -60px auto; /*margin 0px auto hace que el auto se centre horizontalmente*/
+  width: 850px;
+  border-radius: 25px;
+  color: #003064;
 }
 
-.directorio:hover {
-  background-color: rgba(0, 48, 100, 1);
-  transition: 1s;
+.buscador {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  height: auto;
 }
 
-.directorio a{
-  display: block;
-  padding: 5px;
-  color: #fbefd7;
-  font-weight: 600;
+.p-buscador {
+  margin-top: 30px;
 }
 
-.directorio a:hover{
- transition: 1s;
- color: #2b0101;
+.input-buscador{
+  border-radius: 25px;
+  height: 40px;
+  text-align: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.5);
+  border: 2px #ffffff solid;
+  font-size: medium;
+  color: #003064;
+  /*outline: none;*/ /*el outlline resalta automaticamente el input*/
+  outline-color: #0091ff;
 }
 
-/*Servicios*/
+.input-buscador::placeholder{
+  color: #868686;
+}
+
+.input-buscador:hover{
+  transition: 0.8s;
+  border: 2px #0091ff solid;
+}
 
 .content-services {
   display: block;
-  width:500px;
+  width:400px;
   text-align: center;
-  margin: 150px 10px 80px 10px;
+  margin: 80px 10px 80px 10px;
 }
 
 .content-services:hover {
@@ -690,7 +893,7 @@ input[type="file"]{
 .content-services img {
   align-items: center;
   cursor: pointer;
-  width: 400px;
+  width: 300px;
   margin-top: 20px;
   border-radius: 10px;
 }
@@ -701,28 +904,30 @@ input[type="file"]{
   text-align: center;
   align-items: center;
   margin-bottom: 20px;
-  width: 500px;
+  width: 360px;
 }
 
 
 /*Contacto*/
-.img-contact img { 
-  max-width: 100%;
-  height: 700px;
-  width: 500px;
-
-}
 
 .container-contacto {
   background-image: linear-gradient();
   background-size: cover;
   height: 100vh;
   display: flex;
-  color: #fbefd7;
   align-items: center;
   justify-content: center;
   gap: 20px;
-  padding: 20px;
+  margin-left: 40px;
+  background-image: url(/css/Imagenes/eclipse4.png);
+  background-size: auto;
+}
+
+.img-contact img { 
+  max-width: 100%;
+  height: 550px;
+  width: 500px;
+  border-radius: 30px;
 }
 
 .container-contacto p {
@@ -731,50 +936,45 @@ input[type="file"]{
 
 
 .contact {
-  width: 50%;
-  margin: 10% 112px;
+  width: 45%;
+  height: 550px;
+  background-color: rgba(249, 203, 216, 0.5);
+  border-radius: 30px;
 }
 
+.contact p {
+  text-align: start;
+  font-size: 1.6em;
+  font-weight: normal;
+  letter-spacing: 1px;
+  line-height: 150%;
+  color: #003064;
+  margin-left: 20px;
+  margin-top: 30px;
+}
 
 .contact h2 {
+  text-align: center;
   justify-content: center;
-  font-size: 5em;
+  font-size: 3.5em;
   font-family: Arial, serif;
   font-weight: bold;
-  margin-top: -90px;
   color:#003064;
   
 }
 
-.contact h4 {
- color: #fbefd7;
- font-size: 1.7em;
- margin-top: -10px;
- margin-bottom: 70px;
- margin-left: 238px;
-}
-
-.contact p {
-  text-align: center;
-  font-size: 1.5em;
-  font-weight: normal;
-  letter-spacing: 1px;
-  line-height: 150%;
-  color: #fbefd7;
-  margin-bottom: 25px;
-}
-
 input::placeholder, textarea::placeholder {
   font-size: 20px;
-  color: #bdb5a4;
+  color: #003064;
 }
 
 .contact-form {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 15px;
   justify-content: center;
   align-items: center;
+  margin-top: 30px;
 }
 
 .contact-row {
@@ -788,8 +988,15 @@ input::placeholder, textarea::placeholder {
   width: 500px;
   background-color: transparent;
   border: transparent;
-  border-bottom: 1px #fbefd7 solid;
-  color: #fbefd7;
+  border-bottom: 3px #003064 solid;
+  color: #003064;
+  font-size: medium;
+}
+
+.contact-row input:hover, 
+.contact-row textarea:hover {
+  border-bottom: 3px #ffa200 solid;
+  transition: 0.8s;
 }
 
 .contact-row i {
@@ -815,24 +1022,17 @@ input::placeholder, textarea::placeholder {
   font-size: 20px;
   border-radius: 50px;
   width: 30%;
-  background-color: #fbefd7;
+  background-color: rgba(215, 9, 9, 0.005);
+  color: #003064;
+  border: 3px #003064 solid;
 }
 .contact button:hover{
-  color: #1e1e1e;
+  color: #ffa200;
   transition: all 0.8s;
-  background-color: #ffc96d;
+  background-color: rgba(215, 9, 9, 0.005);
+  border: 3px #ffa200 solid;
 }
 
-.contact a {
-  display: block;
-  color:#ffdda3;
-  margin: 5px 0;
-}
-
-.contact a:hover{
-  color:#ffa200;
-  transition: 0.9s;
-}
 
 
 /*footer*/
