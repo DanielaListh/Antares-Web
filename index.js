@@ -20,6 +20,8 @@ app.use('/js', express.static(path.join(__dirname, 'js')));
 app.use('/imagenes', express.static(path.join(__dirname, 'css','imagenes')));
 //servir archivos estaticos desde la carpeta 'uploads'
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+//config de archivos estaticos para la acrpeta html
+app.use(express.static(path.join(__dirname, 'html')));
 
 
 const especialidadesMedicasRouter = require('./routers/especialidades_medicas.router'); // que coloque en esta constante lo que hay en ese modulo
@@ -51,8 +53,19 @@ app.get('/adminHome', (req,res) => { // la ruta raiz del proyecto o pag principa
 
 // servir la pagina html cuando se hace una solicitud
 app.get('/loginAdmin', (req,res) => { // ruta cuando se quiere loguear un admin
-   res.sendFile(path.join(__dirname,'html', 'LoginAdmin.html'));
+   console.log('acediendo a /loginAdmin');
+   res.sendFile(path.join(__dirname,'html', 'loginAdmin.html'));
 });
+
+
+// Ejemplo de ruta específica al home
+app.get('/Agape', (req, res) => {
+   res.sendFile(path.join(__dirname, 'html', 'index.html'));
+});
+
+
+
+
 
 
 const PORT = process.env.PORT || 3000;// que coloque en el puerto lo que este definido en el servidor o por default 3000. env=enviroment

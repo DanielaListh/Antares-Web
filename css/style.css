@@ -31,6 +31,10 @@ body{
   align-items: center;
 }
 
+.menu-icono{
+  display: none;
+}
+
 .menu-container {
   position: sticky;
   position: -webkit-sticky;

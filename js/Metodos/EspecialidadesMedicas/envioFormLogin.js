@@ -35,6 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     localStorage.setItem('token', data.token);
                     localStorage.setItem('userRole', data.user.id_rol);// aqui antes estaba solo data.user.role daba error por incongruencia
+                    //userRole es el nombre clave para recuperar los valores que tiene data.user.id_rol
                     
                     if (data.user.id_rol === 3) {// si el irRol es 3 en lo traido de user data
                         window.location.href = 'http://localhost:3000/adminHome/';// nos redirige a el homeAdmin
