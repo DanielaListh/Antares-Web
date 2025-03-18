@@ -1,10 +1,15 @@
-const expres = require('express');
+const express = require('express');
+const app  = express();
 ////const router = expres.Router();
 const jwt = require ("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 //const multer = require('multer');
 const fs = require('fs'); // proporciona una API que interactua con archivos, puede renombrar archivos, leerlos, darles nombre, eliminarlos, etc.
 const nodemailer = require('nodemailer');
+const cors = require('cors');
+
+app.use(express.json());
+app.use(cors());
 
 //controladores del modulo, accede a la base de datos
 const db = require("../db/db");
@@ -27,96 +32,149 @@ const transporter = nodemailer.createTransport({
     }
 });
 
+
 //POST crear un usuario REGISTRAR
-const crearUsuario = (req, res) => {
-    console.log(req.file); // mostrar en consola el archivo enviado a la api
-    if (!req.file) {
-        return res.status(400).send('No se subió ningún archivo');
+const crearUsuario = async (req, res) => {
+    try {
+        console.log(req.file);//muestra los detalles del archibo que se ha subido
+
+        let imagenUrl = req.file ? saveImage(req.file) : null;// si no se proporciona una img en la bbdd queda como null
+        const { nombreUsuario, correoElectronico, password, fechaNacimiento, idGenero } = req.body;// datos traidas de req.body almacenados en las constantes
+        const idRol = parseInt(req.body.idRol, 10);// pasamos el dato idRol de la bbdd a constante idRol 
+
+        //utiliza la desestructuración de objetos de JavaScript para extraer varias propiedades del objeto 
+        //req.body y almacenarlas en constantes separadas.Esto es muy útil para acceder directamente a estos 
+        // valores sin tener que escribir req.body.nombreUsuario, req.body.correoElectronico, etc.
+
+        const hash = bcrypt.hashSync(password, 8);//hace que el la bbdd se almacena la contraseña como un hash
+        console.log(hash);
+
+        // Insertar usuario en la base de datos
+        const sql = "INSERT INTO usuarios (nombre_usuario, correo_electronico, password, fecha_nacimiento, id_rol, imagen_perfil_usuario, id_genero, es_borrado) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        const [result] = await db.promise().query(sql, [nombreUsuario, correoElectronico, hash, fechaNacimiento, idRol, imagenUrl, idGenero, false]);
+        //es una consulta a la base de datos usando un método que retorna una promesa.
+        //En JavaScript, usar corchetes[] con const es una técnica conocida como desestructuración de arrays. Permite extraer valores de 
+        // un array y asignarlos a variables individuales de una manera más concisa y legible.
+        //Valor de result: Generalmente, query retorna un array donde el primer elemento es el conjunto de filas que coinciden con la consulta 
+        // SQL. Por lo tanto, result contendrá ese conjunto de filas.
+
+        const idUsuario = result.insertId;// el resultado de la consulta trae el id de la fila insertada
+        const tareas = [];//array vacio
+
+        if (idRol === 2) {
+            tareas.push(db.promise().query("INSERT INTO medicos (id_usuario, codigo_medico, biografia_medico) VALUES (?, 'none', 'none')", [idUsuario]));
+            // ejemplo de manejo de resolve inplicitamente
+            //las llamadas a db.promise().query(...) retornan promesas. Cuando estas consultas se completan exitosamente, las promesas se 
+            // resuelven, es decir, se llama a resolve internamente dentro de la implementación de la función query.
+        }
+
+        if (idRol === 3) {
+            tareas.push(db.promise().query("INSERT INTO administradores (id_usuario, permisos, estado_conexion, ultima_conexion) VALUES (?, 'none', ?, ?)", [idUsuario, 0, new Date()])); //estado_conexion se establecerá en 0, que es el equivalente a false en MySQL.
+            //tareas.push(...): El resultado de la consulta (que es una promesa) se añade al final del array tareas utilizando el método push(). 
+            // Esto significa que tareas ahora contiene una promesa que se resolverá cuando la consulta a la base de datos se complete.
+        }
+
+
+        // Esperar a que todas las tareas terminen de cumplir
+        await Promise.all(tareas);
+
+        // Generar token JWT
+        const token = jwt.sign({ id: idUsuario }, process.env.SECRET_KEY, { expiresIn: "1h" });
+        //Cuando jwt.sign(...) genera el token exitosamente, la operación se considera resuelta tambien.
+
+        // Configurar opciones del correo
+        const mailOptions = {
+            from: 'tuemail@ejemplo.com',
+            to: correoElectronico,
+            subject: 'Bienvenido a la plataforma',
+            text: `Hola ${nombreUsuario}, tu cuenta ha sido creada exitosamente.`
+        };
+
+        // Enviar correo
+        await transporter.sendMail(mailOptions);
+        //retorna una promesa que se RESUELVE cuando el correo se envía exitosamente.
+
+        res.status(201).json({
+            userCreado: { id: idUsuario, ...req.body },
+            token,
+            necesitaEspecialidad: idRol === 2
+        });
+
+    } catch (error) {
+        console.error('Error en la creación del usuario:', error);
+        res.status(500).json({ error: "Error al crear el usuario" });
     }
-    const imagenUrl = saveImage(req.file); // la imagen guardada se va a la constante imagenUrl
-    const { nombreUsuario, correoElectronico, password, fechaNacimiento, idRol, idGenero } = req.body; // lo que el body requiere
-
-    // Hashear la contraseña antes de guardarla
-    const hash = bcrypt.hashSync(password, 8); // hash sincronico, que hace calculos mat del password
-    console.log(hash); //ver el hash por la console
-
-    const sql = "INSERT INTO usuarios (nombre_usuario, correo_electronico, password, fecha_nacimiento, id_rol, imagen_perfil_usuario, id_genero, es_borrado) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-    db.query(sql, [nombreUsuario, correoElectronico, hash, fechaNacimiento, idRol, imagenUrl, idGenero, false], (error, result) => {
-        if (error) {
-            console.log('Error al insertar en la base de datos:', error);
-            return res.status(500).json({ error: "Error: intente más tarde" });
-        }
-        const idUsuario = result.insertId;// el resultado se inserta con el id creado de la query y se guarda en  idUsuario
-
-        // al crear un usuario con el rol 2 creamos automaticamente en la tabla medicos y dejamos por default los demas valores
-        if(idRol == 2){ // es para que se vea el rol de los medicos
-            const sqlMedico = "INSERT INTO medicos (id_usuario, codigo_medico, biografia_medico) VALUES (?, 'none', 'none')"; // se deja none como valor por default
-            db.query(sqlMedico,[idUsuario], (errorMedico) => {
-                if(errorMedico){
-                    console.log('Error al insertar en la tabla medicos:', errorMedico);
-                    return res.status(500).json({error:"Error al crear datos del medico"});
-                }
-            });
-        }
-        //si no hay error se procede a general el token JWT y definimos si necesita completar el form de medico
-        const token = jwt.sign(
-            { id: idUsuario },
-            process.env.SECRET_KEY,  // esta en mis variables de entorno .env
-            { expiresIn: "1h" } //expira en una hora el token
-        );
-
-        console.log(token);  //se muestra el JWT en la consola, pero para fines laborales no es bueno mostrar por consola esto, es inseguro
-
-        const userCreado = { ...req.body, id: result.insertId };
-        const necesitaEspecialidad = (idRol == 2); // Si es médico, necesita especialidad
-        
-
-        //enviar el correo
-        transporter.sendMail(mailOptions, (error, info) => {
-            if(error){
-                console.log('Error al enviar el correo:', error);
-                return res.status(500).json({error: "Error al enviar el correo"});
-            }
-
-            console.log('Correo enviado: ' + info.response);
-            // Si no es médico, pasa de largo
-            res.status(201).json({ userCreado, token, necesitaEspecialidad});
-        });  
-    });
+    // El bloque catch en tu función async maneja cualquier error que ocurra en las operaciones anteriores. 
+    // Si cualquiera de las promesas se RECHAZA, se lanzará un error y se ejecutará el bloque catch, 
+    // manejando el REJECT de esas promesas.
 };
 
 
+
+
 //POST login
-const loginUsuario = (req, res) => {
-    const { correoElectronico, password } = req.body;
+const loginUsuario = async (req, res) => {
 
-    // Consulta a la base de datos para encontrar al usuario por el correo electronico
-    const sql = "SELECT * FROM usuarios WHERE correo_electronico = ?";
-    db.query(sql, [correoElectronico], (error, results) => {
-        if (error) {
-            console.error('Error al consultar la base de datos:', error);
-            return res.status(500).json({ error: "Error: intente más tarde" });
-        }
-        //si no hay error
-        if (results.length === 0) { // si la longitud del resultado es igual a 0 significa que no encontro nada
-            return res.status(404).send("Usuario no encontrado");
-        }
+    console.log("Datos recibidos desde el frontend: ", req.body);
 
-        const user = results[0];
+    if(!req.body || !req.body.correoElectronico || !req.body.password){ // si el req.body es distinto del recibido con email o password
+        //significa que no estan llegando los datos al backend desde el fronted
+        return res.status(400).json({error: "Respuesta del backend: Correo electronico y contraseña son requeridos"});
+    }
 
-        // Verificar la contraseña
-        const passwordIsValid = bcrypt.compareSync(password, user.password); //se utiliza compareSync para verificar la password
-        if (!passwordIsValid) { // si es falso
-            return res.status(401).send({ auth: false, token: null });
-        }
 
-        // Generar el token JWT
-        const token = jwt.sign({ id: user.id }, process.env.SECRET_KEY, {
-            expiresIn: "1h"
-        });
+    try {
+        let { correoElectronico, password } = req.body;
 
-        res.status(200).json({ auth: true, token });
-    });
+        correoElectronico = correoElectronico.trim();// trim elimina espacios en blancos antes y despues
+
+        console.log("Correo recibido:", correoElectronico); // Depuración
+
+
+        // Consulta a la base de datos para encontrar al usuario por el correo electronico
+        const sql = "SELECT id_usuario, nombre_usuario, correo_electronico, password, id_rol FROM usuarios WHERE LOWER(correo_electronico) = LOWER(?)";
+        const [results] = await db.promise().query(sql, [correoElectronico]);
+
+        console.log("Resultado de consulta: ", results);//depuracion
+     
+            //si no hay error
+            if (results.length === 0) { // si la longitud del resultado es igual a 0 significa que no encontro nada
+                console.log("Usuario no encontrado en la bbdd");
+                return res.status(404).send("Usuario no encontrado");
+                }
+                const user = results[0];
+
+            // Verificar la contraseña
+            const passwordIsValid = bcrypt.compareSync(password, user.password); //se utiliza compareSync para verificar la password
+            if (!passwordIsValid) { // si es falso
+                //return res.status(401).send({ auth: false, token: null });
+                return res.status(401).json({error: "Credenciales invalidas"});
+            }
+
+            // Generar el token JWT con id y rol
+            const token = jwt.sign(
+                { id: user.id_usuario, idRol:user.id_rol }, 
+                process.env.SECRET_KEY, 
+                { expiresIn: "1h"}
+            );
+
+            console.log("respuesta enviada al front: ", {token, user});
+            
+            //res.json({token, user});// se debe enviar solo una respuesta
+
+            res.status(200).json({ // ENVIO DE RESPUESTA UNICA
+                 token,
+                 user: {
+                    id_usuario: user.id_usuario,
+                    nombre_usuario: user.nombreUsuario,
+                    id_rol: user.id_rol
+                 }
+                });
+    }
+    catch(error) {
+        console.error("Error en el Login: ", error);
+        res.status(500).json({ error: "Error al inicioar sesion"});
+    }
 };
 
 

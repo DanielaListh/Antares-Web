@@ -39,7 +39,7 @@ const controller = require("../controllers/especialidades_medicas.controller");
 router.get('/', controller.especialidadesMedicas);
 
 // Método GET para una sola especialidad
-router.get('/:idEspecialidad', controller.especialidad);
+router.get('/:idEspecialidad', controller.especialidad); // coincide con el la const busqueda
 
 // Método POST para crear
 router.post('/', upload, controller.crearEspecialidad);

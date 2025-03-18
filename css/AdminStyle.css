@@ -78,18 +78,21 @@ body {
 
 
 .submenu a:hover{
-    background-color: #f9cbd8;
-    color: #003064;
+    color: #ff91b0;
+    transition: .6s;
 }
 
 .submenu img {
  height: 20px;
- 
 }
 
 .list_arrow {
     height: 20px;
-    margin-left: -15px;
+    transition: transform .3s;
+}
+
+.arrow.rotate {
+    transform: rotate(90deg);
 }
 
 
@@ -103,6 +106,8 @@ body {
     width: 74vw;
 }
 
+/*Barra horizontal Superior*/
+
 .barra-horizontal-sup{
     display: flex;
     margin: 0 10px 0 10px;
@@ -111,6 +116,13 @@ body {
     border-radius: 15px;
     justify-content: end;
     gap: 5px;
+    position: relative;
+}
+
+.barra-horizontal-sup button{
+    border: 1px solid #f6f6f401;
+    background-color: white;
+    border-radius: 20px;
 }
 
 .barra-horizontal-sup img{
@@ -122,6 +134,37 @@ body {
     height: 30px;
     width: 30px;
 }
+
+#sub-menu{
+  position: absolute;
+  top: 110%;
+  background-color: white;
+  border-radius: 10px;
+  z-index: 1000;
+  height: auto;
+  width: 150px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.hidden {
+ display: none;
+ 
+}
+
+.a-link {
+    color: #003064;
+    font-weight: 400;
+    padding-left: 10px;
+    text-decoration: none;
+}
+
+.a-link:hover {
+    color: #ff91b0;
+    transition: 0.4s;
+}
+
+/*contenedor hijo*/
 
 .contenedor-padre h1{
     color: #003064;
@@ -177,8 +220,21 @@ body {
     align-items: center;
 }
 
+.search input{
+    cursor: pointer;
+    outline: none;
+    padding-left: 5px;
+    color: #003064;
+    font-weight: 400;
+    font-size: 0.9em;   
+}
+
+.search input::placeholder{
+    color: #e3b5c2;
+}
+
 .refresh button{
-    border-radius: 10px;
+    border-radius: 20px;
     border: 1px solid #f9cbd8;
     background-color: #f9cbd8;
     height: 30px;
@@ -187,6 +243,14 @@ body {
     font-family: "Open Sans", serif;
     font-weight: 500;
     color: #003064;
+    cursor: pointer;
+}
+
+.refresh button:hover{
+    background-color: #fde2ea;
+    border: 1px solid #fde2ea;
+    color: #0569d396;
+    transition: 0.4s;
 }
 
 .barra-rosa2 {
@@ -223,6 +287,10 @@ body {
     border: 3px solid #f9cbd8;
 }
 
+.search input:hover{
+    border: 3px solid #fde2ea;
+}
+
 .search-btn button {
     margin: 0 5px;
     background-color: #f9cbd8;
@@ -233,4 +301,12 @@ body {
     align-items: center;
     padding: 10px 20px;
     font-weight: 600;
+    cursor: pointer;
+}
+
+.search-btn button:hover{
+    background-color: #fde2ea;
+    border: 1px solid #fde2ea;
+    color: #0569d396;
+    transition: 0.4s;
 }

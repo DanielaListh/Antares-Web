@@ -17,11 +17,11 @@
 
             <li class="submenu">
                 <a class="submenu_a" href="#">Gestión de Tablas</a>
-                <img src="/css/Imagenes/arrow.svg" alt="">
+                <img class="arrow list_arrow" src="/css/Imagenes/arrow.svg" alt="">
                 <ul class="submenu-content">
                     <li class="submenu">
                         <a href="#">Especialidades</a>
-                        <img src="/css/Imagenes/arrow.svg" alt="">
+                        <img class="arrow list_arrow" src="/css/Imagenes/arrow.svg" alt="">
                         <ul class="submenu-content">
                             <li><a href="/html/verEspecialidadesMedicas.html">Ver especialidades</a></li>
                             <li><a href="#">Crear especialidad</a></li>
@@ -30,7 +30,7 @@
                     </li>
                     <li class="submenu">
                         <a href="#">Estados</a>
-                        <img src="/css/Imagenes/arrow.svg" alt="">
+                        <img class="arrow list_arrow" src="/css/Imagenes/arrow.svg" alt="">
                         <ul class="submenu-content">
                             <li><a href="#">Ver estados</a></li>
                             <li><a href="#">Crear estado</a></li>
@@ -39,7 +39,7 @@
                     </li>
                     <li class="submenu">
                         <a href="#">Géneros</a>
-                        <img src="/css/Imagenes/arrow.svg" alt="">
+                        <img class="arrow list_arrow" src="/css/Imagenes/arrow.svg" alt="">
                         <ul class="submenu-content">
                             <li><a href="#">Ver géneros</a></li>
                             <li><a href="#">Crear género</a></li>
@@ -48,7 +48,7 @@
                     </li>
                     <li class="submenu">
                         <a href="#">Médicos</a>
-                        <img src="/css/Imagenes/arrow.svg" alt="">
+                        <img class="arrow list_arrow" class="arrow" src="/css/Imagenes/arrow.svg" alt="">
                         <ul class="submenu-content">
                             <li><a href="#">Lista de médicos</a></li>
                             <li><a href="#">Agregar médico</a></li>
@@ -57,7 +57,7 @@
                     </li>
                     <li class="submenu">
                         <a href="#">Roles</a>
-                        <img src="/css/Imagenes/arrow.svg" alt="">
+                        <img class="arrow list_arrow" src="/css/Imagenes/arrow.svg" alt="">
                         <ul class="submenu-content">
                             <li><a href="#">Ver roles</a></li>
                             <li><a href="#">Crear rol</a></li>
@@ -66,7 +66,7 @@
                     </li>
                     <li class="submenu">
                         <a href="#">Usuarios</a>
-                        <img src="/css/Imagenes/arrow.svg" alt="">
+                        <img class="arrow list_arrow" src="/css/Imagenes/arrow.svg" alt="">
                         <ul class="submenu-content">
                             <li><a href="#">Lista de usuarios</a></li>
                             <li><a href="#">Agregar usuario</a></li>
@@ -78,17 +78,23 @@
 
             <li>
                 <a class="submenu_a" href="#">Estadísticas</a>
-                <img src="/css/Imagenes/arrow.svg" alt="">
+                <img class="arrow list_arrow" src="/css/Imagenes/arrow.svg" >
             </li>
         </ul>
-    </nav>
+    </nav> 
 
     <div class="contenedor-padre">
 
         <div class="barra-horizontal-sup">
-          <div class="icon-chat"><img src="/css/Imagenes/chat.png" alt=""></div>
-          <div class="icon-notificacion"><img src="/css/Imagenes/bell.png" alt=""></div>
-          <div class="icon-user-perfil"><img src="/css/Imagenes/user.png" alt=""></div>
+          <div class="icon-chat"><button><img src="/css/Imagenes/chat.png" alt=""></button></div>
+          <div class="icon-notificacion"><button><img src="/css/Imagenes/bell.png" alt=""></button></div>
+          <div id="icon-user-perfil" class="icon-user-perfil"><button><img src="/css/Imagenes/user.svg" alt=""></button></div>
+          <div id="sub-menu" class="sub-menu hidden">
+            <ul>
+                <li><a class="a-link" href="#" id="logout">Ver perfil</a></li>
+                <li><a class="a-link" href="/html/LoginAdmin.html" id="logout" onclick="cerrarSession()">Cerrar Sesion</a></li>
+            </ul>
+          </div>
         </div>
     
         <h1>Home</h1>
@@ -97,7 +103,10 @@
         </div>
       </div>
 
-      <script src="/js/Metodos/EspecialidadesMedicas/navBarAdmin.js"></script>
+      <script src="/js/navBarAdmin.js"></script>
+      <script src="/js/cerrarSesion.js"></script>
+
+
 
 </body>
 </html>

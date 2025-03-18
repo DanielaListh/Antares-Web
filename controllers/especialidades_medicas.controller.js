@@ -28,6 +28,8 @@ const especialidad = (req, res) => {
     db.query(sql, [idEspecialidad], (error, rows) => {
         if (error) {
             return res.status(500).json({ error: "Error: intente más tarde" });
+            // hay que buscar la manera de mostrar los errores en el dom en forma de notificacion
+            //para facilidad del usuario n
         }
         if (rows.length == 0) {
             return res.status(404).send({ error: "Error: No existe la especialidad buscada" });

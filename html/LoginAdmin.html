@@ -47,12 +47,12 @@
 
     <div class="container">
         <div class="form-container">
-            <form class="form-login" action="http://localhost:3000/usuarios/login" method="POST" enctype="multipart/form-data">
+            <form id="form-login" class="form-login" action="http://localhost:3000/usuarios/login/" method="POST" enctype="multipart/form-data">
               <h2>Log In</h2>
                 <input type="email" id="correoElectronico" name="correoElectronico" placeholder="escribe tu email" required>
                 <input type="password" id="password" name="password" placeholder="coloca tu contraseña" required>
               <div>
-                  <button type="submit">Login</button>
+                  <button id="redirectBtn" type="submit">Login</button>
               </div>
               <div class="or-login">
                 <div class="linea-div"></div>
@@ -62,11 +62,14 @@
               <a href="/html/registroUsuarios.html" class="login-link"><span class="color3">si no tienes cuenta, </span><span class="color4">Regístrate</span></a>
           </form>
 
+          
+
           <div class="imageSingup">
             <img src="/css/Imagenes/Screenshot (1).png" alt="personal medico atendiendo a paciente">
         </div>
 
           <div id="notificacion" class="notificacion"> ¡Inicio de sesion exitoso! </div>
+          <div id="errorMessage" style="color: red;"></div>
 
         </div>
     </div>
@@ -124,23 +127,7 @@
         </div>
     </footer>
 
-    <script>
-      
-      function mostrarNotificacion() { 
-        var notificacion = document.getElementById("notificacion"); 
-        notificacion.style.display = "block"; 
-        setTimeout(function() { 
-          notificacion.style.display = "none"; 
-        }, 5000); 
-      } 
-      
-      function LoginUsuario(event) { 
-        event.preventDefault(); // Evitar el envío del formulario por defecto 
-        mostrarNotificacion();
-        // Aquí iría el código para registrar en la base de datos 
-        }
-
-  </script>
+    <script src="/js/Metodos/EspecialidadesMedicas/envioFormLogin.js"></script>
 
 </body>
 </html>

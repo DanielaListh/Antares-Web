@@ -34,16 +34,28 @@ const upload = multer({ // definimos que siempre subiremos una sola imagen traid
 }).single('imagenUrl');// tener cuidado de siempre colocar las comillas ''
 
 
-//ruta para crear un nuevo usuaerio
+//ruta para crear un nuevo usuario
 router.post('/register', upload, controller.crearUsuario);// el profe lo nombro como register
 
-//ruta para iniciar sesion
-router.post('/login', controller.loginUsuario)
+//ruta para iniciar sesion !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+router.post('/login', controller.loginUsuario);
 
-//ruta protejida de ejemplo
+//ruta protejida de ejemplos 1  
 router.get("/protected", usuariosMiddleware, (req, res) => {
-    res.status(200).send(`Hola Usuario ${req.userName}`); //es la respuesta sin errores del middleware
+    res.sendFile(__dirname + 'adminHome.html');// envia el archivo
+    res.status(200).send(`Hola Usuario ${req.userName}`); //es la respuesta sin errores del middleware, ya que en este script vemos solo los error
+    
 });
+
+// Endpoint protegido hacia el home del admin
+//app.get('/adminHome', usuariosMiddleware, (req, res) => {
+   // res.sendFile(__dirname + '/adminHome.html'); // Envía el archivo HTML
+    //res.status(200).send(`Hola Usuario ${req.userName}`); //es la respuesta sin errores del middleware, ya que en este script vemos solo los error
+
+//});
+
+
+
 
 //ruta para encontrar los usuarios registrados
 router.get('/', controller.obtenerUsuarios);

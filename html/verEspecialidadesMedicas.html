@@ -17,11 +17,11 @@
 
             <li class="submenu">
                 <a class="submenu_a" href="#">Gestión de Tablas</a>
-                <img src="/css/Imagenes/arrow.svg" alt="">
+                <img class="arrow list_arrow" src="/css/Imagenes/arrow.svg" alt="">
                 <ul class="submenu-content">
                     <li class="submenu">
                         <a href="#">Especialidades</a>
-                        <img src="/css/Imagenes/arrow.svg" alt="">
+                        <img class="arrow list_arrow" src="/css/Imagenes/arrow.svg" alt="">
                         <ul class="submenu-content">
                             <li><a href="/html/verEspecialidadesMedicas.html">Ver especialidades</a></li>
                             <li><a href="#">Crear especialidad</a></li>
@@ -30,7 +30,7 @@
                     </li>
                     <li class="submenu">
                         <a href="#">Estados</a>
-                        <img src="/css/Imagenes/arrow.svg" alt="">
+                        <img class="arrow list_arrow" src="/css/Imagenes/arrow.svg" alt="">
                         <ul class="submenu-content">
                             <li><a href="#">Ver estados</a></li>
                             <li><a href="#">Crear estado</a></li>
@@ -39,7 +39,7 @@
                     </li>
                     <li class="submenu">
                         <a href="#">Géneros</a>
-                        <img src="/css/Imagenes/arrow.svg" alt="">
+                        <img class="arrow list_arrow" src="/css/Imagenes/arrow.svg" alt="">
                         <ul class="submenu-content">
                             <li><a href="#">Ver géneros</a></li>
                             <li><a href="#">Crear género</a></li>
@@ -48,7 +48,7 @@
                     </li>
                     <li class="submenu">
                         <a href="#">Médicos</a>
-                        <img src="/css/Imagenes/arrow.svg" alt="">
+                        <img class="arrow list_arrow" src="/css/Imagenes/arrow.svg" alt="">
                         <ul class="submenu-content">
                             <li><a href="#">Lista de médicos</a></li>
                             <li><a href="#">Agregar médico</a></li>
@@ -57,7 +57,7 @@
                     </li>
                     <li class="submenu">
                         <a href="#">Roles</a>
-                        <img src="/css/Imagenes/arrow.svg" alt="">
+                        <img class="arrow list_arrow" src="/css/Imagenes/arrow.svg" alt="">
                         <ul class="submenu-content">
                             <li><a href="#">Ver roles</a></li>
                             <li><a href="#">Crear rol</a></li>
@@ -66,7 +66,7 @@
                     </li>
                     <li class="submenu">
                         <a href="#">Usuarios</a>
-                        <img src="/css/Imagenes/arrow.svg" alt="">
+                        <img class="arrow list_arrow" src="/css/Imagenes/arrow.svg" alt="">
                         <ul class="submenu-content">
                             <li><a href="#">Lista de usuarios</a></li>
                             <li><a href="#">Agregar usuario</a></li>
@@ -76,9 +76,9 @@
                 </ul>
             </li>
 
-            <li>
+            <li class="submenu">
                 <a class="submenu_a" href="#">Estadísticas</a>
-                <img src="/css/Imagenes/arrow.svg" alt="">
+                <img class="arrow list_arrow" class="list_arrow" src="/css/Imagenes/arrow.svg" alt="">
             </li>
         </ul>
     </nav>
@@ -109,11 +109,13 @@
     
             <div class="search">
               <a href=""><img src="/css/Imagenes/icon-duda.png" width="15"></a>
-              <label for="busqueda-especialidad-input">Ingresa el nombre o el ID</label>
-              <input id="busqueda-especialidad-input" type="text" placeholder="escribe la especialida">
+              <label for="busqueda-especialidad-input">Ingresa el ID de la especialidad</label>
+              <input id="especialidad-id" type="number" placeholder="ID especialidad">
             </div>
             <div class="search-btn">
-              <button>buscar</button>
+              <button onclick="buscarEspecialidad()">buscar</button>
+              <div id="notification"></div>
+              <div id="especialidad-details"></div>
             </div>
     
           </div>
@@ -126,7 +128,7 @@
         </div>
       </div>
 
-    <script src="/js/Metodos/EspecialidadesMedicas/navBarAdmin.js"></script>
+    <script src="/js/navBarAdmin.js"></script>
     <script src="/js/Metodos/EspecialidadesMedicas/getAll.js"></script>
 
 </body>

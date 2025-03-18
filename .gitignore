@@ -7,3 +7,6 @@
 
 #ignorar carpeta de node modules
 node_modules/
+
+// scripts de aprendisaje que estan fuera del proyecto
+js/noTomarEnCuenta.js

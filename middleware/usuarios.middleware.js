@@ -1,9 +1,13 @@
 const jwt = require("jsonwebtoken");
 const db =  require("../db/db");
 
-module.exports = (req, res, next) => { 
-    const authHeader = req.headers["authorization"];
-    if (!authHeader) {
+// este middleware solo verifica la autorizacion del nombre del usaurio
+
+// es probable que mas adelante se implementen los roles.
+
+module.exports = (req, res, next) => { // se podra exportar el modulo
+    const authHeader = req.headers["authorization"];// Obtiene el token desde los headers (Authorization)
+    if (!authHeader) {//Si no existe, bloquea el acceso (401 Unauthorized)
         return res.status(403).send({ auth: false, message: "No se proporcionó un token" });
     }
 
@@ -16,6 +20,7 @@ module.exports = (req, res, next) => {
         if (error) {
             return res.status(500).send({ auth: false, message: "Falló la autenticación del token." });
         }
+
         req.userId = decoded.id;
 
         //consultamos el nombre del usuario
@@ -27,7 +32,8 @@ module.exports = (req, res, next) => {
             if(results.length === 0){
                 return res.status(404).send({ auth: false, message: "Usuario no encontrado" });
         }
-        req.userName = results[0].nombre_usuario;
+        //si el token es valido, extrae los datos y los guarda en req.user para usarlos en las rutas protegidas
+        req.userName = results[0].nombre_usuario;// toma el nombre de usuario del primer resultado de una búsqueda y lo asigna a userName del obj req
         next();
         });
     });
