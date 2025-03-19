@@ -1,4 +1,4 @@
-//obtener solo UNA especialidad medica mediante el id
+//obtener solo UNA especialidad medica mediante el id Y TRAERLA AL FRONT
 
 async function buscarEspecialidad() {
     const idEspecialidad = document.getElementById('especialidad-id').value;

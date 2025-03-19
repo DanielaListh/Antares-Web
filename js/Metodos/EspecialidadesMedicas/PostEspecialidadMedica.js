@@ -1,5 +1,5 @@
 // script para mostrar las especialidades medicas del front del lado del 
-//administrador para que se muestren en el front del lado cliente
+//administrador para que se muestren en el front del ADMIN
 
 document.getElementById('especialidadMedicaForm').addEventListener('submit', function (event) { //eventListener captura el evento del formulario
   event.preventDefault(); // de manera asincrona manejamos el envio del formulario

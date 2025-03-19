@@ -33,11 +33,11 @@
       </label>
       <nav class="navbar">
         <ul>
-          <li><a href="/html/index.html">Home</a></li>
-          <li><a href="#nuestraHistoria">Nuestra Clínica</a></li>
-          <li><a href="#servicios">Servicios que Ofrecemos</a></li>
-          <li><a href="#Turnos">Consigue turno</a></li>
-          <li><a href="#contacto">Contacto</a></li>
+          <li><a href="/Agape/">Home</a></li>
+          <li><a id="nuestraHistoria" href="/Agape/#nuestraHistoria">Nuestra Clínica</a></li>
+          <li><a id="servicios" href="/Agape/#servicios">Servicios que Ofrecemos</a></li>
+          <li><a id="turnos" href="/Agape/#turnos">Consigue turno</a></li>
+          <li><a id="contacto" href="/Agape/#contacto">Contacto</a></li>
         </ul>
       </nav>
     </div>
@@ -86,9 +86,8 @@
                 <div class="O"> O </div>
                 <div class="linea-div"></div>
               </div>
-              <a href="/html/LoginAdmin.html" class="login-link"><span class="color3">si ya tienes cuenta, </span><span class="color4">Inicia Sesión</span></a>
+              <a href="#" onclick="irLoginAdmin()" class="login-link"><span class="color3">si ya tienes cuenta, </span><span class="color4">Inicia Sesión</span></a>
           </form>
-
           <div id="notificacion" class="notificacion"> ¡Registro creado exitosamente! </div>
 
         </div>
@@ -123,8 +122,8 @@
             <ul>
               <a href="#">Política de Cookies</a><br>
               <a href="#">Soluciones Empresariales</a><br>
-              <a href="/html/registroUsuarios.html">Registro Administrativo</a><br>
-              <a href="/html/LoginAdmin.html">Login Administrativo</a>
+              <a href="#" onclick="irRegistroAdmin()">Registro Administrativo</a><br>
+              <a href="#" onclick="irLoginAdmin()">Login Administrativo</a>
             </ul>
           </div>
         </div>
@@ -178,6 +177,7 @@
 
 
   </script>
+  <script src="/js/rutasIndex.js"></script>
 
 </body>
 </html>

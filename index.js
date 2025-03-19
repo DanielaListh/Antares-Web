@@ -51,16 +51,23 @@ app.get('/adminHome', (req,res) => { // la ruta raiz del proyecto o pag principa
    res.sendFile(path.join(__dirname,'html', 'adminHome.html'));
 });
 
-// servir la pagina html cuando se hace una solicitud
-app.get('/loginAdmin', (req,res) => { // ruta cuando se quiere loguear un admin
-   console.log('acediendo a /loginAdmin');
-   res.sendFile(path.join(__dirname,'html', 'loginAdmin.html'));
-});
-
 
 // Ejemplo de ruta específica al home
 app.get('/Agape', (req, res) => {
    res.sendFile(path.join(__dirname, 'html', 'index.html'));
+});
+
+//ruta para ir a el registro de admin
+app.get('/Agape/registerAdmin', (req,res) =>{
+   console.log('accediendo al registro');
+   res.sendFile(path.join(__dirname, 'html', 'registroUsuarios.html'));
+})
+
+// servir la pagina html cuando se hace una solicitud
+// ruta cuando se quiere loguear un admin
+app.get('/Agape/loginAdmin', (req,res) => { 
+   console.log('accediendo a /loginAdmin');
+   res.sendFile(path.join(__dirname,'html', 'loginAdmin.html'));
 });
 
 

@@ -1,4 +1,5 @@
-
+// OBTENER LAS ESPECIALIDADES MEDICAS DE LA BBDD TRAIDAS CON FETCH 
+// Y MOSTRARLAS EN EL FRONT
 
 async function ObtenerEspecialidadesMedicas(params) {
   const link="http://localhost:3000/especialidades/";
