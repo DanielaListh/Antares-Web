@@ -1,7 +1,4 @@
 # Antares-Web
-Antares Web is the official website of Unidad Diagnóstica Antares, a clinic dedicated to offering specialized medical consultations in various areas, focused on the comprehensive health of its patients.
-
-Actividad, subida a la rama conection_ddbb
-
-Link de Documento de actividad 09-10-24
-[https://docs.google.com/document/d/1_ErhdaQYMZVgwyhiS88WefIrVqpGv4WR_T6bz1for5g/edit?usp=sharing](https://docs.google.com/document/d/1_ErhdaQYMZVgwyhiS88WefIrVqpGv4WR_T6bz1for5g/edit?usp=sharing)
+HEAD
+Agape Web is a website I'm building to learn and work with tools such as HTML5, CSS, JavaScript, Node.js, Express, and more. The site focuses on a clinic that offers specialized medical consultations in various fields, prioritizing the holistic health and well-being of its patients.
+registro_login

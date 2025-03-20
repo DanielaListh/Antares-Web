@@ -1,0 +1,314 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+body {
+ background-color: #f6f6f4;
+ font-family: "Opens Sans", sans-serif;
+ height: 100vh;
+}
+
+/*nav*/
+
+.sidebar {
+    background-color: white;
+    width: 370px;
+    position: fixed; /*recordar poner fixed a la tabla*/
+    height: 100vh;/*ocupa el 100% del area visible de la pag*/
+    overflow-y:auto;
+}
+
+.logo img {
+    display: block;
+    height: 140px;
+    margin: 0 0 0 50px;
+}
+
+/*ul*/
+.menu {
+    color: #003064;
+    display: block;
+    padding: 5px 0;/*0*/
+    margin-left: 40px;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.menu li {
+    padding: 5px 30px;
+    cursor: pointer;
+}
+
+.submenu li {
+    width: 80%;
+    border-left: 2px solid #003064;
+    transition: height .4s;
+}
+
+.menu li a {
+    color: #003064;
+    text-decoration: none;
+}
+
+.menu a:hover{
+    color: #ff91b0;
+    transition: .5s;
+}
+
+
+
+/* Ocultar los submenus por defecto */
+.submenu-content {
+    display: none;
+    list-style: none;
+    padding-left: 15px;
+}
+
+/* Estilo cuando el menu esta abierto */
+.submenu.open > .submenu-content {
+    display: block;
+}
+
+/* Ajuste para nietos */
+.submenu .submenu .submenu-content {
+    padding-left: 20px;
+}
+
+
+.submenu a:hover{
+    color: #ff91b0;
+    transition: .6s;
+}
+
+.submenu img {
+ height: 20px;
+}
+
+.list_arrow {
+    height: 20px;
+    transition: transform .3s;
+}
+
+.arrow.rotate {
+    transform: rotate(90deg);
+}
+
+
+
+
+/* Contenedor padre*/
+
+.contenedor-padre {
+    display: flexbox;
+    margin-left: 370px;
+    width: 74vw;
+}
+
+/*Barra horizontal Superior*/
+
+.barra-horizontal-sup{
+    display: flex;
+    margin: 0 10px 0 10px;
+    background-color: white;
+    height: 60px;
+    border-radius: 15px;
+    justify-content: end;
+    gap: 5px;
+    position: relative;
+}
+
+.barra-horizontal-sup button{
+    border: 1px solid #f6f6f401;
+    background-color: white;
+    border-radius: 20px;
+}
+
+.barra-horizontal-sup img{
+    display: inline-block;
+    padding: 10px 5px;
+    margin-right: 5px;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    width: 30px;
+}
+
+#sub-menu{
+  position: absolute;
+  top: 110%;
+  background-color: white;
+  border-radius: 10px;
+  z-index: 1000;
+  height: auto;
+  width: 150px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.hidden {
+ display: none;
+ 
+}
+
+.a-link {
+    color: #003064;
+    font-weight: 400;
+    padding-left: 10px;
+    text-decoration: none;
+}
+
+.a-link:hover {
+    color: #ff91b0;
+    transition: 0.4s;
+}
+
+/*contenedor hijo*/
+
+.contenedor-padre h1{
+    color: #003064;
+    padding: 10px;
+    font-family: "Open Sans", serif;
+    font-weight: 800;
+    margin: 10px;
+}
+
+.content-view {
+    background-color: white;
+    border-radius: 25px;
+    height: 540px;
+    padding: 20px;
+    margin: 10px;
+}
+
+/*en el home de admin*/
+#imgEclipse {
+    background-image: url(/css/Imagenes/eclipse1.png);
+    background-repeat: no-repeat;
+}
+
+/*titulo visualizar*/
+
+.tittle {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.barra-rosa {
+    height: 25px;
+    width: 8px;
+    background-color: #f9cbd8;
+    margin-right: 5px;
+}
+
+.content-view h3{
+    color: #003064;
+    font-family: "Open Sans", serif;
+    font-weight: 700;
+}
+
+/* search-content parte de botones y de busqueda por id*/
+
+.search-content{
+    margin: 5px;
+    display: flex;
+    height: 80px;
+    border-radius: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.search input{
+    cursor: pointer;
+    outline: none;
+    padding-left: 5px;
+    color: #003064;
+    font-weight: 400;
+    font-size: 0.9em;   
+}
+
+.search input::placeholder{
+    color: #e3b5c2;
+}
+
+.refresh button{
+    border-radius: 20px;
+    border: 1px solid #f9cbd8;
+    background-color: #f9cbd8;
+    height: 30px;
+    width: 180px;
+    margin: 5px 10px;
+    font-family: "Open Sans", serif;
+    font-weight: 500;
+    color: #003064;
+    cursor: pointer;
+}
+
+.refresh button:hover{
+    background-color: #fde2ea;
+    border: 1px solid #fde2ea;
+    color: #0569d396;
+    transition: 0.4s;
+}
+
+.barra-rosa2 {
+    height: 40px;
+    width: 5px;
+    background-color: #f9cbd8;
+    margin-right: 5px;
+}
+
+.search {
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: auto;
+}
+
+.search a{
+    margin-left: 185px;
+    margin-bottom: -15 px;
+}
+
+.search label{
+    align-items: flex-start;
+    font-family: "Opens Sans", sans-serif;
+    color: #003064;
+    margin: 5px 0;
+    font-weight: 500;
+}
+
+.search input{
+    border-radius: 5px;
+    height: 30px;
+    border: 3px solid #f9cbd8;
+}
+
+.search input:hover{
+    border: 3px solid #fde2ea;
+}
+
+.search-btn button {
+    margin: 0 5px;
+    background-color: #f9cbd8;
+    color: #003064;
+    border-radius: 20px;
+    border: 1px solid #f9cbd8;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.search-btn button:hover{
+    background-color: #fde2ea;
+    border: 1px solid #fde2ea;
+    color: #0569d396;
+    transition: 0.4s;
+}

@@ -1,0 +1,12 @@
+# ignoramos archivos de la base de datos
+#*.sql
+#/SqlDDBB
+
+// se ignora .env porque si lo subimos al githhub nuestro proyecto queda expuesto
+.env
+
+#ignorar carpeta de node modules
+node_modules/
+
+// scripts de aprendisaje que estan fuera del proyecto
+js/noTomarEnCuenta.js

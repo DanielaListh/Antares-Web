@@ -1,0 +1,56 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    background: #0d3b66;
+    color: white;
+    position: fixed;
+    padding-top: 20px;
+    overflow-y: auto;
+}
+
+.logo img {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.menu {
+    list-style: none;
+    padding: 0;
+}
+
+.menu li {
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.menu li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+}
+
+/* Ocultar los submenús por defecto */
+.submenu-content {
+    display: none;
+    list-style: none;
+    padding-left: 15px;
+    background: #1c4966;
+}
+
+/* Estilo cuando el menú está abierto */
+.submenu.open > .submenu-content {
+    display: block;
+}
+
+/* Ajuste para nietos */
+.submenu .submenu .submenu-content {
+    padding-left: 20px;
+    background: #25577a;
+}

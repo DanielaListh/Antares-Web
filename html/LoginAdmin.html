@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Admin</title>
+    <link rel="icon" href="css/ImageAntaresWeb/logoWEB.png" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+</head>
+<body class="body-image">
+
+  <!-- Navbar -->
+  <div class="menu-container">
+    <div class="mini-content-portada">
+      <div class="isotipo">
+        <a href="#"><img src="/css/Imagenes/LogoAgape.png" alt=""></a>
+      </div>
+      <div class="direccion-spot">
+        <img src="/css/Imagenes/spot blue.png" alt="">
+        <a href="https://maps.app.goo.gl/yqhJ7Sezm5qkZNsz6">Ágape Clínica Familiar Recoleta</a>
+      </div>
+      <div class="contain-button-indice">
+        <button class="button-indice"><a href="tel:+584245212184">CONTÁCTANOS</a></button>
+        <button class="button-indice"><a href="#resultadosDeExamenes">RESULTADOS DE EXÁMENES</a></button>
+      </div>
+    </div>
+    <div class="content-navbar">
+      <input class="checkbox" type="checkbox" id="menu" />
+      <label for="menu">
+        <img src="/Imagenes/menu.png" class="menu-icono" alt="">
+      </label>
+      <nav class="navbar">
+        <ul>
+          <li><a  href="/Agape/">Home</a></li>
+          <li><a id="nuestraHistoria" href="/Agape/#nuestraHistoria">Nuestra Clínica</a></li>
+          <li><a id="servicios" href="/Agape/#servicios">Servicios que Ofrecemos</a></li>
+          <li><a id="turnos" href="/Agape/#turnos">Consigue turno</a></li>
+          <li><a id="contacto" href="/Agape/#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+
+    <div class="container">
+        <div class="form-container">
+            <form id="form-login" class="form-login" action="http://localhost:3000/usuarios/login/" method="POST" enctype="multipart/form-data">
+              <h2>Log In</h2>
+                <input type="email" id="correoElectronico" name="correoElectronico" placeholder="escribe tu email" required>
+                <input type="password" id="password" name="password" placeholder="coloca tu contraseña" required>
+              <div>
+                  <button id="redirectBtn" type="submit">Login</button>
+              </div>
+              <div class="or-login">
+                <div class="linea-div"></div>
+                <div class="O"> O </div>
+                <div class="linea-div"></div>
+              </div>
+              <a href="#" onclick="irRegistroAdmin()" class="login-link"><span class="color3">si no tienes cuenta, </span><span class="color4">Regístrate</span></a>
+          </form>
+
+          
+
+          <div class="imageSingup">
+            <img src="/css/Imagenes/Screenshot (1).png" alt="personal medico atendiendo a paciente">
+        </div>
+
+          <div id="notificacion" class="notificacion"> ¡Inicio de sesion exitoso! </div>
+          <div id="errorMessage" style="color: red;"></div>
+
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="list-footer" >
+          <div>
+            <h3>Sobre Nosotros</h3>
+            <ul>
+              <a href="#">Comentarios</a><br>
+              <a href="#">Comunidad</a>
+            </ul>
+          </div>
+          <div>
+            <h3 >Confianza, Seguridad y Protección</h3>
+            <ul >
+              <a href="#">Ayuda y Soporte</a><br>
+              <a href="#">Nuestra Historia</a>
+            </ul>
+          </div>
+          <div>
+            <h3>Términos de Servicio</h3>
+            <ul >
+              <a href="#">Política de Privacidad</a><br>
+              <a href="#">Aviso de Recopilación de CA</a><br>
+              <a href="#">Configuración de Cookies</a>
+            </ul>
+          </div>
+          <div>
+            <h3 >Accesibilidad</h3>
+            <ul>
+              <a href="#">Política de Cookies</a><br>
+              <a href="#">Soluciones Empresariales</a><br>
+              <a href="#" onclick="irRegistroAdmin()">Registro Administrativo</a><br>
+              <a href="#" onclick="irLoginAdmin()">Login Administrativo</a>
+            </ul>
+          </div>
+        </div>
+        <div class="redes">
+          <div>
+            <h3>Síguenos</h3>
+            <div class="logos-redes">   
+              <a href="https://www.facebook.com/profile.php?id=100090071004171" target="_blank" class="icon-facebook">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://www.instagram.com/antaresbarinas?igsh=ZnpxOHhodjhrcHZo" target="_blank" class="icon-instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            </div>
+          </div>
+        </div>
+        <div class="linea-divisoria"></div>
+        <div class="derechos-reservados">
+          <p>© 2002 - 2025 Ágape Clínica Familiar. ®</p>
+        </div>
+    </footer>
+
+    <script src="/js/Metodos/EspecialidadesMedicas/envioFormLogin.js"></script>
+    <script src="/js/rutasIndex.js"></script>
+    
+
+</body>
+</html>
